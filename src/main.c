@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/25 21:03:33 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/25 21:11:27 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ int		main(int argc, char const *argv[])
 		glfwPollEvents();
 	}
 	
+	destroy_shader(s);
+	mesh_destroy(m);
+
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return (0);

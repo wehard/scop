@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/25 21:11:27 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 13:43:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include <stdarg.h>
 #include "obj_loader.h"
 #include "shader.h"
+#include <stdlib.h>
+#include "ft_printf.h"
 
 // int		on_render(void *param)
 // {
@@ -60,8 +62,6 @@ int		main(int argc, char const *argv[])
 	}
 	if (argc != 2)
 		return (EXIT_FAILURE);
-	
-	
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
@@ -79,11 +79,27 @@ int		main(int argc, char const *argv[])
 
 	t_shader *s = create_shader("resources/basic.vert", "resources/basic.frag");
 	t_mesh *m = obj_load(argv[1]);
+	t_entity *e = create_entity(m, s);
+	t_camera c;
+	c.position = ft_make_vec3(0,0,10);
 
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClearColor(0.1, 0.1, 0.1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		draw_entity(&c, e);
+
+		if (glfwGetKey(window, GLFW_KEY_UP))
+			c.position.z -= 0.0001;
+		if (glfwGetKey(window, GLFW_KEY_DOWN))
+			c.position.z += 0.0001;
+		if (glfwGetKey(window, GLFW_KEY_LEFT))
+			c.position.x -= 0.0001;
+		if (glfwGetKey(window, GLFW_KEY_RIGHT))
+			c.position.x += 0.0001;
+
+		ft_printf("z: %.4f\n", c.position.z);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

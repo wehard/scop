@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/25 20:04:46 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 11:52:08 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static void read_indices(t_mesh *m, size_t i, char *line)
 
 	parts = ft_strsplit(line + 1, ' ');
 	j = 0;
-	while (parts[j] && j < 3)
+	while (j < 3)
 	{
 		m->indices[i + j] = ft_atoi(parts[j]) - 1;
 		j++;
@@ -128,12 +128,15 @@ void		read_mesh(int fd, t_mesh *m)
 	{
 		if (ft_strncmp(line, "v ", 2) == 0)
 			m->vertices[i[0]++] = ft_parse_vec3(line + 1);
-		else if (ft_strncmp(line, "vt", 2) == 0)
-			m->uvs[i[1]++] = ft_parse_vec2(line + 1);
-		else if (ft_strncmp(line, "vn", 2) == 0)
-			m->normals[i[2]++] = ft_parse_vec3(line + 2);
+		// else if (ft_strncmp(line, "vt", 2) == 0)
+		// 	m->uvs[i[1]++] = ft_parse_vec2(line + 1);
+		// else if (ft_strncmp(line, "vn", 2) == 0)
+		// 	m->normals[i[2]++] = ft_parse_vec3(line + 2);
 		else if (ft_strncmp(line, "f ", 2) == 0)
-			read_indices(m, i[3]++, line); //parse_face(m, i[3]++, line, 0);
+		{
+			read_indices(m, i[3], line); //parse_face(m, i[3]++, line, 0);
+			i[3] += 3;
+		}
 		free(line);
 	}
 }

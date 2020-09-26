@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:00:35 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/25 19:59:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 10:15:23 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct	s_triface
 
 typedef struct	s_mesh
 {
-	int			*indices;
+	unsigned int *indices;
 	size_t		num_indices;
 	t_triface	*trifaces;
 	size_t		num_trifaces;

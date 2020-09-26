@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 18:24:04 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/25 19:59:13 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 10:15:47 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	mesh_create_indices(t_mesh *m, size_t num_indices)
 	if (!m || num_indices == 0)
 		return ;
 	m->num_indices = num_indices;
-	if (!(m->indices = (int*)malloc(sizeof(int) * num_indices)))
+	if (!(m->indices = (unsigned int*)malloc(sizeof(unsigned int) * num_indices)))
 	{
 		ft_printf("mesh_create: failed to allocate memory for vertices!\n");
 		exit(EXIT_FAILURE);

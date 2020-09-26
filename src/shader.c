@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:16:24 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/25 21:09:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 13:55:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include "ft_get_next_line.h"
 #include <GL/glew.h>
+// #include "matrix.h"
 
 static char *load_shader_src(char *src_path)
 {
@@ -94,4 +95,10 @@ void destroy_shader(t_shader *shader)
 	free(shader->vert_src);
 	free(shader->frag_src);
 	free(shader);
+}
+
+void shader_set_uniform_mat4(t_shader *shader, char *loc_name, t_mat4 m)
+{
+	GLuint location = glGetUniformLocation(shader->program_id, loc_name);
+	glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat*)&m.data[0]);
 }

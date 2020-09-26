@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/09/25 21:02:02 by wkorande         ###   ########.fr        #
+#    Updated: 2020/09/26 10:20:38 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = scop
 
 SRCDIR = src
 
-SRC =	main.c\
+SRC =	entity.c\
+		main.c\
 		mesh/mesh_create.c\
 		mesh/mesh_destroy.c\
 		mesh/mesh_set_vert.c\

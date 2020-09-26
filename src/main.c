@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 19:48:20 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 20:26:48 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	float yoffset;
 	
 	scop = (t_scop*)glfwGetWindowUserPointer(window);
-	xoffset = (xpos - scop->mouse_last_x) * scop->mouse_sensitivity;
-	yoffset = (scop->mouse_last_y - ypos) * scop->mouse_sensitivity;
+	xoffset = (scop->mouse_last_x -xpos) * scop->mouse_sensitivity;
+	yoffset = (ypos - scop->mouse_last_y) * scop->mouse_sensitivity;
 
 	scop->camera->yaw += xoffset;
 	scop->camera->pitch += yoffset;
@@ -145,8 +145,8 @@ int		main(int argc, char const *argv[])
 	t_mesh *m = obj_load(argv[1]);
 	t_entity *e = create_entity(m, s);
 	t_camera c;
-	c.position = ft_make_vec3(0, 0, 0);
-	c.forward = ft_make_vec3(0,0,-1);
+	c.position = ft_make_vec3(0, 0, -20);
+	c.forward = ft_make_vec3(0,0, -1);
 	c.yaw = -90.0;
 	c.pitch = 0.0;
 	

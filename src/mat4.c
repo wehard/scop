@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:51:22 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 16:10:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 17:27:08 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,9 @@ t_mat4 mat4_trs(t_vec3 pos, t_vec3 rot, t_vec3 scale)
 	return (trs);
 }
 
+// [12][ab] [1⋅a+2⋅c 1⋅b+2⋅d]
+// [34][cd] [3⋅a+4⋅c 3⋅b+4⋅d]
+
 // m0 m4 m8  m12
 // m1 m5 m9  m13
 // m2 m6 m10 m14
@@ -140,29 +143,23 @@ t_mat4 mat4_trs(t_vec3 pos, t_vec3 rot, t_vec3 scale)
 
 t_mat4	mul_mat4(t_mat4 a, t_mat4 b)
 {
-	// t_mat4	c;
-	int			x;
-	int			y;
-	int			i;
+	t_mat4	c;
+	int		x;
+	int		y;
 
-	t_mat4 c = {
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		0, 0, 0, 1
-	};
 	y = 0;
 	while (y < 4)
 	{
 		x = 0;
 		while (x < 4)
 		{
-			i = 0;
-			while (i < 4)
-			{
-				c.data[y * 4 + x] += a.data[y * 4 + i] * b.data[i * 4 + x];
-				i++;
-			}
+			int xv = y + x * 4;
+			int yv = y * 4 + x;
+			c.data[y + x * 4] =
+				a.data[y + x * 4] * b.data[y * 4 + x] +
+				a.data[(y + x * 4) + 1] * b.data[(y * 4 + x) * 1] +
+				a.data[(y + x * 4) + 2] * b.data[(y * 4 + x) * 2] +
+				a.data[(y + x * 4) + 3] * b.data[(y * 4 + x) * 3];
 			x++;
 		}
 		y++;

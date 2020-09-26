@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:51:22 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 20:39:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 22:19:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,29 @@
 // 10 11 12 13
 // 20 21 22 23
 // 30 31 32 33
+
+static t_mat4 init_mat4()
+{
+	t_mat4 m;
+
+	m.data[0] = 0.0;
+	m.data[1] = 0.0;
+	m.data[2] = 0.0;
+	m.data[3] = 0.0;
+	m.data[4] = 0.0;
+	m.data[5] = 0.0;
+	m.data[6] = 0.0;
+	m.data[7] = 0.0;
+	m.data[8] = 0.0;
+	m.data[9] = 0.0;
+	m.data[10] = 0.0;
+	m.data[11] = 0.0;
+	m.data[12] = 0.0;
+	m.data[13] = 0.0;
+	m.data[14] = 0.0;
+	m.data[15] = 0.0;
+	return (m);
+}
 
 t_mat4		identity_mat4(void)
 {
@@ -239,16 +262,13 @@ t_mat4	lookat_mat4(t_vec3 from, t_vec3 to, t_vec3 world_up)
 t_mat4        create_perspective_mat4(float fov, float aspect, float zn, float zf)
 {
         t_mat4        mat;
-
-		mat = identity_mat4();
-		float rad =  ft_deg_to_rad(fov * 0.5);
-		float h = cosf(rad * 0.5) / sinf(rad * 0.5);
-		float w = h * aspect;
-
-		mat.data[0] = w;
-		mat.data[5] = h;
+		float tanhalffov ;
+		mat = init_mat4();
+		tanhalffov = tanf(ft_deg_to_rad(fov) / 2.0);
+		mat.data[0] = 1.0 / (aspect * tanhalffov);
+		mat.data[5] = 1.0 / tanhalffov;
 		mat.data[10] = -(zf + zn) / (zf - zn);
-		mat.data[11] = -1.0;
-		mat.data[14] = -(2.0 * zf * zn) / (zf - zn);
+		mat.data[14] = -1.0;
+		mat.data[11] = -(2.0 * zf * zn) / (zf - zn);
         return (mat);
 }

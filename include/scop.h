@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 18:54:30 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 22:27:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_scop
 	float		mouse_last_x;
 	float		mouse_last_y;
 	float		mouse_sensitivity;
+	float		delta_time;
 }				t_scop;
 
 void	exit_message(const char *message);

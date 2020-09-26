@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 20:45:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 22:32:41 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	float yoffset;
 	
 	scop = (t_scop*)glfwGetWindowUserPointer(window);
-	xoffset = (xpos - scop->mouse_last_x) * scop->mouse_sensitivity;
-	yoffset = (scop->mouse_last_y - ypos) * scop->mouse_sensitivity;
+	xoffset = (scop->mouse_last_x - xpos) * scop->mouse_sensitivity;
+	yoffset = (ypos - scop->mouse_last_y) * scop->mouse_sensitivity;
 
 	scop->camera->yaw += xoffset;
 	scop->camera->pitch += yoffset;
@@ -145,9 +145,9 @@ int		main(int argc, char const *argv[])
 	t_mesh *m = obj_load(argv[1]);
 	t_entity *e = create_entity(m, s);
 	t_camera c;
-	c.position = ft_make_vec3(0, 0, -20);
-	c.forward = ft_make_vec3(0,0, 1);
-	c.yaw = 90.0;
+	c.position = ft_make_vec3(0, 0, -5);
+	c.forward = ft_make_vec3(0,0, -1);
+	c.yaw = -90.0;
 	c.pitch = 0.0;
 	
 	scop.entity = e;
@@ -159,8 +159,15 @@ int		main(int argc, char const *argv[])
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetKeyCallback(window, key_callback);
 
+	float last_time = 0.0;
+	scop.delta_time = 0.0;
+
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
+		float current_time = glfwGetTime();
+		scop.delta_time = current_time - last_time;
+		last_time = current_time;
+		
 		glClearColor(0.1, 0.1, 0.1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 		if (scop.wireframe)
@@ -168,6 +175,7 @@ int		main(int argc, char const *argv[])
 		else
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+		e->rotation.y += scop.delta_time * 40.0;
 		draw_entity(&c, e);
 
 		glfwSwapBuffers(window);

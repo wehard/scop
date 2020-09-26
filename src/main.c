@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 18:19:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 19:48:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "shader.h"
 #include <stdlib.h>
 #include "ft_printf.h"
+#include <math.h>
 
 // int		on_render(void *param)
 // {
@@ -55,13 +56,42 @@ void    free_null(size_t count, ...)
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-    if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_RELEASE)
+	t_scop *scop;
+	
+	scop = (t_scop*)glfwGetWindowUserPointer(window);
+	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_RELEASE)
 	{
-		double x;
-		double y;
-		glfwGetCursorPos(window, &x, &y);
-		ft_printf("%f, %f\n", x, y);
+		ft_printf("%f, %f\n", scop->camera->pitch, scop->camera->yaw);
 	}
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	t_scop *scop;
+	float xoffset;
+	float yoffset;
+	
+	scop = (t_scop*)glfwGetWindowUserPointer(window);
+	xoffset = (xpos - scop->mouse_last_x) * scop->mouse_sensitivity;
+	yoffset = (scop->mouse_last_y - ypos) * scop->mouse_sensitivity;
+
+	scop->camera->yaw += xoffset;
+	scop->camera->pitch += yoffset;
+
+	if(scop->camera->pitch > 89.0f)
+        scop->camera->pitch = 89.0f;
+    if(scop->camera->pitch < -89.0f)
+        scop->camera->pitch = -89.0f;
+
+	t_vec3 dir;
+	dir.x = cosf(ft_deg_to_rad(scop->camera->yaw)) * cosf(ft_deg_to_rad(scop->camera->pitch));
+	dir.y = sinf(ft_deg_to_rad(scop->camera->pitch));
+	dir.z = sinf(ft_deg_to_rad(scop->camera->yaw)) * cosf(ft_deg_to_rad(scop->camera->pitch));
+
+	scop->camera->forward = (ft_normalize_vec3(dir));
+	scop->mouse_last_x = xpos;
+	scop->mouse_last_y = ypos;
+	ft_printf("forward %.4f %.4f %.4f\n", scop->camera->forward.x, scop->camera->forward.y, scop->camera->forward.z);
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -72,9 +102,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_W && action == GLFW_PRESS)
 		scop->wireframe = !scop->wireframe;
 	if (key == GLFW_KEY_UP && action == GLFW_REPEAT)
-		scop->camera->position.z -= 0.1;
-	if (key == GLFW_KEY_DOWN && action == GLFW_REPEAT)
 		scop->camera->position.z += 0.1;
+	if (key == GLFW_KEY_DOWN && action == GLFW_REPEAT)
+		scop->camera->position.z -= 0.1;
 	if (key == GLFW_KEY_LEFT && action == GLFW_REPEAT)
 		scop->camera->position.x -= 0.1;
 	if (key == GLFW_KEY_RIGHT && action == GLFW_REPEAT)
@@ -84,6 +114,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 int		main(int argc, char const *argv[])
 {
 	t_scop scop;
+	scop.mouse_last_x = 1280/2;
+	scop.mouse_last_y = 720/2;
+	scop.mouse_sensitivity = 0.1f;
 	
 	if (!glfwInit())
 	{
@@ -112,13 +145,18 @@ int		main(int argc, char const *argv[])
 	t_mesh *m = obj_load(argv[1]);
 	t_entity *e = create_entity(m, s);
 	t_camera c;
-	c.position = ft_make_vec3(0, 0, 5);
+	c.position = ft_make_vec3(0, 0, 0);
+	c.forward = ft_make_vec3(0,0,-1);
+	c.yaw = -90.0;
+	c.pitch = 0.0;
+	
 	scop.entity = e;
 	scop.camera = &c;
 
 	glfwSetWindowUserPointer(window, &scop);
 
 	glfwSetMouseButtonCallback(window, mouse_button_callback);
+	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetKeyCallback(window, key_callback);
 
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
@@ -131,10 +169,6 @@ int		main(int argc, char const *argv[])
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		draw_entity(&c, e);
-
-		
-
-		
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

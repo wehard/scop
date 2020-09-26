@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 18:14:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 18:54:30 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ struct s_shader;
 typedef struct	s_camera
 {
 	t_vec3		position;
+	t_vec3		forward;
+	float		pitch;
+	float		yaw;
 }				t_camera;
 
 typedef struct	s_entity
@@ -47,6 +50,9 @@ typedef struct	s_scop
 	int			wireframe;
 	t_camera	*camera;
 	t_entity	*entity;
+	float		mouse_last_x;
+	float		mouse_last_y;
+	float		mouse_sensitivity;
 }				t_scop;
 
 void	exit_message(const char *message);

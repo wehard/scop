@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:51:22 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 17:41:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 19:39:09 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,12 +168,49 @@ t_mat4	mul_mat4(t_mat4 a, t_mat4 b)
 	return (c);
 }
 
+	// GLM_FUNC_QUALIFIER detail::tmat4x4<T, P> lookAt
+	// (
+	// 	detail::tvec3<T, P> const & eye,
+	// 	detail::tvec3<T, P> const & center,
+	// 	detail::tvec3<T, P> const & up
+	// )
+	// {
+	// 	detail::tvec3<T, P> const f(normalize(center - eye));
+	// 	detail::tvec3<T, P> const s(normalize(cross(f, up)));
+	// 	detail::tvec3<T, P> const u(cross(s, f));
+
+	// 	detail::tmat4x4<T, P> Result(1);
+	// 	Result[0][0] = s.x;
+	// 	Result[1][0] = s.y;
+	// 	Result[2][0] = s.z;
+	// 	Result[0][1] = u.x;
+	// 	Result[1][1] = u.y;
+	// 	Result[2][1] = u.z;
+	// 	Result[0][2] =-f.x;
+	// 	Result[1][2] =-f.y;
+	// 	Result[2][2] =-f.z;
+	// 	Result[3][0] =-dot(s, eye);
+	// 	Result[3][1] =-dot(u, eye);
+	// 	Result[3][2] = dot(f, eye);
+	// 	return Result;
+
+
+// m0 m4 m8  m12
+// m1 m5 m9  m13
+// m2 m6 m10 m14
+// m3 m7 m11 m15
+
+// 00 01 02 03
+// 10 11 12 13
+// 20 21 22 23
+// 30 31 32 33
+
 t_mat4	lookat_mat4(t_vec3 from, t_vec3 to, t_vec3 world_up)
 {
 	t_mat4	m;
-	t_vec3		f;
-	t_vec3		s;
-	t_vec3		u;
+	t_vec3	f;
+	t_vec3	s;
+	t_vec3	u;
 
 	f = ft_normalize_vec3(ft_sub_vec3(to, from));
 	s = ft_normalize_vec3(ft_cross_vec3(f, world_up));
@@ -195,7 +232,7 @@ t_mat4	lookat_mat4(t_vec3 from, t_vec3 to, t_vec3 world_up)
 
 	m.data[12] = -ft_dot_vec3(s, from);
 	m.data[13] = -ft_dot_vec3(u, from);
-	m.data[14] = -ft_dot_vec3(f, from);
+	m.data[14] = ft_dot_vec3(f, from);
 	return (m);
 }
 

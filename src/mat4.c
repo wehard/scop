@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:51:22 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 19:39:09 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 20:39:53 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,14 +241,14 @@ t_mat4        create_perspective_mat4(float fov, float aspect, float zn, float z
         t_mat4        mat;
 
 		mat = identity_mat4();
-		float rad =  ft_deg_to_rad(fov);
+		float rad =  ft_deg_to_rad(fov * 0.5);
 		float h = cosf(rad * 0.5) / sinf(rad * 0.5);
 		float w = h * aspect;
 
 		mat.data[0] = w;
 		mat.data[5] = h;
 		mat.data[10] = -(zf + zn) / (zf - zn);
-		mat.data[14] = -1.0;
-		mat.data[11] = -(2.0 * zf * zn) / (zf - zn);
+		mat.data[11] = -1.0;
+		mat.data[14] = -(2.0 * zf * zn) / (zf - zn);
         return (mat);
 }

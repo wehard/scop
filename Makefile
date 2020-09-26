@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/09/26 10:20:38 by wkorande         ###   ########.fr        #
+#    Updated: 2020/09/26 15:56:38 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC =	entity.c\
 		mesh/mesh_destroy.c\
 		mesh/mesh_set_vert.c\
 		obj_loader.c\
-		shader.c
+		shader.c\
+		mat4.c
 		
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 

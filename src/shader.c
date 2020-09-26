@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:16:24 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 13:55:29 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 15:57:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static uint32_t compile_shader(char *src, GLenum shader_type)
 	char *error;
 
 	shader_id = glCreateShader(shader_type);
-	glShaderSource(shader_id, 1, &src, NULL);
+	glShaderSource(shader_id, 1, (const char**)&src, NULL);
 	glCompileShader(shader_id);
 	glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &log_len);
 	glGetShaderiv(shader_id, GL_COMPILE_STATUS, &status);

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 13:43:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 15:14:07 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		main(int argc, char const *argv[])
 	t_mesh *m = obj_load(argv[1]);
 	t_entity *e = create_entity(m, s);
 	t_camera c;
-	c.position = ft_make_vec3(0,0,10);
+	c.position = ft_make_vec3(0, 0, 5);
 
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
@@ -99,7 +99,7 @@ int		main(int argc, char const *argv[])
 		if (glfwGetKey(window, GLFW_KEY_RIGHT))
 			c.position.x += 0.0001;
 
-		ft_printf("z: %.4f\n", c.position.z);
+		// ft_printf("z: %.4f\n", c.position.z);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

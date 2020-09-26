@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 16:11:04 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 18:14:21 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ typedef struct	s_mat4
 {
 	float		data[16];
 }				t_mat4;
+
+typedef struct	s_scop
+{
+	int			wireframe;
+	t_camera	*camera;
+	t_entity	*entity;
+}				t_scop;
 
 void	exit_message(const char *message);
 void    free_null(size_t count, ...);

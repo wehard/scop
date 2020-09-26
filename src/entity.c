@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 17:41:44 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 17:44:47 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		draw_entity(t_camera *camera, t_entity *entity)
 	t_mat4 p = identity_mat4();
 
 	// m = mat4_translate((t_vec3){-2,0,0});
-	m = mat4_trs(ft_make_vec3(0,0,0), ft_make_vec3(0,0,0), ft_make_vec3(1,1,1));
+	m = mat4_trs(ft_make_vec3(0,0,0), ft_make_vec3(0,45,0), ft_make_vec3(1,1,1));
 	// m = mat4_rotate_y(-90.0);
 	p = create_perspective_mat4(30.0, 720.0 / 1280.0, -1, 10.0);
 	v = lookat_mat4(camera->position, ft_add_vec3(camera->position, ft_make_vec3(0, 0, -1)), ft_make_vec3(0,1,0));

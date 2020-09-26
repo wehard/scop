@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 17:21:35 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/26 18:19:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,46 @@ void    free_null(size_t count, ...)
         va_end(pl);
 }
 
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_RELEASE)
+	{
+		double x;
+		double y;
+		glfwGetCursorPos(window, &x, &y);
+		ft_printf("%f, %f\n", x, y);
+	}
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	t_scop *scop;
+	
+	scop = (t_scop*)glfwGetWindowUserPointer(window);
+    if (key == GLFW_KEY_W && action == GLFW_PRESS)
+		scop->wireframe = !scop->wireframe;
+	if (key == GLFW_KEY_UP && action == GLFW_REPEAT)
+		scop->camera->position.z -= 0.1;
+	if (key == GLFW_KEY_DOWN && action == GLFW_REPEAT)
+		scop->camera->position.z += 0.1;
+	if (key == GLFW_KEY_LEFT && action == GLFW_REPEAT)
+		scop->camera->position.x -= 0.1;
+	if (key == GLFW_KEY_RIGHT && action == GLFW_REPEAT)
+		scop->camera->position.x += 0.1;
+}
+
 int		main(int argc, char const *argv[])
 {
+	t_scop scop;
+	
 	if (!glfwInit())
 	{
-		
 		return (EXIT_FAILURE);
 	}
 	if (argc != 2)
 		return (EXIT_FAILURE);
 
-	int wireframe = 0;
+	scop.wireframe = 0;
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
@@ -84,30 +113,28 @@ int		main(int argc, char const *argv[])
 	t_entity *e = create_entity(m, s);
 	t_camera c;
 	c.position = ft_make_vec3(0, 0, 5);
+	scop.entity = e;
+	scop.camera = &c;
+
+	glfwSetWindowUserPointer(window, &scop);
+
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
+	glfwSetKeyCallback(window, key_callback);
 
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClearColor(0.1, 0.1, 0.1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
-		if (wireframe)
+		if (scop.wireframe)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		else
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		draw_entity(&c, e);
 
-		if (glfwGetKey(window, GLFW_KEY_UP))
-			c.position.z -= 0.0001;
-		if (glfwGetKey(window, GLFW_KEY_DOWN))
-			c.position.z += 0.0001;
-		if (glfwGetKey(window, GLFW_KEY_LEFT))
-			c.position.x -= 0.0001;
-		if (glfwGetKey(window, GLFW_KEY_RIGHT))
-			c.position.x += 0.0001;
+		
 
-		// ft_printf("z: %.4f\n", c.position.z);
-		if (glfwGetKey(window, GLFW_KEY_W))
-			wireframe = !wireframe;
+		
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

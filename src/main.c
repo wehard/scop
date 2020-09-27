@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/27 12:48:06 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/27 14:51:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,14 +176,14 @@ int		main(int argc, char const *argv[])
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		e->rotation.y += scop.delta_time * 40.0;
-		draw_entity(&c, e, (t_vec4){0.2, 0.2, 0.8, 1.0});
+		entity_draw(&c, e, (t_vec4){0.2, 0.2, 0.8, 1.0});
 
 		if (scop.wireframe)
 		{
 			glEnable(GL_POLYGON_OFFSET_LINE);
 			glPolygonOffset(-0.5, 0.5);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			draw_entity(&c, e, (t_vec4){1, 1, 1, 1.0});
+			entity_draw(&c, e, (t_vec4){1, 1, 1, 1.0});
 			glDisable(GL_POLYGON_OFFSET_LINE);
 		}
 

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/27 12:28:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/27 14:52:21 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,18 @@
 struct s_mesh;
 struct s_shader;
 
+typedef struct	s_mat4
+{
+	float		data[16];
+}				t_mat4;
+
 typedef struct	s_camera
 {
 	t_vec3		position;
 	t_vec3		forward;
 	float		pitch;
 	float		yaw;
+	t_mat4		view_matrix;
 }				t_camera;
 
 typedef struct	s_entity
@@ -40,11 +46,6 @@ typedef struct	s_entity
 	uint32_t	ebo_id;
 }				t_entity;
 
-typedef struct	s_mat4
-{
-	float		data[16];
-}				t_mat4;
-
 typedef struct	s_scop
 {
 	int			wireframe;
@@ -54,6 +55,7 @@ typedef struct	s_scop
 	float		mouse_last_y;
 	float		mouse_sensitivity;
 	float		delta_time;
+	t_mat4		proj_matrix;
 }				t_scop;
 
 typedef union	u_vec_col
@@ -74,8 +76,8 @@ void	exit_message(const char *message);
 void    free_null(size_t count, ...);
 
 t_entity	*create_entity(struct s_mesh *mesh, struct s_shader *shader);
-void		draw_entity(t_camera *camera, t_entity *entity, t_vec4 color);
-
+void		entity_draw(t_camera *camera, t_entity *entity, t_vec4 color);
+void		entity_draw_instanced(t_scop *scop, t_entity *entity, size_t count);
 
 t_mat4		identity_mat4(void);
 t_mat4 mat4_translate(t_vec3 translation);

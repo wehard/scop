@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/27 14:51:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/27 19:08:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,18 @@ t_entity	*create_entity(t_mesh *mesh, t_shader *shader)
 	entity->mesh = mesh;
 	entity->shader = shader;
 	gen_buffers(entity);
+	return (entity);
+}
+
+t_entity	*entity_create_instanced(t_mesh *mesh, size_t count)
+{
+	t_entity *entity;
+
+	if (!(entity = (t_entity*)malloc(sizeof(t_entity))))
+		exit_message("Failed to malloc entity!");
+	entity->instance_count = count;
+
+
 	return (entity);
 }
 

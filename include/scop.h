@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/27 14:52:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/27 19:07:01 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_entity
 	uint32_t	vao_id;
 	uint32_t	vbo_id;
 	uint32_t	ebo_id;
+	size_t		instance_count;
 }				t_entity;
 
 typedef struct	s_scop

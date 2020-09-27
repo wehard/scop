@@ -7,13 +7,14 @@ layout(location = 0) in vec3 v_pos;
 uniform mat4 model_matrix;
 uniform mat4 view_matrix;
 uniform mat4 proj_matrix;
+uniform vec4 color;
 
 out vec4 f_col;
 out vec3 f_normal;
 
 void main()
 {
-	f_col = vec4(1.0, 1.0, 1.0, 1.0); //v_col;
+	f_col = color; //v_col;
 	f_normal = vec3(1.0, 1.0, 1.0); // v_normal;
 	gl_Position = proj_matrix * view_matrix * model_matrix * vec4(v_pos, 1.0);
 }

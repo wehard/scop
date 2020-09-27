@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:16:24 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 15:57:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:24:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,16 @@ void shader_set_uniform_mat4(t_shader *shader, char *loc_name, t_mat4 m)
 {
 	GLuint location = glGetUniformLocation(shader->program_id, loc_name);
 	glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat*)&m.data[0]);
+}
+
+void shader_set_uniform_vec3(t_shader *shader, char *loc_name, t_vec3 v)
+{
+	GLuint location = glGetUniformLocation(shader->program_id, loc_name);
+	glUniform3f(location, v.x, v.y, v.z);
+}
+
+void shader_set_uniform_vec4(t_shader *shader, char *loc_name, t_vec4 v)
+{
+	GLuint location = glGetUniformLocation(shader->program_id, loc_name);
+	glUniform4f(location, v.x, v.y, v.z, v.w);
 }

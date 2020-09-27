@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 22:27:31 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:28:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,25 @@ typedef struct	s_scop
 	float		delta_time;
 }				t_scop;
 
+typedef union	u_vec_col
+{
+
+}				t_vec_col;
+
+typedef struct 	s_vec4
+{
+	union { float x, r;};
+	union { float y, g;};
+	union { float z, b;};
+	union { float w, a;};
+}				t_vec4;
+
+
 void	exit_message(const char *message);
 void    free_null(size_t count, ...);
 
 t_entity	*create_entity(struct s_mesh *mesh, struct s_shader *shader);
-void		draw_entity(t_camera *camera, t_entity *entity);
+void		draw_entity(t_camera *camera, t_entity *entity, t_vec4 color);
 
 
 t_mat4		identity_mat4(void);

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 22:32:05 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:28:47 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_entity	*create_entity(t_mesh *mesh, t_shader *shader)
 	return (entity);
 }
 
-void		draw_entity(t_camera *camera, t_entity *entity)
+void		draw_entity(t_camera *camera, t_entity *entity, t_vec4 color)
 {
 	glUseProgram(entity->shader->program_id);
 	t_mat4 m = identity_mat4();
@@ -69,6 +69,7 @@ void		draw_entity(t_camera *camera, t_entity *entity)
 	shader_set_uniform_mat4(entity->shader, "model_matrix", m);
 	shader_set_uniform_mat4(entity->shader, "view_matrix", v);
 	shader_set_uniform_mat4(entity->shader, "proj_matrix", p);
+	shader_set_uniform_vec4(entity->shader, "color", color);
 	glBindVertexArray(entity->vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, entity->ebo_id);
 	glDrawElements(GL_TRIANGLES, entity->mesh->num_indices, GL_UNSIGNED_INT, 0);

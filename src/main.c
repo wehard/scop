@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 22:32:41 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:48:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,21 +162,30 @@ int		main(int argc, char const *argv[])
 	float last_time = 0.0;
 	scop.delta_time = 0.0;
 
+	glEnable(GL_DEPTH_TEST);
+
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		float current_time = glfwGetTime();
 		scop.delta_time = current_time - last_time;
 		last_time = current_time;
 		
-		glClearColor(0.1, 0.1, 0.1, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT);
-		if (scop.wireframe)
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		else
+		glClearColor(0.7, 0.4, 0.1, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		e->rotation.y += scop.delta_time * 40.0;
-		draw_entity(&c, e);
+		draw_entity(&c, e, (t_vec4){0.2, 0.2, 0.8, 1.0});
+
+		if (scop.wireframe)
+		{
+			glEnable(GL_POLYGON_OFFSET_LINE);
+			glPolygonOffset(-0.5, 0.5);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			draw_entity(&c, e, (t_vec4){1, 1, 1, 1.0});
+			glDisable(GL_POLYGON_OFFSET_LINE);
+		}
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

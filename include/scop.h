@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/27 19:07:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/10/11 16:22:16 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "vector.h"
+#include "vec4.h"
 
 struct s_mesh;
 struct s_shader;
@@ -58,20 +59,6 @@ typedef struct	s_scop
 	float		delta_time;
 	t_mat4		proj_matrix;
 }				t_scop;
-
-typedef union	u_vec_col
-{
-
-}				t_vec_col;
-
-typedef struct 	s_vec4
-{
-	union { float x, r;};
-	union { float y, g;};
-	union { float z, b;};
-	union { float w, a;};
-}				t_vec4;
-
 
 void	exit_message(const char *message);
 void    free_null(size_t count, ...);

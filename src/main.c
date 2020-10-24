@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/27 14:51:29 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/10/24 20:33:41 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	float yoffset;
 	
 	scop = (t_scop*)glfwGetWindowUserPointer(window);
-	xoffset = (scop->mouse_last_x - xpos) * scop->mouse_sensitivity;
-	yoffset = (ypos - scop->mouse_last_y) * scop->mouse_sensitivity;
+	xoffset = (xpos-scop->mouse_last_x) * scop->mouse_sensitivity;
+	yoffset = (scop->mouse_last_y - ypos) * scop->mouse_sensitivity;
 
 	scop->camera->yaw += xoffset;
 	scop->camera->pitch += yoffset;
@@ -99,16 +99,17 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	t_scop *scop;
 	
 	scop = (t_scop*)glfwGetWindowUserPointer(window);
-    if (key == GLFW_KEY_W && action == GLFW_PRESS)
+    if (key == GLFW_KEY_1 && action == GLFW_PRESS)
 		scop->wireframe = !scop->wireframe;
-	if (key == GLFW_KEY_UP && action == GLFW_REPEAT)
-		scop->camera->position.z += 0.1;
-	if (key == GLFW_KEY_DOWN && action == GLFW_REPEAT)
+	if (key == GLFW_KEY_W && action == GLFW_REPEAT)
 		scop->camera->position.z -= 0.1;
-	if (key == GLFW_KEY_LEFT && action == GLFW_REPEAT)
+	if (key == GLFW_KEY_S && action == GLFW_REPEAT)
+		scop->camera->position.z += 0.1;
+	if (key == GLFW_KEY_A && action == GLFW_REPEAT)
 		scop->camera->position.x -= 0.1;
-	if (key == GLFW_KEY_RIGHT && action == GLFW_REPEAT)
+	if (key == GLFW_KEY_D && action == GLFW_REPEAT)
 		scop->camera->position.x += 0.1;
+	ft_printf("camera %.4f %.4f %.4f\n", scop->camera->position.x, scop->camera->position.y, scop->camera->position.z);
 }
 
 int		main(int argc, char const *argv[])
@@ -145,7 +146,7 @@ int		main(int argc, char const *argv[])
 	t_mesh *m = obj_load(argv[1]);
 	t_entity *e = create_entity(m, s);
 	t_camera c;
-	c.position = ft_make_vec3(0, 0, -5);
+	c.position = ft_make_vec3(0, 0, 5);
 	c.forward = ft_make_vec3(0,0, -1);
 	c.yaw = -90.0;
 	c.pitch = 0.0;

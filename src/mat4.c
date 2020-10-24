@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:51:22 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 22:19:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/10/24 20:21:04 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,13 +262,14 @@ t_mat4	lookat_mat4(t_vec3 from, t_vec3 to, t_vec3 world_up)
 t_mat4        create_perspective_mat4(float fov, float aspect, float zn, float zf)
 {
         t_mat4        mat;
-		float tanhalffov ;
+		float tanhalffov;
+		float rad = ft_deg_to_rad(fov);
 		mat = init_mat4();
-		tanhalffov = tanf(ft_deg_to_rad(fov) / 2.0);
+		tanhalffov = tanf(fov / 2.0);
 		mat.data[0] = 1.0 / (aspect * tanhalffov);
 		mat.data[5] = 1.0 / tanhalffov;
 		mat.data[10] = -(zf + zn) / (zf - zn);
-		mat.data[14] = -1.0;
-		mat.data[11] = -(2.0 * zf * zn) / (zf - zn);
+		mat.data[11] = -1.0;
+		mat.data[14] = -(2.0 * zf * zn) / (zf - zn);
         return (mat);
 }

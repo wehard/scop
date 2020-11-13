@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:00:35 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 10:15:23 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/13 23:12:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define MESH_H
 
 # include <stdlib.h>
-# include "vector.h"
+# include "vec3.h"
+# include "vec2.h"
 # include "color.h"
 
 typedef struct	s_triface

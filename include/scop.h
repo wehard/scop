@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/10/11 16:22:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/13 23:15:39 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,12 @@
 
 #include <stdlib.h>
 #include <stdint.h>
-#include "vector.h"
+#include "vec3.h"
 #include "vec4.h"
+#include "mat4.h"
 
 struct s_mesh;
 struct s_shader;
-
-typedef struct	s_mat4
-{
-	float		data[16];
-}				t_mat4;
 
 typedef struct	s_camera
 {
@@ -67,16 +63,6 @@ t_entity	*create_entity(struct s_mesh *mesh, struct s_shader *shader);
 void		entity_draw(t_camera *camera, t_entity *entity, t_vec4 color);
 void		entity_draw_instanced(t_scop *scop, t_entity *entity, size_t count);
 
-t_mat4		identity_mat4(void);
-t_mat4 mat4_translate(t_vec3 translation);
-t_mat4	mat4_scale(t_vec3 scale);
-t_mat4 mat4_rotate_x(float angle);
-t_mat4 mat4_rotate_y(float angle);
-t_mat4 mat4_rotate_z(float angle);
-t_mat4	mul_mat4(t_mat4 a, t_mat4 b);
-t_mat4	lookat_mat4(t_vec3 from, t_vec3 to, t_vec3 world_up);
-t_mat4        create_perspective_mat4(float fov, float aspect, float zn, float zf);
-t_mat4 mat4_rotate_xyz(t_vec3 rotation);
-t_mat4 mat4_trs(t_vec3 pos, t_vec3 rot, t_vec3 scale);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2020/10/24 20:34:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/13 23:31:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ t_entity	*entity_create_instanced(t_mesh *mesh, size_t count)
 void		entity_draw(t_camera *camera, t_entity *entity, t_vec4 color)
 {
 	glUseProgram(entity->shader->program_id);
-	t_mat4 m = identity_mat4();
+	t_mat4 m = mat4_identity();
 
-	t_mat4 v = identity_mat4();
-	t_mat4 p = identity_mat4();
+	t_mat4 v = mat4_identity();
+	t_mat4 p = mat4_identity();
 
 	// m = mat4_translate((t_vec3){-2,0,0});
 	m = mat4_trs(ft_make_vec3(0, 0, 0), entity->rotation, ft_make_vec3(1,1,1));
-	p = create_perspective_mat4(45.0, 1.6, 0.1, 100.0);
-	v = lookat_mat4(camera->position, ft_add_vec3(camera->position, camera->forward), ft_make_vec3(0,1,0));
+	p = mat4_perspective(45.0, 1.6, 0.1, 100.0);
+	v = mat4_lookat(camera->position, ft_add_vec3(camera->position, camera->forward), ft_make_vec3(0,1,0));
 	shader_set_uniform_mat4(entity->shader, "model_matrix", m);
 	shader_set_uniform_mat4(entity->shader, "view_matrix", v);
 	shader_set_uniform_mat4(entity->shader, "proj_matrix", p);

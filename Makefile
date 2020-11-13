@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/09/26 15:56:38 by wkorande         ###   ########.fr        #
+#    Updated: 2020/11/13 23:29:36 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,15 @@ SRC =	entity.c\
 		mesh/mesh_set_vert.c\
 		obj_loader.c\
 		shader.c\
-		mat4.c
+		mat4/mat4_init.c\
+		mat4/mat4_lookat.c\
+		mat4/mat4_mul.c\
+		mat4/mat4_rotate.c\
+		mat4/mat4_scale.c\
+		mat4/mat4_trs.c\
+		mat4/mat_identity.c\
+		mat4/mat_perspective.c\
+		mat4/mat_translate.c
 		
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 

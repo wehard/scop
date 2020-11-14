@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/13 23:31:31 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/14 21:09:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ void		entity_draw(t_camera *camera, t_entity *entity, t_vec4 color)
 	glUseProgram(0);
 }
 
-void	entity_draw_instanced(t_scop *scop, t_entity *entity, size_t count)
+void	entity_draw_instanced(t_env *env, t_entity *entity, size_t count)
 {
-	glUseProgram(entity->shader->program_id);
-	shader_set_uniform_mat4(entity->shader, "model_matrix", mat4_trs(ft_make_vec3(0,0, 0), entity->rotation, ft_make_vec3(1,1,1)));
-	shader_set_uniform_mat4(entity->shader, "view_matrix", scop->camera->view_matrix);
-	shader_set_uniform_mat4(entity->shader, "proj_matrix", scop->proj_matrix);
-	shader_set_uniform_vec4(entity->shader, "color", (t_vec4){1.0, 1.0, 1.0, 1.0});
+	glUseProgram(env->shader_instanced->program_id);
+	shader_set_uniform_mat4(entity->shader, "model_matrix", mat4_trs(ft_make_vec3(0, 0, 0), entity->rotation, ft_make_vec3(1,1,1)));
+	shader_set_uniform_mat4(entity->shader, "view_matrix", env->camera->view_matrix);
+	shader_set_uniform_mat4(entity->shader, "proj_matrix", env->proj_matrix);
+	shader_set_uniform_vec4(entity->shader, "color", (t_vec4){0.3, 0.2, 0.5, 1.0});
 	glBindVertexArray(entity->vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, entity->ebo_id);
 	glDrawElementsInstanced(GL_TRIANGLES, entity->mesh->num_indices, GL_UNSIGNED_INT, 0, count);

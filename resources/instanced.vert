@@ -16,5 +16,6 @@ void main()
 {
 	f_col = color;
 	f_normal = vec3(1.0, 1.0, 1.0);
-	gl_Position = proj_matrix * view_matrix * model_matrix * vec4(v_pos, 1.0);
+	vec3 pos = v_pos + vec3(cos(gl_InstanceID) * 10, 0, sin(gl_InstanceID) * 10);
+	gl_Position = proj_matrix * view_matrix * model_matrix * vec4(pos, 1.0);
 }

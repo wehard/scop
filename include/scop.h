@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 16:13:24 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 19:15:07 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include "vec4.h"
 #include "mat4.h"
 
-# define WIN_W 1280
-# define WIN_H 720
+# define WIN_W 1920
+# define WIN_H 1080
 
 struct s_mesh;
 struct s_shader;

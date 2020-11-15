@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 16:27:24 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 19:29:05 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	env = (t_env*)glfwGetWindowUserPointer(window);
     if (key == GLFW_KEY_1 && action == GLFW_PRESS)
 		env->wireframe = !env->wireframe;
-	if (key == GLFW_KEY_W && action == GLFW_REPEAT)
-		env->camera->position = ft_add_vec3(env->camera->position, ft_mul_vec3(env->camera->forward, 0.3));
-	if (key == GLFW_KEY_S && action == GLFW_REPEAT)
-		env->camera->position = ft_sub_vec3(env->camera->position, ft_mul_vec3(env->camera->forward, 0.3));
-	if (key == GLFW_KEY_A && action == GLFW_REPEAT)
-		env->camera->position = ft_sub_vec3(env->camera->position, ft_mul_vec3(env->camera->right, 0.3));
-	if (key == GLFW_KEY_D && action == GLFW_REPEAT)
-		env->camera->position = ft_add_vec3(env->camera->position, ft_mul_vec3(env->camera->right, 0.3));
+	// if (key == GLFW_KEY_W && action == GLFW_REPEAT)
+	// 	env->camera->position = ft_add_vec3(env->camera->position, ft_mul_vec3(env->camera->forward, 0.3));
+	// if (key == GLFW_KEY_S && action == GLFW_REPEAT)
+	// 	env->camera->position = ft_sub_vec3(env->camera->position, ft_mul_vec3(env->camera->forward, 0.3));
+	// if (key == GLFW_KEY_A && action == GLFW_REPEAT)
+	// 	env->camera->position = ft_sub_vec3(env->camera->position, ft_mul_vec3(env->camera->right, 0.3));
+	// if (key == GLFW_KEY_D && action == GLFW_REPEAT)
+	// 	env->camera->position = ft_add_vec3(env->camera->position, ft_mul_vec3(env->camera->right, 0.3));
 	ft_printf("camera %.4f %.4f %.4f\n", env->camera->position.x, env->camera->position.y, env->camera->position.z);
 }
 
@@ -194,7 +194,7 @@ int		main(int argc, char const *argv[])
 
 	size_t i;
 
-
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		float current_time = glfwGetTime();
@@ -208,7 +208,14 @@ int		main(int argc, char const *argv[])
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		// e->rotation[0].y += env.delta_time * 10.0;
+		if (glfwGetKey(window, GLFW_KEY_W))
+			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 0.3));
+		if (glfwGetKey(window, GLFW_KEY_S))
+			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 0.3));
+		if (glfwGetKey(window, GLFW_KEY_A))
+			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 0.3));
+		if (glfwGetKey(window, GLFW_KEY_D))
+			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 0.3));
 
 		if (env.wireframe)
 		{

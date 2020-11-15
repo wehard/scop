@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 16:13:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 20:02:42 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	gen_buffers(t_entity *entity)
 	glGenBuffers(1, &entity->vbo_id);
 	glGenBuffers(1, &entity->ebo_id);
 	glGenBuffers(1, &entity->mbo_id);
+
+	glGenBuffers(1, &entity->uvbo_id);
 }
 
 static void init_buffers(t_entity *entity)
@@ -35,6 +37,10 @@ static void init_buffers(t_entity *entity)
 	glBindBuffer(GL_ARRAY_BUFFER, entity->vbo_id);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, entity->vbo_id);
+	glEnableVertexAttribArray(5);
+	glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	
 	if (entity->instance_count > 1)
 	{
@@ -56,6 +62,9 @@ void entity_update_buffers(t_entity *entity)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, entity->vbo_id);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * entity->mesh->num_vertices * 3, entity->mesh->vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, entity->uvbo_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * entity->mesh->num_uvs * 2, entity->mesh->uvs, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, entity->ebo_id);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * entity->mesh->num_indices, entity->mesh->indices, GL_STATIC_DRAW);

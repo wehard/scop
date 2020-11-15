@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 19:29:05 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 20:22:50 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,13 +209,13 @@ int		main(int argc, char const *argv[])
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		if (glfwGetKey(window, GLFW_KEY_W))
-			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 0.3));
+			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 10.3 * env.delta_time));
 		if (glfwGetKey(window, GLFW_KEY_S))
-			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 0.3));
+			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 10.3 * env.delta_time));
 		if (glfwGetKey(window, GLFW_KEY_A))
-			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 0.3));
+			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 10.3 * env.delta_time));
 		if (glfwGetKey(window, GLFW_KEY_D))
-			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 0.3));
+			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 10.3 * env.delta_time));
 
 		if (env.wireframe)
 		{

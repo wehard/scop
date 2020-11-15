@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 19:15:07 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 20:00:33 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct	s_entity
 	uint32_t	vbo_id;
 	uint32_t	ebo_id;
 	uint32_t	mbo_id;
+	uint32_t	uvbo_id;
 	size_t		instance_count;
 	t_mat4		*model_matrix;
 }				t_entity;

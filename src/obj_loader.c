@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/26 11:52:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 20:25:25 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ static void	read_mesh_info(t_mesh *m, const char *filename)
 		free(line);
 	}
 	close(fd);
+	m->num_uvs = m->num_vertices;		// !!!
+	m->num_normals = m->num_vertices;	// !!!
 	mesh_create_verts(m, m->num_vertices);
 	mesh_create_indices(m, m->num_indices);
 	mesh_create_normals(m, m->num_normals);
 	mesh_create_uvs(m, m->num_uvs);
-	// mesh_create_trifaces(m, m->num_trifaces);
 }
 
 // void		triface_calc_bounds(t_triface *t)
@@ -71,34 +72,34 @@ static void	read_mesh_info(t_mesh *m, const char *filename)
 // 	}
 // }
 
-static void	parse_face(t_mesh *m, size_t i, char *line, size_t j)
-{
-	char	**parts;
-	char	**tf;
-	size_t	n;
+// static void	parse_face(t_mesh *m, size_t i, char *line, size_t j)
+// {
+// 	char	**parts;
+// 	char	**tf;
+// 	size_t	n;
 
-	parts = ft_strsplit(line + 1, ' ');
-	while (parts[j] && (tf = ft_strsplit(parts[j], '/')))
-	{
-		if (!tf[0] || ((n = ft_atoi(tf[0])) && (n > m->num_vertices || n < 1)))
-			exit_message("Not enough vertices");
-		m->trifaces[i].v[j] = m->vertices[n - 1];
-		if (!tf[1] || ((n = ft_atoi(tf[1])) && (n > m->num_uvs || n < 1)))
-			exit_message("Not enough uvs");
-		m->trifaces[i].uv[j] = m->uvs[n - 1];
-		if (!tf[2] || ((n = ft_atoi(tf[2])) && (n > m->num_normals || n < 1)))
-			exit_message("Not enough normals");
-		m->trifaces[i].n[j] = m->normals[n - 1];
-		free_null(5, tf[0], tf[1], tf[2], tf, parts[j]);
-		j++;
-	}
-	free(parts);
-	m->trifaces[i].e[0] = ft_sub_vec3(m->trifaces[i].v[1], m->trifaces[i].v[0]);
-	m->trifaces[i].e[1] = ft_sub_vec3(m->trifaces[i].v[2], m->trifaces[i].v[1]);
-	m->trifaces[i].e[2] = ft_sub_vec3(m->trifaces[i].v[0], m->trifaces[i].v[2]);
-	m->trifaces[i].normal = m->trifaces[i].n[0];
-	// triface_calc_bounds(&m->trifaces[i]);
-}
+// 	parts = ft_strsplit(line + 1, ' ');
+// 	while (parts[j] && (tf = ft_strsplit(parts[j], '/')))
+// 	{
+// 		if (!tf[0] || ((n = ft_atoi(tf[0])) && (n > m->num_vertices || n < 1)))
+// 			exit_message("Not enough vertices");
+// 		m->trifaces[i].v[j] = m->vertices[n - 1];
+// 		if (!tf[1] || ((n = ft_atoi(tf[1])) && (n > m->num_uvs || n < 1)))
+// 			exit_message("Not enough uvs");
+// 		m->trifaces[i].uv[j] = m->uvs[n - 1];
+// 		if (!tf[2] || ((n = ft_atoi(tf[2])) && (n > m->num_normals || n < 1)))
+// 			exit_message("Not enough normals");
+// 		m->trifaces[i].n[j] = m->normals[n - 1];
+// 		free_null(5, tf[0], tf[1], tf[2], tf, parts[j]);
+// 		j++;
+// 	}
+// 	free(parts);
+// 	m->trifaces[i].e[0] = ft_sub_vec3(m->trifaces[i].v[1], m->trifaces[i].v[0]);
+// 	m->trifaces[i].e[1] = ft_sub_vec3(m->trifaces[i].v[2], m->trifaces[i].v[1]);
+// 	m->trifaces[i].e[2] = ft_sub_vec3(m->trifaces[i].v[0], m->trifaces[i].v[2]);
+// 	m->trifaces[i].normal = m->trifaces[i].n[0];
+// 	// triface_calc_bounds(&m->trifaces[i]);
+// }
 
 static void read_indices(t_mesh *m, size_t i, char *line)
 {
@@ -127,7 +128,9 @@ void		read_mesh(int fd, t_mesh *m)
 	while (ft_get_next_line(fd, &line) > 0)
 	{
 		if (ft_strncmp(line, "v ", 2) == 0)
+		{
 			m->vertices[i[0]++] = ft_parse_vec3(line + 1);
+		}
 		// else if (ft_strncmp(line, "vt", 2) == 0)
 		// 	m->uvs[i[1]++] = ft_parse_vec2(line + 1);
 		// else if (ft_strncmp(line, "vn", 2) == 0)
@@ -141,6 +144,44 @@ void		read_mesh(int fd, t_mesh *m)
 	}
 }
 
+static float	ft_abs_f(float f)
+{
+	if (f < 0.0)
+		return (f * -1.0);
+	return (f);
+}
+
+static int max_axis(t_vec3 v)
+{
+	if (ft_abs_f(v.x) >= ft_abs_f(v.y) &&  ft_abs_f(v.x) >= ft_abs_f(v.z))
+		return (0);
+	else if (ft_abs_f(v.y) >= ft_abs_f(v.z) &&  ft_abs_f(v.y) >= ft_abs_f(v.x))
+		return (1);
+	else
+		return (2);
+}
+
+static void generate_uvs(t_mesh *mesh)
+{
+	size_t i;
+
+	i = 0;
+	while (i < mesh->num_vertices)
+	{
+		t_vec2 uv;
+		t_vec3 d = ft_normalize_vec3(mesh->vertices[i]);
+		int axis = max_axis(d);
+		if (axis == 0)
+			uv = (t_vec2){ft_abs_f(d.y), ft_abs_f(d.z)};
+		else if (axis == 1)
+			uv = (t_vec2){ft_abs_f(d.x), ft_abs_f(d.z)};
+		else
+			uv = (t_vec2){ft_abs_f(d.x), ft_abs_f(d.y)};
+		mesh->uvs[i] = uv;
+		i++;
+	}
+}
+
 t_mesh		*obj_load(const char *filename)
 {
 	t_mesh	*m;
@@ -151,9 +192,10 @@ t_mesh		*obj_load(const char *filename)
 	read_mesh_info(m, filename);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0 || read(fd, NULL, 0) == -1)
-		exit_message("Error loading model file!");
+		exit_message("Error loading obj file!");
 	read_mesh(fd, m);
 	close(fd);
 	// mesh_calc_bounds(m);
+	generate_uvs(m);
 	return (m);
 }

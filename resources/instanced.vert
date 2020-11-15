@@ -9,6 +9,8 @@ uniform mat4 view_matrix;
 uniform mat4 proj_matrix;
 uniform vec4 color;
 
+uniform vec3 positions[100];
+
 out vec4 f_col;
 out vec3 f_normal;
 
@@ -16,6 +18,6 @@ void main()
 {
 	f_col = color;
 	f_normal = vec3(1.0, 1.0, 1.0);
-	vec3 pos = v_pos + vec3(cos(gl_InstanceID) * 10, 0, sin(gl_InstanceID) * 10);
+	vec3 pos = v_pos + positions[gl_InstanceID];
 	gl_Position = proj_matrix * view_matrix * model_matrix * vec4(pos, 1.0);
 }

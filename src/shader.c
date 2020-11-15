@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:16:24 by wkorande          #+#    #+#             */
-/*   Updated: 2020/09/27 12:24:31 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 11:59:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,13 @@ void destroy_shader(t_shader *shader)
 	free(shader);
 }
 
+void shader_use(t_shader *shader)
+{
+	if (!shader)
+		return;
+	glUseProgram(shader->program_id);
+}
+
 void shader_set_uniform_mat4(t_shader *shader, char *loc_name, t_mat4 m)
 {
 	GLuint location = glGetUniformLocation(shader->program_id, loc_name);
@@ -106,11 +113,23 @@ void shader_set_uniform_mat4(t_shader *shader, char *loc_name, t_mat4 m)
 void shader_set_uniform_vec3(t_shader *shader, char *loc_name, t_vec3 v)
 {
 	GLuint location = glGetUniformLocation(shader->program_id, loc_name);
-	glUniform3f(location, v.x, v.y, v.z);
+	glUniform3fv(location, 1, (GLfloat*)&v);
 }
 
 void shader_set_uniform_vec4(t_shader *shader, char *loc_name, t_vec4 v)
 {
 	GLuint location = glGetUniformLocation(shader->program_id, loc_name);
 	glUniform4f(location, v.x, v.y, v.z, v.w);
+}
+
+void shader_set_uniform_vec3_array(t_shader *shader, char *loc_name, t_vec3 *v, size_t count)
+{
+	GLuint location = glGetUniformLocation(shader->program_id, loc_name);
+	glUniform3fv(location, count, (GLfloat*)&v[0]);
+}
+
+void shader_set_uniform_vec4_array(t_shader *shader, char *loc_name, t_vec4 *v, size_t count)
+{
+	GLuint location = glGetUniformLocation(shader->program_id, loc_name);
+	glUniform4fv(location, count, (GLfloat*)&v[0]);
 }

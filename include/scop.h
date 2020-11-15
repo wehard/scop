@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/14 21:17:44 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 11:41:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ typedef struct	s_entity
 {
 	struct s_mesh *mesh;
 	struct s_shader *shader;
-	t_vec3		position;
-	t_vec3		scale;
-	t_vec3		rotation;
+	t_vec3		*position;
+	t_vec3		*scale;
+	t_vec3		*rotation;
 	uint32_t	vao_id;
 	uint32_t	vbo_id;
 	uint32_t	ebo_id;
@@ -65,9 +65,10 @@ typedef struct	s_env
 void	exit_message(const char *message);
 void    free_null(size_t count, ...);
 
-t_entity	*create_entity(struct s_mesh *mesh, struct s_shader *shader);
+t_entity	*entity_create(struct s_mesh *mesh, struct s_shader *shader);
+t_entity	*entity_create_instanced(struct s_mesh *mesh, struct s_shader *shader, size_t instance_count);
 void		entity_draw(t_camera *camera, t_entity *entity, t_vec4 color);
-void		entity_draw_instanced(t_env *env, t_entity *entity, size_t count);
+void		entity_draw_instanced(t_env *env, t_entity *entity);
 
 void camera_init(t_camera *camera, t_vec3 pos, t_vec3 forward, float yaw, float pitch);
 void camera_update(t_camera *camera);

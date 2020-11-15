@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/14 21:21:05 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 12:30:27 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,15 +147,11 @@ int		main(int argc, char const *argv[])
 	t_shader *instanced = create_shader("resources/instanced.vert", "resources/instanced.frag");
 
 	t_mesh *teapot = obj_load(argv[1]);
-	t_entity *e = create_entity(teapot, basic);
+	t_entity *e = entity_create_instanced(teapot, instanced, 20);
+	// t_entity *e = entity_create(teapot, basic);
 	
 	t_camera c;
-	// c.position = ft_make_vec3(0, 0, 5);
-	// c.forward = ft_make_vec3(0,0, -1);
-	// c.yaw = -90.0;
-	// c.pitch = 0.0;
-
-	camera_init(&c, ft_make_vec3(0, 0, 5), ft_make_vec3(0,0, -1), -90.0, 0.0);
+	camera_init(&c, ft_make_vec3(0, 10, 45), ft_make_vec3(0, -0.3, -1), -90.0, 0.0);
 	
 	env.entity = e;
 	env.camera = &c;
@@ -188,7 +184,7 @@ int		main(int argc, char const *argv[])
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		e->rotation.y += env.delta_time * 40.0;
+		e->rotation[0].y += env.delta_time * 10.0;
 
 		if (env.wireframe)
 		{
@@ -196,11 +192,11 @@ int		main(int argc, char const *argv[])
 			glPolygonOffset(-0.5, 0.5);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			// entity_draw(&c, e, (t_vec4){1, 1, 1, 1.0});
-			entity_draw_instanced(&env, e, 6);
+			entity_draw_instanced(&env, e);
 			glDisable(GL_POLYGON_OFFSET_LINE);
 		}
 		else
-			entity_draw_instanced(&env, e, 6);
+			entity_draw_instanced(&env, e);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

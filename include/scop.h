@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 13:36:00 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 16:13:24 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ t_entity	*entity_create(struct s_mesh *mesh, struct s_shader *shader);
 t_entity	*entity_create_instanced(struct s_mesh *mesh, struct s_shader *shader, size_t instance_count);
 void		entity_draw(t_env *env, t_entity *entity);
 void		entity_draw_instanced(t_env *env, t_entity *entity);
+
+void entity_update_buffers(t_entity *entity);
 
 void camera_init(t_camera *camera, t_vec3 pos, t_vec3 forward, float yaw, float pitch);
 void camera_update(t_camera *camera);

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 14:38:05 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 16:27:24 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,30 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	ft_printf("camera %.4f %.4f %.4f\n", env->camera->position.x, env->camera->position.y, env->camera->position.z);
 }
 
+void init_matrices(t_entity *entity)
+{
+	size_t i = 0;
+	float angle = 0;
+	while (i < entity->instance_count)
+	{
+		entity->position[i].x = (cosf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
+		entity->position[i].y = 2.5 - rand() % 5;
+		entity->position[i].z = (sinf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
+		angle += 360.0 / entity->instance_count;
+		entity->rotation[i] = ft_make_vec3(0.0, (float)(rand()%360), 0.0);
+		entity->scale[i] = ft_make_vec3(0.1, 0.1, 0.1);
+		entity->model_matrix[i] = mat4_trs(entity->position[i], entity->rotation[i], entity->scale[i]);
+		i++;
+	}
+}
+
 int		main(int argc, char const *argv[])
 {
 	t_env env;
 	env.mouse_last_x = WIN_W / 2;
 	env.mouse_last_y = WIN_H / 2;
 	env.mouse_sensitivity = 0.1f;
-	
+	srand((unsigned)4);
 	if (!glfwInit())
 	{
 		return (EXIT_FAILURE);
@@ -148,7 +165,12 @@ int		main(int argc, char const *argv[])
 
 	t_mesh *teapot = obj_load(argv[1]);
 	t_entity *entity = entity_create(teapot, basic);
-	t_entity *entity_instanced = entity_create_instanced(teapot, instanced, 50);
+	t_entity *entity_instanced = entity_create_instanced(teapot, instanced, 5000);
+
+	entity->scale[0] = ft_make_vec3(5,5,5);
+
+	init_matrices(entity_instanced);
+	entity_update_buffers(entity_instanced);
 	
 	t_camera c;
 	camera_init(&c, ft_make_vec3(0, 10, 45), ft_make_vec3(0, -0.3, -1), -90.0, 0.0);
@@ -172,17 +194,6 @@ int		main(int argc, char const *argv[])
 
 	size_t i;
 
-	// i = 0;
-	// float angle = 0;
-	// while (i < e->instance_count)
-	// {
-	// 	e->position[i].x = cosf(ft_deg_to_rad(angle)) * 30;
-	// 	e->position[i].y = 0;
-	// 	e->position[i].z = sinf(ft_deg_to_rad(angle)) * 30;
-	// 	angle += 360.0 / e->instance_count;
-	// 	e->model_matrix[i] = mat4_trs(e->position[i], e->rotation[i], e->scale[i]);
-	// 	i++;
-	// }
 
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
@@ -204,13 +215,13 @@ int		main(int argc, char const *argv[])
 			glEnable(GL_POLYGON_OFFSET_LINE);
 			glPolygonOffset(-0.5, 0.5);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			// entity_draw(&env, entity);
+			entity_draw(&env, entity);
 			entity_draw_instanced(&env, entity_instanced);
 			glDisable(GL_POLYGON_OFFSET_LINE);
 		}
 		else
 		{
-			// entity_draw(&env, entity);
+			entity_draw(&env, entity);
 			entity_draw_instanced(&env, entity_instanced);
 		}
 

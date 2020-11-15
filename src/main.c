@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 12:30:27 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/15 14:38:05 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,13 +147,12 @@ int		main(int argc, char const *argv[])
 	t_shader *instanced = create_shader("resources/instanced.vert", "resources/instanced.frag");
 
 	t_mesh *teapot = obj_load(argv[1]);
-	t_entity *e = entity_create_instanced(teapot, instanced, 20);
-	// t_entity *e = entity_create(teapot, basic);
+	t_entity *entity = entity_create(teapot, basic);
+	t_entity *entity_instanced = entity_create_instanced(teapot, instanced, 50);
 	
 	t_camera c;
 	camera_init(&c, ft_make_vec3(0, 10, 45), ft_make_vec3(0, -0.3, -1), -90.0, 0.0);
 	
-	env.entity = e;
 	env.camera = &c;
 	env.shader_basic = basic;
 	env.shader_instanced = instanced;
@@ -171,6 +170,20 @@ int		main(int argc, char const *argv[])
 
 	glEnable(GL_DEPTH_TEST);
 
+	size_t i;
+
+	// i = 0;
+	// float angle = 0;
+	// while (i < e->instance_count)
+	// {
+	// 	e->position[i].x = cosf(ft_deg_to_rad(angle)) * 30;
+	// 	e->position[i].y = 0;
+	// 	e->position[i].z = sinf(ft_deg_to_rad(angle)) * 30;
+	// 	angle += 360.0 / e->instance_count;
+	// 	e->model_matrix[i] = mat4_trs(e->position[i], e->rotation[i], e->scale[i]);
+	// 	i++;
+	// }
+
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		float current_time = glfwGetTime();
@@ -184,19 +197,22 @@ int		main(int argc, char const *argv[])
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		e->rotation[0].y += env.delta_time * 10.0;
+		// e->rotation[0].y += env.delta_time * 10.0;
 
 		if (env.wireframe)
 		{
 			glEnable(GL_POLYGON_OFFSET_LINE);
 			glPolygonOffset(-0.5, 0.5);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			// entity_draw(&c, e, (t_vec4){1, 1, 1, 1.0});
-			entity_draw_instanced(&env, e);
+			// entity_draw(&env, entity);
+			entity_draw_instanced(&env, entity_instanced);
 			glDisable(GL_POLYGON_OFFSET_LINE);
 		}
 		else
-			entity_draw_instanced(&env, e);
+		{
+			// entity_draw(&env, entity);
+			entity_draw_instanced(&env, entity_instanced);
+		}
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 20:25:25 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:36:25 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "ft_printf.h"
+#include "obj_loader.h"
+#include "vec2.h"
 
 static void	read_mesh_info(t_mesh *m, const char *filename)
 {
@@ -154,11 +156,11 @@ static float	ft_abs_f(float f)
 static int max_axis(t_vec3 v)
 {
 	if (ft_abs_f(v.x) >= ft_abs_f(v.y) &&  ft_abs_f(v.x) >= ft_abs_f(v.z))
-		return (0);
+		return (AXIS_X);
 	else if (ft_abs_f(v.y) >= ft_abs_f(v.z) &&  ft_abs_f(v.y) >= ft_abs_f(v.x))
-		return (1);
+		return (AXIS_Y);
 	else
-		return (2);
+		return (AXIS_Z);
 }
 
 static void generate_uvs(t_mesh *mesh)
@@ -171,12 +173,12 @@ static void generate_uvs(t_mesh *mesh)
 		t_vec2 uv;
 		t_vec3 d = ft_normalize_vec3(mesh->vertices[i]);
 		int axis = max_axis(d);
-		if (axis == 0)
-			uv = (t_vec2){ft_abs_f(d.y), ft_abs_f(d.z)};
-		else if (axis == 1)
-			uv = (t_vec2){ft_abs_f(d.x), ft_abs_f(d.z)};
+		if (axis == AXIS_X)
+			uv = (t_vec2){(-d.z), (-d.y)};
+		else if (axis == AXIS_Y)
+			uv = (t_vec2){(d.x), (d.z)};
 		else
-			uv = (t_vec2){ft_abs_f(d.x), ft_abs_f(d.y)};
+			uv = (t_vec2){(d.x), (-d.y)};
 		mesh->uvs[i] = uv;
 		i++;
 	}

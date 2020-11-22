@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 20:22:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:39:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include <math.h>
+#include "tex.h"
 
 // int		on_render(void *param)
 // {
@@ -163,9 +164,10 @@ int		main(int argc, char const *argv[])
 	t_shader *basic = create_shader("resources/basic.vert", "resources/basic.frag");
 	t_shader *instanced = create_shader("resources/instanced.vert", "resources/instanced.frag");
 
-	t_mesh *teapot = obj_load(argv[1]);
-	t_entity *entity = entity_create(teapot, basic);
-	t_entity *entity_instanced = entity_create_instanced(teapot, instanced, 5000);
+	t_mesh *arg_mesh = obj_load(argv[1]);
+	t_entity *entity = entity_create(arg_mesh, basic);
+	entity->tex = tex_load("resources/texture.jpg");
+	t_entity *entity_instanced = entity_create_instanced(arg_mesh, instanced, 500);
 
 	entity->scale[0] = ft_make_vec3(5,5,5);
 
@@ -209,13 +211,13 @@ int		main(int argc, char const *argv[])
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		if (glfwGetKey(window, GLFW_KEY_W))
-			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 10.3 * env.delta_time));
+			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 20.0 * env.delta_time));
 		if (glfwGetKey(window, GLFW_KEY_S))
-			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 10.3 * env.delta_time));
+			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->forward, 20.0 * env.delta_time));
 		if (glfwGetKey(window, GLFW_KEY_A))
-			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 10.3 * env.delta_time));
+			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 20.0 * env.delta_time));
 		if (glfwGetKey(window, GLFW_KEY_D))
-			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 10.3 * env.delta_time));
+			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 20.0 * env.delta_time));
 
 		if (env.wireframe)
 		{
@@ -238,7 +240,7 @@ int		main(int argc, char const *argv[])
 	
 	destroy_shader(basic);
 	destroy_shader(instanced);
-	mesh_destroy(teapot);
+	mesh_destroy(arg_mesh);
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

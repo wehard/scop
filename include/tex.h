@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_loader.h                                       :+:      :+:    :+:   */
+/*   tex.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/23 13:20:00 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/22 13:48:40 by wkorande         ###   ########.fr       */
+/*   Created: 2020/11/22 12:53:29 by wkorande          #+#    #+#             */
+/*   Updated: 2020/11/22 13:20:55 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJ_LOADER_H
-# define OBJ_LOADER_H
+#ifndef TEX_H
+# define TEX_H
 
-# include "mesh.h"
+# include <stdint.h>
 
-# define AXIS_X 0
-# define AXIS_Y 1
-# define AXIS_Z 2
+typedef struct	s_tex
+{
+	uint32_t	tex_id;
+	int			width;
+	int			height;
+	int			num_channels;
+}				t_tex;
 
-t_mesh			*obj_load(const char *filename);
+
+t_tex	*tex_load(const char *filepath);
+void	tex_bind(t_tex *tex);
 
 #endif

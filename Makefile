@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/11/14 20:43:19 by wkorande         ###   ########.fr        #
+#    Updated: 2020/11/22 13:23:58 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ SRC =	entity.c\
 		mat4/mat_identity.c\
 		mat4/mat_perspective.c\
 		mat4/mat_translate.c\
-		camera.c
+		camera.c\
+		tex.c\
+		stb_image.c
 		
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 
@@ -38,7 +40,7 @@ CFLAGS = #-Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
-INCL = -I libft/includes/ -I include
+INCL = -I libft/includes/ -I include -I lib
 
 UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux)

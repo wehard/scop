@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 20:02:42 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:23:14 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "shader.h"
 #include <math.h>
 #include "libft.h"
+#include "tex.h"
 
 static void	gen_buffers(t_entity *entity)
 {
@@ -38,7 +39,7 @@ static void init_buffers(t_entity *entity)
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, entity->vbo_id);
+	glBindBuffer(GL_ARRAY_BUFFER, entity->uvbo_id);
 	glEnableVertexAttribArray(5);
 	glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	
@@ -100,6 +101,7 @@ t_entity	*entity_create_instanced(t_mesh *mesh, t_shader *shader, size_t instanc
 	entity->vbo_id = -1;
 	entity->ebo_id = -1;
 	entity->mbo_id = -1;
+	entity->tex = NULL;
 
 	i = 0;
 	while (i < instance_count)
@@ -122,6 +124,7 @@ t_entity	*entity_create_instanced(t_mesh *mesh, t_shader *shader, size_t instanc
 void		entity_draw(t_env *env, t_entity *entity)
 {
 	shader_use(env->shader_basic);
+	tex_bind(entity->tex);
 	
 	shader_set_uniform_mat4(env->shader_basic, "model_matrix", mat4_trs(entity->position[0], entity->rotation[0], entity->scale[0]));
 	shader_set_uniform_mat4(env->shader_basic, "view_matrix", env->camera->view_matrix);
@@ -131,6 +134,7 @@ void		entity_draw(t_env *env, t_entity *entity)
 	glBindVertexArray(entity->vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, entity->ebo_id);
 	glDrawElements(GL_TRIANGLES, entity->mesh->num_indices, GL_UNSIGNED_INT, 0);
+	tex_bind(0);
 	shader_use(0);
 }
 

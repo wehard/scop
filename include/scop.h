@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 20:00:33 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:23:36 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 struct s_mesh;
 struct s_shader;
+struct s_tex;
 
 typedef struct	s_camera
 {
@@ -38,6 +39,7 @@ typedef struct	s_camera
 typedef struct	s_entity
 {
 	struct s_mesh *mesh;
+	struct s_tex *tex;
 	struct s_shader *shader;
 	t_vec3		*position;
 	t_vec3		*scale;
@@ -49,6 +51,7 @@ typedef struct	s_entity
 	uint32_t	uvbo_id;
 	size_t		instance_count;
 	t_mat4		*model_matrix;
+
 }				t_entity;
 
 typedef struct	s_env

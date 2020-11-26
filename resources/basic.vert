@@ -12,11 +12,13 @@ uniform vec4 color;
 out vec4 f_col;
 out vec3 f_normal;
 out vec2 f_uv;
+out vec3 frag_pos;
 
 void main()
 {
 	f_uv = v_uv;
-	f_col = color; //v_col;
-	f_normal = vec3(1.0, 1.0, 1.0); // v_normal;
+	f_col = color;
+	f_normal = normalize(v_pos);
+	frag_pos = vec3(model_matrix * vec4(v_pos, 1.0));
 	gl_Position = proj_matrix * view_matrix * model_matrix * vec4(v_pos, 1.0);
 }

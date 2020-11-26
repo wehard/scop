@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/22 14:39:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/26 20:11:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	env->camera->right = ft_cross_vec3(env->camera->forward, ft_make_vec3(0,1,0));
 	env->mouse_last_x = xpos;
 	env->mouse_last_y = ypos;
-	ft_printf("forward %.4f %.4f %.4f\n", env->camera->forward.x, env->camera->forward.y, env->camera->forward.z);
+	// ft_printf("forward %.4f %.4f %.4f\n", env->camera->forward.x, env->camera->forward.y, env->camera->forward.z);
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -111,7 +111,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	// 	env->camera->position = ft_sub_vec3(env->camera->position, ft_mul_vec3(env->camera->right, 0.3));
 	// if (key == GLFW_KEY_D && action == GLFW_REPEAT)
 	// 	env->camera->position = ft_add_vec3(env->camera->position, ft_mul_vec3(env->camera->right, 0.3));
-	ft_printf("camera %.4f %.4f %.4f\n", env->camera->position.x, env->camera->position.y, env->camera->position.z);
+	// ft_printf("camera %.4f %.4f %.4f\n", env->camera->position.x, env->camera->position.y, env->camera->position.z);
 }
 
 void init_matrices(t_entity *entity)
@@ -166,7 +166,7 @@ int		main(int argc, char const *argv[])
 
 	t_mesh *arg_mesh = obj_load(argv[1]);
 	t_entity *entity = entity_create(arg_mesh, basic);
-	entity->tex = tex_load("resources/texture.jpg");
+	entity->tex = tex_load("resources/paint.jpg");
 	t_entity *entity_instanced = entity_create_instanced(arg_mesh, instanced, 500);
 
 	entity->scale[0] = ft_make_vec3(5,5,5);
@@ -218,6 +218,8 @@ int		main(int argc, char const *argv[])
 			env.camera->position = ft_sub_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 20.0 * env.delta_time));
 		if (glfwGetKey(window, GLFW_KEY_D))
 			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 20.0 * env.delta_time));
+
+		entity->rotation->y += 10.0 * env.delta_time;
 
 		if (env.wireframe)
 		{

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/26 20:11:35 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/27 23:58:48 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,11 @@ void init_matrices(t_entity *entity)
 	while (i < entity->instance_count)
 	{
 		entity->position[i].x = (cosf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
-		entity->position[i].y = 2.5 - rand() % 5;
 		entity->position[i].z = (sinf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
+		entity->position[i].y = 2.5 - rand() % 10 * (ft_len_vec2((t_vec2){entity->position[i].x, entity->position[i].z}) / 50.0);
 		angle += 360.0 / entity->instance_count;
-		entity->rotation[i] = ft_make_vec3(0.0, (float)(rand()%360), 0.0);
-		entity->scale[i] = ft_make_vec3(0.1, 0.1, 0.1);
+		entity->rotation[i] = ft_make_vec3((float)(rand()%360), (float)(rand()%360), (float)(rand()%360));
+		entity->scale[i] = ft_make_vec3(0.3, 0.3, 0.3);
 		entity->model_matrix[i] = mat4_trs(entity->position[i], entity->rotation[i], entity->scale[i]);
 		i++;
 	}
@@ -142,7 +142,7 @@ int		main(int argc, char const *argv[])
 	{
 		return (EXIT_FAILURE);
 	}
-	if (argc != 2)
+	if (argc != 3)
 		return (EXIT_FAILURE);
 
 	env.wireframe = 0;
@@ -165,9 +165,10 @@ int		main(int argc, char const *argv[])
 	t_shader *instanced = create_shader("resources/instanced.vert", "resources/instanced.frag");
 
 	t_mesh *arg_mesh = obj_load(argv[1]);
+	t_mesh *arg_mesh2 = obj_load(argv[2]);
 	t_entity *entity = entity_create(arg_mesh, basic);
 	entity->tex = tex_load("resources/paint.jpg");
-	t_entity *entity_instanced = entity_create_instanced(arg_mesh, instanced, 500);
+	t_entity *entity_instanced = entity_create_instanced(arg_mesh2, instanced, 50000);
 
 	entity->scale[0] = ft_make_vec3(5,5,5);
 
@@ -203,9 +204,9 @@ int		main(int argc, char const *argv[])
 		env.delta_time = current_time - last_time;
 		last_time = current_time;
 
-		camera_update(env.camera);
+		// camera_update(env.camera);
 		
-		glClearColor(0.7, 0.4, 0.1, 1.0);
+		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

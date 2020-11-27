@@ -1,5 +1,6 @@
 #version 330 core
 in vec4 f_col;
+in vec3 w_normal;
 in vec3 f_normal;
 in vec2 f_uv;
 in vec3 frag_pos;
@@ -40,9 +41,10 @@ void main()
 
 	vec4 col = col_front + col_side + col_top;
 
-	vec3 light_pos = vec3(2.0, 20.0, 20.0);
+	vec3 light_pos = vec3(2.0, 15.0, 25.0);
 	vec3 light_dir = normalize(light_pos - frag_pos);
-	float diffuse = max(dot(f_normal, light_dir), 0.0);
+	float diffuse = max(dot(w_normal, light_dir), 0.0);
+	float light_intensity = 5.0;
 
-	color = col * diffuse;
+	color = col * diffuse * light_intensity;
 }

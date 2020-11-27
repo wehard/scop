@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/22 14:23:14 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/27 23:42:11 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	entity_draw_instanced(t_env *env, t_entity *entity)
 	shader_use(env->shader_instanced);
 	shader_set_uniform_mat4(env->shader_instanced, "view_matrix", env->camera->view_matrix);
 	shader_set_uniform_mat4(env->shader_instanced, "proj_matrix", env->proj_matrix);
-	shader_set_uniform_vec4(env->shader_instanced, "color", (t_vec4){0.3, 0.2, 0.5, 1.0});
+	shader_set_uniform_vec4(env->shader_instanced, "color", (t_vec4){0.1, 0.1, 0.1, 1.0});
 	
 	glBindVertexArray(entity->vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, entity->ebo_id);

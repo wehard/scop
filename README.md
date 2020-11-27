@@ -1,3 +1,3 @@
 # scop
 
-![screenshot](https://github.com/wehard/rt/blob/master/resources/screenshot.png)
+![screenshot](https://github.com/wehard/scop/blob/master/resources/screenshot.png)

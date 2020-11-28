@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/27 23:58:48 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/28 22:12:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ int		main(int argc, char const *argv[])
 		env.delta_time = current_time - last_time;
 		last_time = current_time;
 
-		// camera_update(env.camera);
+		camera_update(env.camera);
 		
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

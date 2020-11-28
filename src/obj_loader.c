@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/22 14:36:25 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/11/28 22:38:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 #include "ft_printf.h"
 #include "obj_loader.h"
 #include "vec2.h"
+
+static int count_face_indices(char *line)
+{
+	size_t num_indices;
+	char **parts;
+
+	parts = ft_strsplit(line, ' ');
+	num_indices = 0;
+	while (parts[++num_indices]);
+	if (num_indices == 4)
+		num_indices = 6;
+
+	return (num_indices);
+}
 
 static void	read_mesh_info(t_mesh *m, const char *filename)
 {
@@ -37,7 +51,7 @@ static void	read_mesh_info(t_mesh *m, const char *filename)
 		else if (ft_strncmp(line, "vn", 2) == 0)
 			m->num_normals++;
 		else if (ft_strncmp(line, "f ", 2) == 0)
-			m->num_indices += 3;
+			m->num_indices += count_face_indices(line + 2);
 		free(line);
 	}
 	close(fd);
@@ -103,19 +117,41 @@ static void	read_mesh_info(t_mesh *m, const char *filename)
 // 	// triface_calc_bounds(&m->trifaces[i]);
 // }
 
-static void read_indices(t_mesh *m, size_t i, char *line)
+static size_t read_indices(t_mesh *m, size_t i, char *line)
 {
 	char	**parts;
 	size_t	n;
 	size_t j;
+	size_t num_indices;
 
 	parts = ft_strsplit(line + 1, ' ');
+	num_indices = 0;
+	while (parts[++num_indices]);
+
 	j = 0;
-	while (j < 3)
+	// while (j < num_indices)
+	// {
+	// 	m->indices[i + j] = ft_atoi(parts[j]) - 1;
+	// 	j++;
+	// }
+	if (num_indices == 3)
 	{
-		m->indices[i + j] = ft_atoi(parts[j]) - 1;
-		j++;
+		m->indices[i + 0] = ft_atoi(parts[0]) - 1;
+		m->indices[i + 1] = ft_atoi(parts[1]) - 1;
+		m->indices[i + 2] = ft_atoi(parts[2]) - 1;
 	}
+	else if (num_indices == 4)
+	{
+		m->indices[i + 0] = ft_atoi(parts[0]) - 1;
+		m->indices[i + 1] = ft_atoi(parts[1]) - 1;
+		m->indices[i + 2] = ft_atoi(parts[2]) - 1;
+
+		m->indices[i + 3] = ft_atoi(parts[0]) - 1;
+		m->indices[i + 4] = ft_atoi(parts[2]) - 1;
+		m->indices[i + 5] = ft_atoi(parts[3]) - 1;
+		num_indices = 6;
+	}
+	return (num_indices);
 }
 
 void		read_mesh(int fd, t_mesh *m)
@@ -139,8 +175,7 @@ void		read_mesh(int fd, t_mesh *m)
 		// 	m->normals[i[2]++] = ft_parse_vec3(line + 2);
 		else if (ft_strncmp(line, "f ", 2) == 0)
 		{
-			read_indices(m, i[3], line); //parse_face(m, i[3]++, line, 0);
-			i[3] += 3;
+			i[3] += read_indices(m, i[3], line); //parse_face(m, i[3]++, line, 0);
 		}
 		free(line);
 	}

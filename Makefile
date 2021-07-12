@@ -47,7 +47,7 @@ UNAME_S := $(shell uname -s)
 		LDFLAGS = -L libft -lft -lglfw -lGL -lGLEW -lm -lXext -lX11
 	endif
 	ifeq ($(UNAME_S),Darwin)
-		LDFLAGS = -L libft -lft -lmlx -lm -framework OpenGL -framework AppKit
+		LDFLAGS = -L libft -lft -lglfw -lGLEW -lm -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 	endif
 
 CC = clang

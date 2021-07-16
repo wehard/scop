@@ -6,15 +6,15 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 23:17:17 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/13 23:18:27 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:55:28 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mat4.h"
 
-t_mat4 mat4_init(void)
+t_mat4	mat4_init(void)
 {
-	t_mat4 m;
+	t_mat4	m;
 
 	m.data[0] = 0.0;
 	m.data[1] = 0.0;

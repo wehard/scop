@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 16:41:28 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 16:42:41 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:50:45 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,28 @@ static float	ft_abs_f(float f)
 	return (f);
 }
 
-static int max_axis(t_vec3 v)
+static int	max_axis(t_vec3 v)
 {
-	if (ft_abs_f(v.x) >= ft_abs_f(v.y) &&  ft_abs_f(v.x) >= ft_abs_f(v.z))
+	if (ft_abs_f(v.x) >= ft_abs_f(v.y) && ft_abs_f(v.x) >= ft_abs_f(v.z))
 		return (AXIS_X);
-	else if (ft_abs_f(v.y) >= ft_abs_f(v.z) &&  ft_abs_f(v.y) >= ft_abs_f(v.x))
+	else if (ft_abs_f(v.y) >= ft_abs_f(v.z) && ft_abs_f(v.y) >= ft_abs_f(v.x))
 		return (AXIS_Y);
 	else
 		return (AXIS_Z);
 }
 
-void mesh_gen_uvs(t_mesh *mesh)
+void	mesh_gen_uvs(t_mesh *mesh)
 {
-	size_t i;
+	size_t	i;
+	t_vec2	uv;
+	t_vec3	d;
+	int		axis;
 
 	i = 0;
 	while (i < mesh->num_vertices)
 	{
-		t_vec2 uv;
-		t_vec3 d = ft_normalize_vec3(mesh->vertices[i]);
-		int axis = max_axis(d);
+		d = ft_normalize_vec3(mesh->vertices[i]);
+		axis = max_axis(d);
 		if (axis == AXIS_X)
 			uv = (t_vec2){(-d.z), (-d.y)};
 		else if (axis == AXIS_Y)

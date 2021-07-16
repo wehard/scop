@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2021/07/16 16:43:07 by wkorande         ###   ########.fr        #
+#    Updated: 2021/07/16 16:52:19 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ SRC =	entity.c\
 		mat4/mat4_rotate.c\
 		mat4/mat4_scale.c\
 		mat4/mat4_trs.c\
-		mat4/mat_identity.c\
-		mat4/mat_perspective.c\
-		mat4/mat_translate.c\
+		mat4/mat4_identity.c\
+		mat4/mat4_perspective.c\
+		mat4/mat4_translate.c\
 		camera.c\
 		tex.c\
 		stb_image.c

@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/11/22 13:23:58 by wkorande         ###   ########.fr        #
+#    Updated: 2021/07/16 12:29:56 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,21 +33,21 @@ SRC =	entity.c\
 		camera.c\
 		tex.c\
 		stb_image.c
-		
+
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 
 CFLAGS = #-Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
-INCL = -I libft/includes/ -I include -I lib
+INCL = -I libft/includes/ -I include -I lib/include
 
 UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux)
 		LDFLAGS = -L libft -lft -lglfw -lGL -lGLEW -lm -lXext -lX11
 	endif
 	ifeq ($(UNAME_S),Darwin)
-		LDFLAGS = -L libft -lft -lmlx -lm -framework OpenGL -framework AppKit
+		LDFLAGS = -L libft -lft -L lib -lglfw3 -L lib -lGLEW -lm -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 	endif
 
 CC = clang

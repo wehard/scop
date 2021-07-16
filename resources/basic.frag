@@ -23,9 +23,9 @@ void main()
     vec2 uv_side = f_normal.zy;
     vec2 uv_top = f_normal.xz;
 
-	vec4 col_front = texture2D(main_texture, uv_front);
-	vec4 col_side = texture2D(main_texture, uv_side);
-	vec4 col_top = texture2D(main_texture, uv_top);
+	vec4 col_front = texture(main_texture, uv_front);
+	vec4 col_side = texture(main_texture, uv_side);
+	vec4 col_top = texture(main_texture, uv_top);
 
 	vec3 weights = f_normal;
 	weights = abs(weights);

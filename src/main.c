@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/28 22:12:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 13:45:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void    free_null(size_t count, ...)
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	t_env *env;
-	
+
 	env = (t_env*)glfwGetWindowUserPointer(window);
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_RELEASE)
 	{
@@ -71,7 +71,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	t_env *env;
 	float xoffset;
 	float yoffset;
-	
+
 	env = (t_env*)glfwGetWindowUserPointer(window);
 	xoffset = (xpos-env->mouse_last_x) * env->mouse_sensitivity;
 	yoffset = (env->mouse_last_y - ypos) * env->mouse_sensitivity;
@@ -99,7 +99,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	t_env *env;
-	
+
 	env = (t_env*)glfwGetWindowUserPointer(window);
     if (key == GLFW_KEY_1 && action == GLFW_PRESS)
 		env->wireframe = !env->wireframe;
@@ -161,23 +161,23 @@ int		main(int argc, char const *argv[])
 	if (glewInit() != GLEW_OK)
 		return (EXIT_FAILURE);
 
-	t_shader *basic = create_shader("resources/basic.vert", "resources/basic.frag");
-	t_shader *instanced = create_shader("resources/instanced.vert", "resources/instanced.frag");
+	t_shader *basic = create_shader("/Users/wkorande/projects/scop/resources/basic.vert", "/Users/wkorande/projects/scop/resources/basic.frag");
+	t_shader *instanced = create_shader("/Users/wkorande/projects/scop/resources/instanced.vert", "/Users/wkorande/projects/scop/resources/instanced.frag");
 
 	t_mesh *arg_mesh = obj_load(argv[1]);
 	t_mesh *arg_mesh2 = obj_load(argv[2]);
 	t_entity *entity = entity_create(arg_mesh, basic);
-	entity->tex = tex_load("resources/paint.jpg");
+	entity->tex = tex_load("/Users/wkorande/projects/scop/resources/paint.jpg");
 	t_entity *entity_instanced = entity_create_instanced(arg_mesh2, instanced, 50000);
 
 	entity->scale[0] = ft_make_vec3(5,5,5);
 
 	init_matrices(entity_instanced);
 	entity_update_buffers(entity_instanced);
-	
+
 	t_camera c;
 	camera_init(&c, ft_make_vec3(0, 10, 45), ft_make_vec3(0, -0.3, -1), -90.0, 0.0);
-	
+
 	env.camera = &c;
 	env.shader_basic = basic;
 	env.shader_instanced = instanced;
@@ -205,7 +205,7 @@ int		main(int argc, char const *argv[])
 		last_time = current_time;
 
 		camera_update(env.camera);
-		
+
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -240,7 +240,7 @@ int		main(int argc, char const *argv[])
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-	
+
 	destroy_shader(basic);
 	destroy_shader(instanced);
 	mesh_destroy(arg_mesh);

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 13:20:00 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/22 13:48:40 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:42:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 # define OBJ_LOADER_H
 
 # include "mesh.h"
-
-# define AXIS_X 0
-# define AXIS_Y 1
-# define AXIS_Z 2
 
 t_mesh			*obj_load(const char *filename);
 

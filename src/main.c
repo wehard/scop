@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 13:45:44 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 14:10:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,15 @@ void init_matrices(t_entity *entity)
 {
 	size_t i = 0;
 	float angle = 0;
-	while (i < entity->instance_count)
-	{
-		entity->position[i].x = (cosf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
-		entity->position[i].z = (sinf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
-		entity->position[i].y = 2.5 - rand() % 10 * (ft_len_vec2((t_vec2){entity->position[i].x, entity->position[i].z}) / 50.0);
-		angle += 360.0 / entity->instance_count;
-		entity->rotation[i] = ft_make_vec3((float)(rand()%360), (float)(rand()%360), (float)(rand()%360));
-		entity->scale[i] = ft_make_vec3(0.3, 0.3, 0.3);
-		entity->model_matrix[i] = mat4_trs(entity->position[i], entity->rotation[i], entity->scale[i]);
-		i++;
-	}
+
+	entity->position[0].x = (cosf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
+	entity->position[0].z = (sinf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
+	entity->position[0].y = 2.5 - rand() % 10 * (ft_len_vec2((t_vec2){entity->position[i].x, entity->position[i].z}) / 50.0);
+	// angle += 360.0 / entity->instance_count;
+	entity->rotation[0] = ft_make_vec3((float)(rand()%360), (float)(rand()%360), (float)(rand()%360));
+	entity->scale[0] = ft_make_vec3(0.3, 0.3, 0.3);
+	entity->model_matrix[0] = mat4_trs(entity->position[i], entity->rotation[i], entity->scale[i]);
+	i++;
 }
 
 int		main(int argc, char const *argv[])
@@ -142,7 +140,7 @@ int		main(int argc, char const *argv[])
 	{
 		return (EXIT_FAILURE);
 	}
-	if (argc != 3)
+	if (argc != 2)
 		return (EXIT_FAILURE);
 
 	env.wireframe = 0;
@@ -162,25 +160,17 @@ int		main(int argc, char const *argv[])
 		return (EXIT_FAILURE);
 
 	t_shader *basic = create_shader("/Users/wkorande/projects/scop/resources/basic.vert", "/Users/wkorande/projects/scop/resources/basic.frag");
-	t_shader *instanced = create_shader("/Users/wkorande/projects/scop/resources/instanced.vert", "/Users/wkorande/projects/scop/resources/instanced.frag");
 
 	t_mesh *arg_mesh = obj_load(argv[1]);
-	t_mesh *arg_mesh2 = obj_load(argv[2]);
 	t_entity *entity = entity_create(arg_mesh, basic);
 	entity->tex = tex_load("/Users/wkorande/projects/scop/resources/paint.jpg");
-	t_entity *entity_instanced = entity_create_instanced(arg_mesh2, instanced, 50000);
-
 	entity->scale[0] = ft_make_vec3(5,5,5);
-
-	init_matrices(entity_instanced);
-	entity_update_buffers(entity_instanced);
 
 	t_camera c;
 	camera_init(&c, ft_make_vec3(0, 10, 45), ft_make_vec3(0, -0.3, -1), -90.0, 0.0);
 
 	env.camera = &c;
 	env.shader_basic = basic;
-	env.shader_instanced = instanced;
 
 	env.proj_matrix =  mat4_perspective(45.0, (float)WIN_W / (float)WIN_H, 0.1, 100.0);
 
@@ -228,13 +218,11 @@ int		main(int argc, char const *argv[])
 			glPolygonOffset(-0.5, 0.5);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			entity_draw(&env, entity);
-			entity_draw_instanced(&env, entity_instanced);
 			glDisable(GL_POLYGON_OFFSET_LINE);
 		}
 		else
 		{
 			entity_draw(&env, entity);
-			entity_draw_instanced(&env, entity_instanced);
 		}
 
 		glfwSwapBuffers(window);
@@ -242,7 +230,6 @@ int		main(int argc, char const *argv[])
 	}
 
 	destroy_shader(basic);
-	destroy_shader(instanced);
 	mesh_destroy(arg_mesh);
 
 	glfwDestroyWindow(window);

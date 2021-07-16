@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 14:10:00 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 15:35:19 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@
 #include "ft_printf.h"
 #include <math.h>
 #include "tex.h"
-
-// int		on_render(void *param)
-// {
-// 	return (0);
-// }
 
 void	exit_message(const char *message)
 {
@@ -119,13 +114,13 @@ void init_matrices(t_entity *entity)
 	size_t i = 0;
 	float angle = 0;
 
-	entity->position[0].x = (cosf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
-	entity->position[0].z = (sinf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
-	entity->position[0].y = 2.5 - rand() % 10 * (ft_len_vec2((t_vec2){entity->position[i].x, entity->position[i].z}) / 50.0);
+	entity->position.x = (cosf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
+	entity->position.z = (sinf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
+	entity->position.y = 2.5 - rand() % 10 * (ft_len_vec2((t_vec2){entity->position.x, entity->position.z}) / 50.0);
 	// angle += 360.0 / entity->instance_count;
-	entity->rotation[0] = ft_make_vec3((float)(rand()%360), (float)(rand()%360), (float)(rand()%360));
-	entity->scale[0] = ft_make_vec3(0.3, 0.3, 0.3);
-	entity->model_matrix[0] = mat4_trs(entity->position[i], entity->rotation[i], entity->scale[i]);
+	entity->rotation = ft_make_vec3((float)(rand()%360), (float)(rand()%360), (float)(rand()%360));
+	entity->scale = ft_make_vec3(0.3, 0.3, 0.3);
+	entity->model_matrix = mat4_trs(entity->position, entity->rotation, entity->scale);
 	i++;
 }
 
@@ -163,8 +158,8 @@ int		main(int argc, char const *argv[])
 
 	t_mesh *arg_mesh = obj_load(argv[1]);
 	t_entity *entity = entity_create(arg_mesh, basic);
-	entity->tex = tex_load("/Users/wkorande/projects/scop/resources/paint.jpg");
-	entity->scale[0] = ft_make_vec3(5,5,5);
+	entity->tex = tex_load("/Users/wkorande/projects/scop/resources/texture.jpg");
+	entity->scale = ft_make_vec3(5,5,5);
 
 	t_camera c;
 	camera_init(&c, ft_make_vec3(0, 10, 45), ft_make_vec3(0, -0.3, -1), -90.0, 0.0);
@@ -210,7 +205,7 @@ int		main(int argc, char const *argv[])
 		if (glfwGetKey(window, GLFW_KEY_D))
 			env.camera->position = ft_add_vec3(env.camera->position, ft_mul_vec3(env.camera->right, 20.0 * env.delta_time));
 
-		entity->rotation->y += 10.0 * env.delta_time;
+		entity->rotation.y += 10.0 * env.delta_time;
 
 		if (env.wireframe)
 		{

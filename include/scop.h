@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 14:31:57 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 14:32:52 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ typedef struct	s_entity
 	struct s_mesh *mesh;
 	struct s_tex *tex;
 	struct s_shader *shader;
-	t_vec3		*position;
-	t_vec3		*scale;
-	t_vec3		*rotation;
+	t_vec3		position;
+	t_vec3		scale;
+	t_vec3		rotation;
 	uint32_t	vao_id;
 	uint32_t	vbo_id;
 	uint32_t	ebo_id;
 	uint32_t	mbo_id;
 	uint32_t	uvbo_id;
-	t_mat4		*model_matrix;
+	t_mat4		model_matrix;
 
 }				t_entity;
 

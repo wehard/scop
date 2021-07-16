@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 14:31:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 15:31:01 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void entity_update_buffers(t_entity *entity)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * entity->mesh->num_indices, entity->mesh->indices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, entity->mbo_id);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(t_mat4), entity->model_matrix, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(t_mat4), &entity->model_matrix, GL_DYNAMIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -83,20 +83,17 @@ t_entity	*entity_create(t_mesh *mesh, t_shader *shader)
 
 	if (!(entity = (t_entity*)malloc(sizeof(t_entity))))
 		exit_message("Failed to malloc entity!");
-	entity->position = malloc(sizeof(t_vec3));
-	entity->rotation = malloc(sizeof(t_vec3));
-	entity->scale = malloc(sizeof(t_vec3));
-	entity->model_matrix = malloc(sizeof(t_mat4));
+
 	entity->vao_id = -1;
 	entity->vbo_id = -1;
 	entity->ebo_id = -1;
 	entity->mbo_id = -1;
 	entity->tex = NULL;
 
-	entity->position[0] = ft_make_vec3(0.0, 0.0, 0.0);
-	entity->rotation[0] = ft_make_vec3(0.0, 0.0, 0.0);
-	entity->scale[0] = ft_make_vec3(1.0, 1.0, 1.0);
-	entity->model_matrix[0] = mat4_trs(entity->position[0], entity->rotation[0], entity->scale[0]);
+	entity->position = ft_make_vec3(0.0, 0.0, 0.0);
+	entity->rotation = ft_make_vec3(0.0, 0.0, 0.0);
+	entity->scale = ft_make_vec3(1.0, 1.0, 1.0);
+	entity->model_matrix = mat4_trs(entity->position, entity->rotation, entity->scale);
 
 	entity->mesh = mesh;
 	entity->shader = shader;
@@ -111,7 +108,7 @@ void		entity_draw(t_env *env, t_entity *entity)
 	shader_use(entity->shader);
 	tex_bind(entity->tex);
 
-	shader_set_uniform_mat4(entity->shader, "model_matrix", mat4_trs(entity->position[0], entity->rotation[0], entity->scale[0]));
+	shader_set_uniform_mat4(entity->shader, "model_matrix", mat4_trs(entity->position, entity->rotation, entity->scale));
 	shader_set_uniform_mat4(entity->shader, "view_matrix", env->camera->view_matrix);
 	shader_set_uniform_mat4(entity->shader, "proj_matrix", env->proj_matrix);
 	shader_set_uniform_vec4(entity->shader, "color", (t_vec4){0.3, 0.2, 0.5, 1.0});

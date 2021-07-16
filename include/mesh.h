@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:00:35 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/13 23:12:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:07:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ typedef struct	s_mesh
 {
 	unsigned int *indices;
 	size_t		num_indices;
-	t_triface	*trifaces;
-	size_t		num_trifaces;
 	t_vec3		*vertices;
 	size_t		num_vertices;
 	t_vec3		*normals;
@@ -47,8 +45,6 @@ void			mesh_create_verts(t_mesh *m, size_t num_vertices);
 void			mesh_create_indices(t_mesh *m, size_t num_indices);
 void			mesh_create_normals(t_mesh *m, size_t num_normals);
 void			mesh_create_uvs(t_mesh *m, size_t num_uvs);
-void			mesh_create_trifaces(t_mesh *m, size_t num_trifaces);
 void			mesh_set_vert(t_mesh *m, size_t i, t_vec3 v);
-// void			mesh_calc_bounds(t_mesh *m);
 
 #endif

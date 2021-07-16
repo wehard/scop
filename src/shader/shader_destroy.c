@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cross_vec4.c                                    :+:      :+:    :+:   */
+/*   shader_destroy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 11:31:38 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 16:58:38 by wkorande         ###   ########.fr       */
+/*   Created: 2020/09/25 20:16:24 by wkorande          #+#    #+#             */
+/*   Updated: 2021/07/16 17:06:14 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec4.h"
+#include "shader.h"
+#include <GL/glew.h>
 
-t_vec4	ft_cross_vec4(t_vec4 a, t_vec4 b)
+void shader_destroy(t_shader *shader)
 {
-	t_vec4	c;
-
-	c.x = a.y * b.z - a.z * b.y;
-	c.y = a.z * b.x - a.x * b.z;
-	c.z = a.x * b.y - a.y * b.x;
-	c.w = 1.0;
-	return (c);
+	glDeleteProgram(shader->program_id);
+	free(shader->vert_src);
+	free(shader->frag_src);
+	free(shader);
 }

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 14:04:20 by wkorande          #+#    #+#             */
-/*   Updated: 2020/10/11 16:54:28 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:58:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec4	ft_div_vec4(t_vec4 v, float t)
 {
-	t_vec4 new;
+	t_vec4	new;
 
 	if (t == 0.0)
 		return (v);

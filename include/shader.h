@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:11:58 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 11:45:48 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 17:07:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ typedef struct	s_shader
 	char 		*frag_src;
 }				t_shader;
 
-t_shader 		*create_shader(char *vert_path, char *frag_path);
-void 			destroy_shader(t_shader *shader);
-void shader_use(t_shader *shader);
+t_shader 		*shader_create(char *vert_path, char *frag_path);
+void 			shader_destroy(t_shader *shader);
+void			shader_use(t_shader *shader);
 void 			shader_set_uniform_mat4(t_shader *shader, char *loc_name, t_mat4 m);
-void shader_set_uniform_vec3(t_shader *shader, char *loc_name, t_vec3 v);
-void shader_set_uniform_vec4(t_shader *shader, char *loc_name, t_vec4 v);
-void shader_set_uniform_vec3_array(t_shader *shader, char *loc_name, t_vec3 *v, size_t count);
-void shader_set_uniform_vec4_array(t_shader *shader, char *loc_name, t_vec4 *v, size_t count);
+void			shader_set_uniform_vec3(t_shader *shader, char *loc_name, t_vec3 v);
+void			shader_set_uniform_vec4(t_shader *shader, char *loc_name, t_vec4 v);
+void			shader_set_uniform_vec3_array(t_shader *shader, char *loc_name, t_vec3 *v, size_t count);
+void			shader_set_uniform_vec4_array(t_shader *shader, char *loc_name, t_vec4 *v, size_t count);
 
 #endif

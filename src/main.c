@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 15:35:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 17:09:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ int		main(int argc, char const *argv[])
 	if (glewInit() != GLEW_OK)
 		return (EXIT_FAILURE);
 
-	t_shader *basic = create_shader("/Users/wkorande/projects/scop/resources/basic.vert", "/Users/wkorande/projects/scop/resources/basic.frag");
+	t_shader *basic = shader_create("/Users/wkorande/projects/scop/resources/basic.vert", "/Users/wkorande/projects/scop/resources/basic.frag");
 
 	t_mesh *arg_mesh = obj_load(argv[1]);
 	t_entity *entity = entity_create(arg_mesh, basic);
@@ -224,7 +224,7 @@ int		main(int argc, char const *argv[])
 		glfwPollEvents();
 	}
 
-	destroy_shader(basic);
+	shader_destroy(basic);
 	mesh_destroy(arg_mesh);
 
 	glfwDestroyWindow(window);

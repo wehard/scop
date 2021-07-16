@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 14:02:35 by wkorande          #+#    #+#             */
-/*   Updated: 2020/10/11 16:35:00 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:58:46 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec4	ft_add_vec4(t_vec4 a, t_vec4 b)
 {
-	t_vec4 c;
+	t_vec4	c;
 
 	c.x = a.x + b.x;
 	c.y = a.y + b.y;

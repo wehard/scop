@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 14:04:52 by wkorande          #+#    #+#             */
-/*   Updated: 2020/10/11 16:52:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:58:12 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 float	ft_len_vec3(t_vec4 v)
 {
-	float l;
+	float	l;
 
 	if (v.x == 0.0f && v.y == 0.0f && v.z == 0.0f)
 		return (0.0f);

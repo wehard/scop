@@ -26,58 +26,58 @@
 #include <math.h>
 #include "tex.h"
 
-void	exit_message(const char *message)
+void exit_message(const char *message)
 {
 	ft_putendl_fd(message, 2);
 	exit(EXIT_FAILURE);
 }
 
-void    free_null(size_t count, ...)
+void free_null(size_t count, ...)
 {
-        va_list pl;
-        size_t  i;
-        void    *param_type;
+	va_list pl;
+	size_t i;
+	void *param_type;
 
-        i = 0;
-        va_start(pl, count);
-        while (i < count)
-        {
-                param_type = va_arg(pl, void *);
-                free(param_type);
-                param_type = NULL;
-                i++;
-        }
-        va_end(pl);
+	i = 0;
+	va_start(pl, count);
+	while (i < count)
+	{
+		param_type = va_arg(pl, void *);
+		free(param_type);
+		param_type = NULL;
+		i++;
+	}
+	va_end(pl);
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
 {
 	t_env *env;
 
-	env = (t_env*)glfwGetWindowUserPointer(window);
+	env = (t_env *)glfwGetWindowUserPointer(window);
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_RELEASE)
 	{
 		ft_printf("%f, %f\n", env->camera->pitch, env->camera->yaw);
 	}
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+void mouse_callback(GLFWwindow *window, double xpos, double ypos)
 {
 	t_env *env;
 	float xoffset;
 	float yoffset;
 
-	env = (t_env*)glfwGetWindowUserPointer(window);
-	xoffset = (xpos-env->mouse_last_x) * env->mouse_sensitivity;
+	env = (t_env *)glfwGetWindowUserPointer(window);
+	xoffset = (xpos - env->mouse_last_x) * env->mouse_sensitivity;
 	yoffset = (env->mouse_last_y - ypos) * env->mouse_sensitivity;
 
 	env->camera->yaw += xoffset;
 	env->camera->pitch += yoffset;
 
-	if(env->camera->pitch > 89.0f)
-        env->camera->pitch = 89.0f;
-    if(env->camera->pitch < -89.0f)
-        env->camera->pitch = -89.0f;
+	if (env->camera->pitch > 89.0f)
+		env->camera->pitch = 89.0f;
+	if (env->camera->pitch < -89.0f)
+		env->camera->pitch = -89.0f;
 
 	t_vec3 dir;
 	dir.x = cosf(ft_deg_to_rad(env->camera->yaw)) * cosf(ft_deg_to_rad(env->camera->pitch));
@@ -85,18 +85,18 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	dir.z = sinf(ft_deg_to_rad(env->camera->yaw)) * cosf(ft_deg_to_rad(env->camera->pitch));
 
 	env->camera->forward = (ft_normalize_vec3(dir));
-	env->camera->right = ft_cross_vec3(env->camera->forward, ft_make_vec3(0,1,0));
+	env->camera->right = ft_cross_vec3(env->camera->forward, ft_make_vec3(0, 1, 0));
 	env->mouse_last_x = xpos;
 	env->mouse_last_y = ypos;
 	// ft_printf("forward %.4f %.4f %.4f\n", env->camera->forward.x, env->camera->forward.y, env->camera->forward.z);
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
 	t_env *env;
 
-	env = (t_env*)glfwGetWindowUserPointer(window);
-    if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+	env = (t_env *)glfwGetWindowUserPointer(window);
+	if (key == GLFW_KEY_1 && action == GLFW_PRESS)
 		env->wireframe = !env->wireframe;
 	// if (key == GLFW_KEY_W && action == GLFW_REPEAT)
 	// 	env->camera->position = ft_add_vec3(env->camera->position, ft_mul_vec3(env->camera->forward, 0.3));
@@ -118,14 +118,19 @@ void init_matrices(t_entity *entity)
 	entity->position.z = (sinf(ft_deg_to_rad(angle)) * 40) + (float)(rand() % 30) - 15;
 	entity->position.y = 2.5 - rand() % 10 * (ft_len_vec2((t_vec2){entity->position.x, entity->position.z}) / 50.0);
 	// angle += 360.0 / entity->instance_count;
-	entity->rotation = ft_make_vec3((float)(rand()%360), (float)(rand()%360), (float)(rand()%360));
+	entity->rotation = ft_make_vec3((float)(rand() % 360), (float)(rand() % 360), (float)(rand() % 360));
 	entity->scale = ft_make_vec3(0.3, 0.3, 0.3);
 	entity->model_matrix = mat4_trs(entity->position, entity->rotation, entity->scale);
 	i++;
 }
 
-int		main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
+	char buf[300];
+	getcwd(buf, sizeof(buf));
+
+	ft_printf("cwd: %s\n", buf);
+
 	t_env env;
 	env.mouse_last_x = WIN_W / 2;
 	env.mouse_last_y = WIN_H / 2;
@@ -135,8 +140,11 @@ int		main(int argc, char const *argv[])
 	{
 		return (EXIT_FAILURE);
 	}
-	if (argc != 2)
+	if (argc != 4)
+	{
+		exit_message("./scop [obj] [vert] [frag]");
 		return (EXIT_FAILURE);
+	}
 
 	env.wireframe = 0;
 
@@ -146,7 +154,7 @@ int		main(int argc, char const *argv[])
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
-	GLFWwindow *window = glfwCreateWindow(WIN_W, WIN_H, "env", NULL, NULL);
+	GLFWwindow *window = glfwCreateWindow(WIN_W, WIN_H, "scop", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(0);
 
@@ -154,12 +162,12 @@ int		main(int argc, char const *argv[])
 	if (glewInit() != GLEW_OK)
 		return (EXIT_FAILURE);
 
-	t_shader *basic = shader_create("/Users/wkorande/projects/scop/resources/basic.vert", "/Users/wkorande/projects/scop/resources/basic.frag");
+	t_shader *basic = shader_create(argv[2], argv[3]);
 
 	t_mesh *arg_mesh = obj_load(argv[1]);
 	t_entity *entity = entity_create(arg_mesh, basic);
-	entity->tex = tex_load("/Users/wkorande/projects/scop/resources/texture.jpg");
-	entity->scale = ft_make_vec3(5,5,5);
+	entity->tex = tex_load("textures/texture.jpg");
+	entity->scale = ft_make_vec3(5, 5, 5);
 
 	t_camera c;
 	camera_init(&c, ft_make_vec3(0, 10, 45), ft_make_vec3(0, -0.3, -1), -90.0, 0.0);
@@ -167,7 +175,7 @@ int		main(int argc, char const *argv[])
 	env.camera = &c;
 	env.shader_basic = basic;
 
-	env.proj_matrix =  mat4_perspective(45.0, (float)WIN_W / (float)WIN_H, 0.1, 100.0);
+	env.proj_matrix = mat4_perspective(45.0, (float)WIN_W / (float)WIN_H, 0.1, 100.0);
 
 	glfwSetWindowUserPointer(window, &env);
 

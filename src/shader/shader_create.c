@@ -16,17 +16,23 @@
 #include <fcntl.h>
 #include "ft_get_next_line.h"
 #include <GL/glew.h>
+#include <stdio.h>
+#include <errno.h>
 
-static char	*load_shader_src(char *src_path)
+static char *load_shader_src(const char *src_path)
 {
-	int		fd;
-	char	*src;
-	char	*line;
+	int fd;
+	char *src;
+	char *line;
+	char cwd[256];
+
+	getcwd(cwd, sizeof(cwd));
+	ft_printf("cwd: %s\n", cwd);
 
 	fd = open(src_path, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Failed to read shader file!\n");
+		ft_printf("load_shader_src: %s %s\n", src_path, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	src = (char *)malloc(MAX_SHADER_SRC_SIZE);
@@ -41,12 +47,12 @@ static char	*load_shader_src(char *src_path)
 	return (src);
 }
 
-static uint32_t	compile_shader(char *src, GLenum shader_type)
+static uint32_t compile_shader(char *src, GLenum shader_type)
 {
-	uint32_t	shader_id;
-	GLint		status;
-	GLint		log_len;
-	char		*error;
+	uint32_t shader_id;
+	GLint status;
+	GLint log_len;
+	char *error;
 
 	shader_id = glCreateShader(shader_type);
 	glShaderSource(shader_id, 1, (const char **)&src, NULL);
@@ -69,9 +75,9 @@ static uint32_t	compile_shader(char *src, GLenum shader_type)
 	return (shader_id);
 }
 
-t_shader	*shader_create(char *vert_path, char *frag_path)
+t_shader *shader_create(const char *vert_path, const char *frag_path)
 {
-	t_shader	*shader;
+	t_shader *shader;
 
 	shader = (t_shader *)malloc(sizeof(t_shader));
 	if (!shader)
@@ -92,9 +98,9 @@ t_shader	*shader_create(char *vert_path, char *frag_path)
 	return (shader);
 }
 
-void	shader_use(t_shader *shader)
+void shader_use(t_shader *shader)
 {
 	if (!shader)
-		return ;
+		return;
 	glUseProgram(shader->program_id);
 }

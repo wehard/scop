@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/06 18:01:40 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/06 19:47:33 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "vec3.h"
 #include "vec4.h"
 #include "mat4.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 # define WIN_W 1920
 # define WIN_H 1080
@@ -62,8 +64,8 @@ typedef struct	s_env
 	float		mouse_last_y;
 	float		mouse_sensitivity;
 	float		delta_time;
+	float		last_time;
 	t_mat4		proj_matrix;
-	struct s_shader	*shader_basic;
 }				t_env;
 
 void	exit_message(const char *message);
@@ -78,5 +80,9 @@ void entity_update_buffers(t_entity *entity);
 
 void camera_init(t_camera *camera, t_vec3 pos, t_vec3 forward, float yaw, float pitch);
 void camera_update(t_camera *camera);
+
+void	mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
+void	mouse_callback(GLFWwindow *window, double xpos, double ypos);
+void	key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 
 #endif

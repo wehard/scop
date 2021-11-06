@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 16:34:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/06 18:01:40 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void    free_null(size_t count, ...);
 t_entity	*entity_create(struct s_mesh *mesh, struct s_shader *shader);
 t_entity	*entity_create_instanced(struct s_mesh *mesh, struct s_shader *shader, size_t instance_count);
 void		entity_draw(t_env *env, t_entity *entity);
+void		entity_destroy(t_entity *entity);
 
 void entity_update_buffers(t_entity *entity);
 

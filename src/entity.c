@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 15:31:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/06 18:02:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ t_entity	*entity_create(t_mesh *mesh, t_shader *shader)
 	init_buffers(entity);
 	entity_update_buffers(entity);
 	return (entity);
+}
+
+void		entity_destroy(t_entity *entity)
+{
+	free(entity);
 }
 
 void		entity_draw(t_env *env, t_entity *entity)

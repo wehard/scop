@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:16:24 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 17:19:12 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/06 17:24:47 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ static char *load_shader_src(const char *src_path)
 	int fd;
 	char *src;
 	char *line;
-	char cwd[256];
-
-	getcwd(cwd, sizeof(cwd));
-	ft_printf("cwd: %s\n", cwd);
 
 	fd = open(src_path, O_RDONLY);
 	if (fd < 0)

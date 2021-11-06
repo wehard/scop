@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 17:09:29 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/06 17:26:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,9 @@ int main(int argc, char *argv[])
 	{
 		return (EXIT_FAILURE);
 	}
-	if (argc != 4)
+	if (argc != 1)
 	{
-		exit_message("./scop [obj] [vert] [frag]");
+		exit_message("./scop [obj]");
 		return (EXIT_FAILURE);
 	}
 
@@ -162,11 +162,11 @@ int main(int argc, char *argv[])
 	if (glewInit() != GLEW_OK)
 		return (EXIT_FAILURE);
 
-	t_shader *basic = shader_create(argv[2], argv[3]);
+	t_shader *basic = shader_create("./shaders/default.vert", "./shaders/default.frag");
 
-	t_mesh *arg_mesh = obj_load(argv[1]);
+	t_mesh *arg_mesh = obj_load("./objs/42.obj");
 	t_entity *entity = entity_create(arg_mesh, basic);
-	entity->tex = tex_load("textures/texture.jpg");
+	entity->tex = tex_load("./textures/texture.jpg");
 	entity->scale = ft_make_vec3(5, 5, 5);
 
 	t_camera c;

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/06 17:26:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/06 17:58:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,9 @@ int main(int argc, char *argv[])
 	if (glewInit() != GLEW_OK)
 		return (EXIT_FAILURE);
 
-	t_shader *basic = shader_create("./shaders/default.vert", "./shaders/default.frag");
+	t_shader *basic = shader_create("./shaders/default.vert", "./shaders/grey.frag");
 
-	t_mesh *arg_mesh = obj_load("./objs/42.obj");
+	t_mesh *arg_mesh = obj_load("./objs/teapot.obj");
 	t_entity *entity = entity_create(arg_mesh, basic);
 	entity->tex = tex_load("./textures/texture.jpg");
 	entity->scale = ft_make_vec3(5, 5, 5);
@@ -199,7 +199,7 @@ int main(int argc, char *argv[])
 
 		camera_update(env.camera);
 
-		glClearColor(0.2, 0.2, 0.2, 1.0);
+		glClearColor(0.4, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

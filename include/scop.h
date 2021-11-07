@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 14:13:04 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:20:19 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_entity
 
 typedef struct	s_env
 {
+	struct s_shader *shader;
 	int			wireframe;
 	t_camera	camera;
 	t_entity	*entity;

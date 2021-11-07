@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 14:15:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:27:01 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ void	init_env(t_env *env)
 		ft_make_vec3(0, -0.3, -1), ft_make_vec2(-90.0, 0.0));
 }
 
+void 	load_shaders(t_env *env)
+{
+	env->shader = shader_create("./shaders/default.vert", "./shaders/grey.frag");
+}
+
 int	main(int argc, char *argv[])
 {
 	t_env		env;
@@ -80,12 +85,12 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 
-	init_env(&env);
 
+	init_env(&env);
 	window = init_gl(&env);
-	t_shader *basic = shader_create("./shaders/default.vert", "./shaders/grey.frag");
+	load_shaders(&env);
 	mesh = obj_load("./objs/teapot.obj");
-	entity = entity_create(mesh, basic);
+	entity = entity_create(mesh, env.shader);
 	entity->tex = tex_load("./textures/texture.jpg");
 	entity->scale = ft_make_vec3(5, 5, 5);
 
@@ -130,7 +135,7 @@ int	main(int argc, char *argv[])
 		glfwPollEvents();
 	}
 
-	shader_destroy(basic);
+	shader_destroy(env.shader);
 	mesh_destroy(mesh);
 
 	free(entity->tex);

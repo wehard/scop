@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 14:04:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:16:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	entity_draw(t_env *env, t_entity *entity)
 	shader_set_uniform_mat4(entity->shader, "model_matrix",
 		mat4_trs(entity->position, entity->rotation, entity->scale));
 	shader_set_uniform_mat4(entity->shader, "view_matrix",
-		env->camera->view_matrix);
+		env->camera.view_matrix);
 	shader_set_uniform_mat4(entity->shader, "proj_matrix",
 		env->proj_matrix);
 	shader_set_uniform_vec4(entity->shader, "color",

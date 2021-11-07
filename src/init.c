@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:14:54 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 18:31:29 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 18:36:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	load_shaders(t_env *env)
 			"./shaders/grey.vert",
 			"./shaders/grey.frag");
 	env->shader_tex = shader_create(
-			"./shaders/default.vert",
-			"./shaders/default.frag");
+			"./shaders/textured.vert",
+			"./shaders/textured.frag");
 	env->shader_current = env->shader_grey;
 }
 

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 18:27:22 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 18:57:37 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ t_mesh	*obj_load(const char *filename)
 		exit_message("Error loading obj file!");
 	read_mesh(fd, m);
 	close(fd);
-	mesh_gen_uvs(m);
 	mesh_center(m);
+	mesh_gen_uvs(m);
 	return (m);
 }

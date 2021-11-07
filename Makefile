@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2021/11/06 19:20:27 by wkorande         ###   ########.fr        #
+#    Updated: 2021/11/07 13:49:48 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC =	entity.c\
 		camera.c\
 		tex.c\
 		stb_image.c\
-		input.c
+		input.c\
+		utils.c
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 

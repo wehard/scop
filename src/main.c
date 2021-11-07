@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/06 19:47:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:49:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,17 @@
 #include <stdlib.h>
 #include "obj_loader.h"
 #include "scop.h"
-#include <stdarg.h>
+
 #include "obj_loader.h"
 #include "shader.h"
-#include <stdlib.h>
+
 #include "ft_printf.h"
 #include <math.h>
 #include "tex.h"
 
-void	exit_message(const char *message)
+GLFWwindow	*init_gl(t_env *env)
 {
-	ft_putendl_fd(message, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	free_null(size_t count, ...)
-{
-	va_list	pl;
-	size_t	i;
-	void	*param_type;
-
-	i = 0;
-	va_start(pl, count);
-	while (i < count)
-	{
-		param_type = va_arg(pl, void *);
-		free(param_type);
-		param_type = NULL;
-		i++;
-	}
-	va_end(pl);
-}
-
-GLFWwindow *init_gl(t_env *env)
-{
-	GLFWwindow	*window;
+	GLFWwindow *window;
 
 	if (!glfwInit())
 	{
@@ -80,7 +56,7 @@ GLFWwindow *init_gl(t_env *env)
 	glEnable(GL_DEPTH_TEST);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	return window;
+	return (window);
 }
 
 void	init_env(t_env *env)
@@ -94,13 +70,13 @@ void	init_env(t_env *env)
 	env->last_time = 0.0;
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_env		env;
-	GLFWwindow	*window;
-	t_mesh		*mesh;
-	t_entity	*entity;
-	t_camera	c;
+	t_env env;
+	GLFWwindow *window;
+	t_mesh *mesh;
+	t_entity *entity;
+	t_camera c;
 
 	srand((unsigned)4);
 
@@ -169,7 +145,6 @@ int main(int argc, char *argv[])
 
 	free(entity->tex);
 	entity_destroy(entity);
-
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2021/11/07 15:17:21 by wkorande         ###   ########.fr        #
+#    Updated: 2021/11/07 16:44:54 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC =	entity.c\
 		mesh/mesh_destroy.c\
 		mesh/mesh_set_vert.c\
 		mesh/mesh_gen_uvs.c\
+		mesh/mesh_center.c\
 		obj_loader.c\
 		shader/shader_create.c\
 		shader/shader_destroy.c\

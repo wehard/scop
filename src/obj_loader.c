@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 16:29:26 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:45:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,5 +155,6 @@ t_mesh *obj_load(const char *filename)
 	read_mesh(fd, m);
 	close(fd);
 	mesh_gen_uvs(m);
+	mesh_center(m);
 	return (m);
 }

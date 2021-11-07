@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 13:36:26 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:29:26 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int count_face_indices(char *line)
 		num_indices = 6;
 
 	i = 0;
-	while (i < num_indices)
+	while (i < num_indices && i < 4)
 	{
 		free(parts[i]);
 		i++;
@@ -103,7 +103,7 @@ static size_t read_indices(t_mesh *m, size_t i, char *line)
 		num_indices = 6;
 	}
 	n = 0;
-	while (n < num_indices)
+	while (n < num_indices && n < 4)
 	{
 		free(parts[n]);
 		n++;

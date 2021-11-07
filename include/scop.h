@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 13:48:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:55:48 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdint.h>
 #include "vec3.h"
 #include "vec4.h"
+#include "vec2.h"
 #include "mat4.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -78,7 +79,7 @@ void		entity_destroy(t_entity *entity);
 
 void entity_update_buffers(t_entity *entity);
 
-void camera_init(t_camera *camera, t_vec3 pos, t_vec3 forward, float yaw, float pitch);
+void camera_init(t_camera *camera, t_vec3 pos, t_vec3 forward, t_vec2 yaw_pitch);
 void camera_update(t_camera *camera);
 
 void	mouse_button_callback(GLFWwindow *window, int button, int action, int mods);

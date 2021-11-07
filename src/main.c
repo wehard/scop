@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 13:49:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:55:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int argc, char *argv[])
 	entity->tex = tex_load("./textures/texture.jpg");
 	entity->scale = ft_make_vec3(5, 5, 5);
 
-	camera_init(&c, ft_make_vec3(0, 10, 45), ft_make_vec3(0, -0.3, -1), -90.0, 0.0);
+	camera_init(&c, ft_make_vec3(0, 10, 45), ft_make_vec3(0, -0.3, -1), ft_make_vec2(-90.0, 0.0));
 
 	env.camera = &c;
 

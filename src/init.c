@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:14:54 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 18:24:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 18:31:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static GLFWwindow	*init_gl(void)
 void	load_shaders(t_env *env)
 {
 	env->shader_grey = shader_create(
-			"./shaders/default.vert",
+			"./shaders/grey.vert",
 			"./shaders/grey.frag");
 	env->shader_tex = shader_create(
 			"./shaders/default.vert",

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 16:45:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:36:26 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 #include "obj_loader.h"
 #include "vec2.h"
 
-static int	count_face_indices(char *line)
+static int count_face_indices(char *line)
 {
-	size_t	num_indices;
-	char	**parts;
+	size_t num_indices;
+	size_t i;
+	char **parts;
 
 	parts = ft_strsplit(line, ' ');
 	num_indices = 0;
@@ -33,13 +34,21 @@ static int	count_face_indices(char *line)
 	}
 	if (num_indices == 4)
 		num_indices = 6;
+
+	i = 0;
+	while (i < num_indices)
+	{
+		free(parts[i]);
+		i++;
+	}
+	free(parts);
 	return (num_indices);
 }
 
-static void	read_mesh_info(t_mesh *m, const char *filename)
+static void read_mesh_info(t_mesh *m, const char *filename)
 {
-	int		fd;
-	char	*line;
+	int fd;
+	char *line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0 || read(fd, NULL, 0) == -1)
@@ -57,7 +66,7 @@ static void	read_mesh_info(t_mesh *m, const char *filename)
 		free(line);
 	}
 	close(fd);
-	m->num_uvs = m->num_vertices; // !!!
+	m->num_uvs = m->num_vertices;	  // !!!
 	m->num_normals = m->num_vertices; // !!!
 	mesh_create_verts(m, m->num_vertices);
 	mesh_create_indices(m, m->num_indices);
@@ -65,11 +74,11 @@ static void	read_mesh_info(t_mesh *m, const char *filename)
 	mesh_create_uvs(m, m->num_uvs);
 }
 
-static size_t	read_indices(t_mesh *m, size_t i, char *line)
+static size_t read_indices(t_mesh *m, size_t i, char *line)
 {
-	char	**parts;
-	size_t	n;
-	size_t	num_indices;
+	char **parts;
+	size_t n;
+	size_t num_indices;
 
 	parts = ft_strsplit(line + 1, ' ');
 	num_indices = 0;
@@ -93,13 +102,21 @@ static size_t	read_indices(t_mesh *m, size_t i, char *line)
 		m->indices[i + 5] = ft_atoi(parts[3]) - 1;
 		num_indices = 6;
 	}
+	n = 0;
+	while (n < num_indices)
+	{
+		free(parts[n]);
+		n++;
+	}
+	free(parts);
+
 	return (num_indices);
 }
 
-void	read_mesh(int fd, t_mesh *m)
+void read_mesh(int fd, t_mesh *m)
 {
-	char	*line;
-	size_t	i[4];
+	char *line;
+	size_t i[4];
 
 	i[0] = 0;
 	i[1] = 0;
@@ -123,10 +140,10 @@ void	read_mesh(int fd, t_mesh *m)
 	}
 }
 
-t_mesh	*obj_load(const char *filename)
+t_mesh *obj_load(const char *filename)
 {
-	t_mesh	*m;
-	int		fd;
+	t_mesh *m;
+	int fd;
 
 	m = mesh_create();
 	if (!m)

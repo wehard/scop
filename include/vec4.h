@@ -6,19 +6,19 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 16:21:15 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 11:39:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:17:27 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC4_H
 # define VEC4_H
 
-typedef struct 	s_vec4
+typedef struct s_vec4
 {
-	union { float x, r;};
-	union { float y, g;};
-	union { float z, b;};
-	union { float w, a;};
+	float	x;
+	float	y;
+	float	z;
+	float	w;
 }				t_vec4;
 
 t_vec4	ft_add_vec4(t_vec4 a, t_vec4 b);

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 23:13:30 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/13 23:33:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:17:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 ** 30 31 32 33
 */
 
-typedef struct	s_mat4
+typedef struct s_mat4
 {
 	float		data[16];
 }				t_mat4;

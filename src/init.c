@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:14:54 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 16:00:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:07:42 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "obj_loader.h"
 #include "tex.h"
 
-static GLFWwindow	*init_gl()
+static GLFWwindow	*init_gl(void)
 {
 	GLFWwindow	*window;
 
@@ -41,10 +41,14 @@ static GLFWwindow	*init_gl()
 	return (window);
 }
 
-void load_shaders(t_env *env)
+void	load_shaders(t_env *env)
 {
-	env->shader_grey = shader_create("./shaders/default.vert", "./shaders/grey.frag");
-	env->shader_tex = shader_create("./shaders/default.vert", "./shaders/default.frag");
+	env->shader_grey = shader_create(
+			"./shaders/default.vert",
+			"./shaders/grey.frag");
+	env->shader_tex = shader_create(
+			"./shaders/default.vert",
+			"./shaders/default.frag");
 	env->shader_current = env->shader_grey;
 }
 
@@ -71,7 +75,7 @@ void	init_env(t_env *env)
 void	init_env_entity(t_env *env, const char *filename)
 {
 	t_mesh	*mesh;
-	
+
 	mesh = obj_load(filename);
 	env->entity = entity_create(mesh);
 	env->entity->tex = tex_load("./textures/texture.jpg");

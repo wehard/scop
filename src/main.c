@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 13:55:29 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:03:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int	main(int argc, char *argv[])
 	mesh_destroy(mesh);
 
 	free(entity->tex);
-	entity_destroy(entity);
+	free(entity);
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

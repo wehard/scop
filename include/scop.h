@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 14:03:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:09:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void camera_update(t_camera *camera);
 
 void	mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 void	mouse_callback(GLFWwindow *window, double xpos, double ypos);
-void	key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 
 void	exit_message(const char *message);
 void	free_null(size_t count, ...);

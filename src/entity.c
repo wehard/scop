@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 14:16:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:31:22 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	entity_update_buffers(t_entity *entity)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-t_entity	*entity_create(t_mesh *mesh, t_shader *shader)
+t_entity	*entity_create(t_mesh *mesh)
 {
 	t_entity	*entity;
 	size_t		i;
@@ -79,24 +79,23 @@ t_entity	*entity_create(t_mesh *mesh, t_shader *shader)
 	entity->model_matrix = mat4_trs(entity->position,
 			entity->rotation, entity->scale);
 	entity->mesh = mesh;
-	entity->shader = shader;
 	gen_buffers(entity);
 	init_buffers(entity);
 	entity_update_buffers(entity);
 	return (entity);
 }
 
-void	entity_draw(t_env *env, t_entity *entity)
+void	entity_draw(t_env *env, t_entity *entity, t_shader *shader)
 {
-	shader_use(entity->shader);
+	shader_use(shader);
 	tex_bind(entity->tex);
-	shader_set_uniform_mat4(entity->shader, "model_matrix",
+	shader_set_uniform_mat4(shader, "model_matrix",
 		mat4_trs(entity->position, entity->rotation, entity->scale));
-	shader_set_uniform_mat4(entity->shader, "view_matrix",
+	shader_set_uniform_mat4(shader, "view_matrix",
 		env->camera.view_matrix);
-	shader_set_uniform_mat4(entity->shader, "proj_matrix",
+	shader_set_uniform_mat4(shader, "proj_matrix",
 		env->proj_matrix);
-	shader_set_uniform_vec4(entity->shader, "color",
+	shader_set_uniform_vec4(shader, "color",
 		(t_vec4){0.3, 0.2, 0.5, 1.0});
 	glBindVertexArray(entity->vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, entity->ebo_id);

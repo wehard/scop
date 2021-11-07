@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 14:20:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:30:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct	s_entity
 {
 	struct s_mesh *mesh;
 	struct s_tex *tex;
-	struct s_shader *shader;
 	t_vec3		position;
 	t_vec3		scale;
 	t_vec3		rotation;
@@ -58,7 +57,8 @@ typedef struct	s_entity
 
 typedef struct	s_env
 {
-	struct s_shader *shader;
+	struct s_shader *shader_grey;
+	struct s_shader *shader_tex;
 	int			wireframe;
 	t_camera	camera;
 	t_entity	*entity;
@@ -73,9 +73,8 @@ typedef struct	s_env
 void	exit_message(const char *message);
 void    free_null(size_t count, ...);
 
-t_entity	*entity_create(struct s_mesh *mesh, struct s_shader *shader);
-t_entity	*entity_create_instanced(struct s_mesh *mesh, struct s_shader *shader, size_t instance_count);
-void		entity_draw(t_env *env, t_entity *entity);
+t_entity	*entity_create(struct s_mesh *mesh);
+void		entity_draw(t_env *env, t_entity *entity, struct s_shader *shader);
 
 void entity_update_buffers(t_entity *entity);
 

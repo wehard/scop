@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 14:27:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:32:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	init_env(t_env *env)
 
 void 	load_shaders(t_env *env)
 {
-	env->shader = shader_create("./shaders/default.vert", "./shaders/grey.frag");
+	env->shader_grey = shader_create("./shaders/default.vert", "./shaders/grey.frag");
+	env->shader_tex = shader_create("./shaders/default.vert", "./shaders/default.frag");
 }
 
 int	main(int argc, char *argv[])
@@ -85,12 +86,11 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 
-
 	init_env(&env);
 	window = init_gl(&env);
 	load_shaders(&env);
 	mesh = obj_load("./objs/teapot.obj");
-	entity = entity_create(mesh, env.shader);
+	entity = entity_create(mesh);
 	entity->tex = tex_load("./textures/texture.jpg");
 	entity->scale = ft_make_vec3(5, 5, 5);
 
@@ -123,19 +123,20 @@ int	main(int argc, char *argv[])
 			glEnable(GL_POLYGON_OFFSET_LINE);
 			glPolygonOffset(-0.5, 0.5);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			entity_draw(&env, entity);
+			entity_draw(&env, entity, env.shader_grey);
 			glDisable(GL_POLYGON_OFFSET_LINE);
 		}
 		else
 		{
-			entity_draw(&env, entity);
+			entity_draw(&env, entity, env.shader_grey);
 		}
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	shader_destroy(env.shader);
+	shader_destroy(env.shader_grey);
+	shader_destroy(env.shader_tex);
 	mesh_destroy(mesh);
 
 	free(entity->tex);

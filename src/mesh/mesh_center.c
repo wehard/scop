@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 16:34:25 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 16:45:35 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 18:23:47 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 #define MAX_BOUNDS 50000
 #define MIN_BOUNDS -50000
+#define BLA 0.001
 
 static void	mesh_calc_bounds(t_mesh *mesh)
 {
-	size_t i;
+	size_t	i;
 
 	mesh->bounds.min = ft_make_vec3(MAX_BOUNDS, MAX_BOUNDS, MAX_BOUNDS);
 	mesh->bounds.max = ft_make_vec3(MIN_BOUNDS, MIN_BOUNDS, MIN_BOUNDS);
@@ -40,24 +41,40 @@ static void	mesh_calc_bounds(t_mesh *mesh)
 	}
 }
 
+static float	ft_abs_f(float f)
+{
+	if (f < 0.0)
+		return (f * -1.0);
+	return (f);
+}
+
+static float	ft_map_range(float v, t_vec2 from, t_vec2 to)
+{
+	return ((((v - from.x) * (to.y - to.x)) / (from.y - from.x)) + to.x);
+}
 
 void	mesh_center(t_mesh *mesh)
 {
 	size_t	i;
-	t_vec3 width;
+	t_vec3	width;
 
 	mesh_calc_bounds(mesh);
-
-	width.x = mesh->bounds.max.x - mesh->bounds.min.x;
-	width.y = mesh->bounds.max.y - mesh->bounds.min.y;
-	width.z = mesh->bounds.max.z - mesh->bounds.min.z;
-
+	width = ft_make_vec3(
+			(mesh->bounds.max.x - mesh->bounds.min.x) / 2,
+			(mesh->bounds.max.y - mesh->bounds.min.y) / 2,
+			(mesh->bounds.max.z - mesh->bounds.min.z) / 2);
 	i = 0;
 	while (i < mesh->num_vertices)
 	{
-		mesh->vertices[i].x -= width.x / 2;
-		mesh->vertices[i].y -= width.y / 2;
-		mesh->vertices[i].z -= width.z / 2;
+		mesh->vertices[i].x = ft_map_range(mesh->vertices[i].x,
+				ft_make_vec2(mesh->bounds.min.x, mesh->bounds.max.x),
+				ft_make_vec2(-width.x, width.x));
+		mesh->vertices[i].y = ft_map_range(mesh->vertices[i].y,
+				ft_make_vec2(mesh->bounds.min.y, mesh->bounds.max.y),
+				ft_make_vec2(-width.y, width.y));
+		mesh->vertices[i].z = ft_map_range(mesh->vertices[i].z,
+				ft_make_vec2(mesh->bounds.min.z, mesh->bounds.max.z),
+				ft_make_vec2(-width.z, width.z));
 		i++;
 	}
 }

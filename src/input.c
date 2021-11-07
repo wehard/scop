@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:18:25 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 14:16:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/07 15:23:11 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,14 @@ void	mouse_button_callback(GLFWwindow *window, int button,
 	t_env	*env;
 
 	env = (t_env *)glfwGetWindowUserPointer(window);
-	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_RELEASE)
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+	{
+		if (env->shader_current == env->shader_grey)
+			env->shader_current = env->shader_tex;
+		else
+			env->shader_current = env->shader_grey;
+	}
+	else if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_RELEASE)
 	{
 		ft_printf("%f, %f\n", env->camera.pitch, env->camera.yaw);
 	}

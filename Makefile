@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2021/11/08 16:20:51 by wkorande         ###   ########.fr        #
+#    Updated: 2021/11/08 16:29:09 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ LODEPNG_SRC = lib/lodepng/lodepng.c
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC)) $(LODEPNG_SRC)
 
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 

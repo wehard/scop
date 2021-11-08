@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:16:24 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 18:00:46 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:37:53 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,20 @@ static char	*load_shader_src(const char *src_path)
 	return (src);
 }
 
+static void	log_shader_error(GLenum shader_type, char *error)
+{
+	if (shader_type == GL_FRAGMENT_SHADER)
+	{
+		ft_putstr("frag: ");
+		ft_putendl(error);
+	}
+	else
+	{
+		ft_putstr("vert: ");
+		ft_putendl(error);
+	}
+}
+
 static uint32_t	compile_shader(char *src, GLenum shader_type)
 {
 	uint32_t	shader_id;
@@ -62,16 +76,8 @@ static uint32_t	compile_shader(char *src, GLenum shader_type)
 	{
 		error = (char *)malloc(sizeof(char) * log_len);
 		glGetShaderInfoLog(shader_id, log_len, NULL, error);
-		if (shader_type == GL_FRAGMENT_SHADER)
-		{
-			ft_putstr("frag: ");
-			ft_putendl(error);
-		}
-		else
-		{
-			ft_putstr("vert: ");
-			ft_putendl(error);
-		}
+		log_shader_error(shader_type, error);
+		free(error);
 	}
 	return (shader_id);
 }

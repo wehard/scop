@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 13:47:47 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:29:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	free_null(size_t count, ...)
 void	free_parts(char **parts)
 {
 	size_t	i;
+
 	i = 0;
 	while (parts[i])
 	{

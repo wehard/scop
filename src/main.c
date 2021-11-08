@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:59:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:29:37 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	render(t_env *env)
 	glfwPollEvents();
 }
 
-void cleanup(t_env *env)
+void	cleanup(t_env *env)
 {
 	env->shader_current = 0;
 	shader_destroy(env->shader_grey);

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 16:41:28 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 15:50:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:32:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	mesh_gen_uvs_sphere(t_mesh *mesh)
 	i = 0;
 	while (i < mesh->num_uvs)
 	{
-		uv.x = 0.5 + (atan2(mesh->vertices[i].x, mesh->vertices[i].z) / (2 * 3.14));
+		uv.x = 0.5 + (atan2(mesh->vertices[i].x,
+					mesh->vertices[i].z) / (2 * 3.14));
 		uv.y = 0.5 - (asin(mesh->vertices[i].y) / 3.14);
 		mesh->uvs[i] = uv;
 		i++;

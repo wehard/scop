@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 16:03:11 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:38:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ static void	render(t_env *env)
 	glfwPollEvents();
 }
 
+void cleanup(t_env *env)
+{
+	env->shader_current = 0;
+	shader_destroy(env->shader_grey);
+	shader_destroy(env->shader_tex);
+	free(env->entity->tex);
+	mesh_destroy(env->entity->mesh);
+	free(env->entity);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_env		env;
@@ -76,11 +86,8 @@ int	main(int argc, char *argv[])
 		update(&env);
 		render(&env);
 	}
-	shader_destroy(env.shader_grey);
-	shader_destroy(env.shader_tex);
-	free(env.entity->tex);
-	free(env.entity);
 	glfwDestroyWindow(env.window);
+	cleanup(&env);
 	glfwTerminate();
 	return (0);
 }

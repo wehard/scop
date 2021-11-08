@@ -6,17 +6,17 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 12:28:18 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:37:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:20:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_light.h"
 
-int		ft_nwords(char *str, char delim)
+int	ft_nwords(char *str, char delim)
 {
-	int word;
-	int n;
-	int i;
+	int	word;
+	int	n;
+	int	i;
 
 	if (!str || !delim)
 		return (0);

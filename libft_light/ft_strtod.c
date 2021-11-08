@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 15:28:06 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:40:00 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:13:30 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,28 @@ static void	check_sign(char **s, int *negptr)
 	}
 }
 
-double		ft_strtod(char *s)
+static double	decr_return(int decimals, double nbr, int negative)
+{
+	while (decimals--)
+		nbr /= 10.0;
+	if (negative)
+		return (-nbr);
+	else
+		return (nbr);
+}
+
+static double	process_decimals(char *s, double nbr, int *decimals)
+{
+	while (ft_isdigit(*s))
+	{
+		*decimals += 1;
+		nbr = nbr * 10.0 + (*s - '0');
+		s++;
+	}
+	return (nbr);
+}
+
+double	ft_strtod(char *s)
 {
 	double	nbr;
 	int		negative;
@@ -48,13 +69,7 @@ double		ft_strtod(char *s)
 	if (*s == '.')
 	{
 		s++;
-		while (ft_isdigit(*s) && (digits += 1) && (decimals += 1))
-		{
-			nbr = nbr * 10.0 + (*s - '0');
-			s++;
-		}
+		nbr = process_decimals(s, nbr, &decimals);
 	}
-	while (decimals--)
-		nbr /= 10.0;
-	return (negative ? -nbr : nbr);
+	return (decr_return(decimals, nbr, negative));
 }

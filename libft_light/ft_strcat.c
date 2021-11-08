@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:46:28 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/15 16:47:11 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 18:20:45 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strcat(char *dest, char *src)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (dest[i] != '\0')

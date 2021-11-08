@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2021/11/08 18:02:09 by wkorande         ###   ########.fr        #
+#    Updated: 2021/11/08 18:45:16 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ libft_light/ft_sub_vec3.c
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC)) $(LODEPNG_SRC) $(LIBFT_LIGHT_SRC)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 

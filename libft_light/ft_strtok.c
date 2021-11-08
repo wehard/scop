@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:16:46 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:42:04 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 18:22:57 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_delim(char c, const char *delims)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (delims[i] != '\0')
@@ -28,7 +28,7 @@ static int	is_delim(char c, const char *delims)
 
 static int	advance_ptr(char *ptr, const char *delims)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (is_delim(*ptr, delims))
@@ -39,7 +39,7 @@ static int	advance_ptr(char *ptr, const char *delims)
 	return (i);
 }
 
-char		*ft_strtok(char *src, const char *delims)
+char	*ft_strtok(char *src, const char *delims)
 {
 	static char	*ptr;
 	char		*token;

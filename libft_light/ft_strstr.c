@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:43:37 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/22 15:57:31 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 18:22:24 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int c1;
-	int c2;
+	int	c1;
+	int	c2;
 
 	if (!*needle)
-		return ((char*)haystack);
+		return ((char *)haystack);
 	c1 = 0;
 	while (haystack[c1] != '\0')
 	{
@@ -28,7 +28,7 @@ char	*ft_strstr(const char *haystack, const char *needle)
 				if (needle[c2 + 1] == '\0')
 				{
 					haystack += c1;
-					return ((char*)haystack);
+					return ((char *)haystack);
 				}
 				c2++;
 			}

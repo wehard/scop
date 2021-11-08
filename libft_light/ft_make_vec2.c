@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 15:37:08 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/22 14:02:11 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:22:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec2	ft_make_vec2(float x, float y)
 {
-	t_vec2 v;
+	t_vec2	v;
 
 	v.x = x;
 	v.y = y;

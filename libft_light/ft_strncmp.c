@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:27:12 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:30:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:16:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < n)

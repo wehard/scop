@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 14:03:27 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 11:48:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:21:16 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec3	ft_mul_vec3(t_vec3 v, float t)
 {
-	t_vec3 new;
+	t_vec3	new;
 
 	new.x = v.x * t;
 	new.y = v.y * t;

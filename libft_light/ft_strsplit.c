@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 12:09:06 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:15:09 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:15:55 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ char	**ft_strsplit(char const *s, char c)
 	int		len;
 
 	nwords = ft_nwords((char *)s, c);
-	if (!(strs = (char **)malloc(sizeof(char *) * (nwords + 1))))
+	strs = (char **)malloc(sizeof(char *) * (nwords + 1));
+	if (!strs)
 		return (NULL);
 	i = 0;
 	while (i < nwords)
 	{
 		while (*s == c)
 			s++;
-		len = ft_wordlen((char*)s, c);
-		if (!(strs[i] = (char*)malloc(sizeof(char) * (len + 1))))
+		len = ft_wordlen((char *)s, c);
+		strs[i] = (char *)malloc(sizeof(char) * (len + 1));
+		if (!strs[i])
 			return (NULL);
 		ft_memcpy(strs[i], s, len);
 		strs[i][len] = '\0';

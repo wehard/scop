@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:14:55 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:53:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:16:19 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (src[i] != '\0' && i < len)

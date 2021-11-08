@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 11:31:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/13 23:01:55 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 19:25:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec3	ft_cross_vec3(t_vec3 a, t_vec3 b)
 {
-	t_vec3 c;
+	t_vec3	c;
 
 	c.x = a.y * b.z - a.z * b.y;
 	c.y = a.z * b.x - a.x * b.z;

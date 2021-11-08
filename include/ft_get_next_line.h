@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:39:53 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 20:14:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:20:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ typedef struct s_gnl_tmp
 	int		len;
 }		t_gnl_tmp;
 
-int ft_get_next_line(const int fd, char **line);
+int	ft_get_next_line(const int fd, char **line);
 
 #endif

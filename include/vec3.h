@@ -6,14 +6,14 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 17:47:41 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/15 11:47:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:23:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC3_H
 # define VEC3_H
 
-typedef struct	s_vec3
+typedef struct s_vec3
 {
 	float		x;
 	float		y;

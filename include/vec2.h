@@ -6,20 +6,20 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 17:47:41 by wkorande          #+#    #+#             */
-/*   Updated: 2020/11/22 14:01:28 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:22:54 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC2_H
 # define VEC2_H
 
-typedef struct	s_vec2i
+typedef struct s_vec2i
 {
 	int			x;
 	int			y;
 }				t_vec2i;
 
-typedef struct	s_vec2
+typedef struct s_vec2
 {
 	float		x;
 	float		y;

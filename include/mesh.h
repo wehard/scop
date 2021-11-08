@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:00:35 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:45:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:21:50 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_triface
 
 typedef struct s_bounds
 {
-	t_vec3 min;
-	t_vec3 max;
+	t_vec3		min;
+	t_vec3		max;
 }				t_bounds;
 
 typedef struct s_mesh

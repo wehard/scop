@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 16:45:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:02:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 static int	count_face_indices(char *line)
 {
 	size_t	num_indices;
-	size_t	i;
 	char	**parts;
 
 	parts = ft_strsplit(line, ' ');
@@ -34,13 +33,7 @@ static int	count_face_indices(char *line)
 	}
 	if (num_indices == 4)
 		num_indices = 6;
-	i = 0;
-	while (i < num_indices && i < 4)
-	{
-		free(parts[i]);
-		i++;
-	}
-	free(parts);
+	free_parts(parts);
 	return (num_indices);
 }
 
@@ -73,25 +66,22 @@ static void	read_mesh_info(t_mesh *m, const char *filename)
 	mesh_create_uvs(m, m->num_uvs);
 }
 
-static size_t	read_indices(t_mesh *m, size_t i, char *line)
+static void	read_indices(t_mesh *m, size_t i, char *line, size_t *num_indices)
 {
 	char	**parts;
-	size_t	n;
-	size_t	num_indices;
 
 	parts = ft_strsplit(line + 1, ' ');
-	num_indices = 0;
-	while (parts[num_indices])
+	while (parts[*num_indices])
 	{
-		++num_indices;
+		++*num_indices;
 	}
-	if (num_indices == 3)
+	if (*num_indices == 3)
 	{
 		m->indices[i + 0] = ft_atoi(parts[0]) - 1;
 		m->indices[i + 1] = ft_atoi(parts[1]) - 1;
 		m->indices[i + 2] = ft_atoi(parts[2]) - 1;
 	}
-	else if (num_indices == 4)
+	else if (*num_indices == 4)
 	{
 		m->indices[i + 0] = ft_atoi(parts[0]) - 1;
 		m->indices[i + 1] = ft_atoi(parts[1]) - 1;
@@ -99,22 +89,16 @@ static size_t	read_indices(t_mesh *m, size_t i, char *line)
 		m->indices[i + 3] = ft_atoi(parts[0]) - 1;
 		m->indices[i + 4] = ft_atoi(parts[2]) - 1;
 		m->indices[i + 5] = ft_atoi(parts[3]) - 1;
-		num_indices = 6;
+		*num_indices = 6;
 	}
-	n = 0;
-	while (n < num_indices && n < 4)
-	{
-		free(parts[n]);
-		n++;
-	}
-	free(parts);
-	return (num_indices);
+	free_parts(parts);
 }
 
 void	read_mesh(int fd, t_mesh *m)
 {
 	char	*line;
 	size_t	i[4];
+	size_t	temp_indices;
 
 	i[0] = 0;
 	i[1] = 0;
@@ -128,7 +112,9 @@ void	read_mesh(int fd, t_mesh *m)
 		}
 		else if (ft_strncmp(line, "f ", 2) == 0)
 		{
-			i[3] += read_indices(m, i[3], line);
+			temp_indices = 0;
+			read_indices(m, i[3], line, &temp_indices);
+			i[3] += temp_indices;
 		}
 		free(line);
 	}

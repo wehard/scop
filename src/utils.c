@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 13:47:47 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 13:50:52 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:55:57 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,16 @@ void	free_null(size_t count, ...)
 		i++;
 	}
 	va_end(pl);
+}
+
+void	free_parts(char **parts)
+{
+	size_t	i;
+	i = 0;
+	while (parts[i])
+	{
+		free(parts[i]);
+		i++;
+	}
+	free(parts);
 }

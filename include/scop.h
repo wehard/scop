@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 16:21:12 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:55:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void		mouse_callback(GLFWwindow *window, double xpos, double ypos);
 
 void		exit_message(const char *message);
 void		free_null(size_t count, ...);
+void		free_parts(char **parts);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 18:57:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:45:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,6 @@ void	read_mesh(int fd, t_mesh *m)
 		{
 			m->vertices[i[0]++] = ft_parse_vec3(line + 1);
 		}
-		// else if (ft_strncmp(line, "vt", 2) == 0)
-		// 	m->uvs[i[1]++] = ft_parse_vec2(line + 1);
-		// else if (ft_strncmp(line, "vn", 2) == 0)
-		// 	m->normals[i[2]++] = ft_parse_vec3(line + 2);
 		else if (ft_strncmp(line, "f ", 2) == 0)
 		{
 			i[3] += read_indices(m, i[3], line);

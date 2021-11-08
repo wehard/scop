@@ -1,51 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 13:47:47 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:19 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/15 14:27:01 by wkorande          #+#    #+#             */
+/*   Updated: 2021/11/08 17:38:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include <stdlib.h>
 #include "libft_light.h"
 
-void	exit_message(const char *message)
+char	*ft_strdup(const char *s1)
 {
-	ft_putendl_fd(message, 2);
-	exit(EXIT_FAILURE);
-}
+	char	*dup;
+	int		i;
 
-void	free_null(size_t count, ...)
-{
-	va_list	pl;
-	size_t	i;
-	void	*param_type;
-
+	if (!(dup = (char*)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
+		return (NULL);
 	i = 0;
-	va_start(pl, count);
-	while (i < count)
+	while (*s1 != '\0')
 	{
-		param_type = va_arg(pl, void *);
-		free(param_type);
-		param_type = NULL;
+		dup[i] = *s1;
+		s1++;
 		i++;
 	}
-	va_end(pl);
-}
-
-void	free_parts(char **parts)
-{
-	size_t	i;
-	i = 0;
-	while (parts[i])
-	{
-		free(parts[i]);
-		i++;
-	}
-	free(parts);
+	dup[i] = '\0';
+	return (dup);
 }

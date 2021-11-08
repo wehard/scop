@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:00:35 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 16:44:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:45:19 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include "vec3.h"
 # include "vec2.h"
-# include "color.h"
 
 # define AXIS_X 0
 # define AXIS_Y 1

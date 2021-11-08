@@ -1,51 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 13:47:47 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:19 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/15 16:14:55 by wkorande          #+#    #+#             */
+/*   Updated: 2021/11/08 17:53:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdlib.h>
 #include "libft_light.h"
 
-void	exit_message(const char *message)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	ft_putendl_fd(message, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	free_null(size_t count, ...)
-{
-	va_list	pl;
-	size_t	i;
-	void	*param_type;
+	size_t i;
 
 	i = 0;
-	va_start(pl, count);
-	while (i < count)
+	while (src[i] != '\0' && i < len)
 	{
-		param_type = va_arg(pl, void *);
-		free(param_type);
-		param_type = NULL;
+		dst[i] = src[i];
 		i++;
 	}
-	va_end(pl);
-}
-
-void	free_parts(char **parts)
-{
-	size_t	i;
-	i = 0;
-	while (parts[i])
+	while (i < len)
 	{
-		free(parts[i]);
+		dst[i] = '\0';
 		i++;
 	}
-	free(parts);
+	return (dst);
 }

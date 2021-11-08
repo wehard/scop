@@ -1,51 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 13:47:47 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:19 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/15 16:27:12 by wkorande          #+#    #+#             */
+/*   Updated: 2021/11/08 17:30:53 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdlib.h>
 #include "libft_light.h"
 
-void	exit_message(const char *message)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	ft_putendl_fd(message, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	free_null(size_t count, ...)
-{
-	va_list	pl;
-	size_t	i;
-	void	*param_type;
+	unsigned int i;
 
 	i = 0;
-	va_start(pl, count);
-	while (i < count)
+	while (i < n)
 	{
-		param_type = va_arg(pl, void *);
-		free(param_type);
-		param_type = NULL;
+		if (s1[i] != s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		if (s1[i] == '\0')
+		{
+			return (0);
+		}
 		i++;
 	}
-	va_end(pl);
-}
-
-void	free_parts(char **parts)
-{
-	size_t	i;
-	i = 0;
-	while (parts[i])
-	{
-		free(parts[i]);
-		i++;
-	}
-	free(parts);
+	return (0);
 }

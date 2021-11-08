@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mat4_perspective.c                                 :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/13 23:26:52 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:41 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/17 17:03:19 by wkorande          #+#    #+#             */
+/*   Updated: 2021/11/08 17:50:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mat4.h"
+#include <stdlib.h>
 #include "libft_light.h"
-#include <math.h>
 
-t_mat4	mat4_perspective(float fov, float aspect, float zn, float zf)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	t_mat4	mat;
-	float	tanhalffov;
-	float	rad;
+	char *sub;
 
-	rad = ft_deg_to_rad(fov);
-	mat = mat4_init();
-	tanhalffov = tanf(fov / 2.0);
-	mat.data[0] = 1.0 / (aspect * tanhalffov);
-	mat.data[5] = 1.0 / tanhalffov;
-	mat.data[10] = -(zf + zn) / (zf - zn);
-	mat.data[11] = -1.0;
-	mat.data[14] = -(2.0 * zf * zn) / (zf - zn);
-	return (mat);
+	if (!s || !(sub = (char*)ft_memalloc(len + 1)))
+		return (NULL);
+	sub = ft_strncpy(sub, s + start, len);
+	return (sub);
 }

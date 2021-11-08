@@ -6,15 +6,14 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:18:25 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 15:52:02 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:45:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <GLFW/glfw3.h>
 #include <math.h>
-#include "libft.h"
-#include "ft_printf.h"
+#include "libft_light.h"
 
 void	mouse_button_callback(GLFWwindow *window, int button,
 	int action, int mods)
@@ -29,10 +28,6 @@ void	mouse_button_callback(GLFWwindow *window, int button,
 			env->shader_current = env->shader_tex;
 		else
 			env->shader_current = env->shader_grey;
-	}
-	else if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_RELEASE)
-	{
-		ft_printf("%f, %f\n", env->camera.pitch, env->camera.yaw);
 	}
 	else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
 	{

@@ -6,12 +6,12 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 23:21:37 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 16:53:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:46:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mat4.h"
-#include "libft.h"
+#include "libft_light.h"
 #include <math.h>
 
 t_mat4	mat4_rot_x(float angle)

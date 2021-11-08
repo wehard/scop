@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mesh_set_vert.c                                    :+:      :+:    :+:   */
+/*   ft_dot_vec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/22 18:23:08 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:56:11 by wkorande         ###   ########.fr       */
+/*   Created: 2020/01/16 14:05:16 by wkorande          #+#    #+#             */
+/*   Updated: 2020/11/15 11:47:50 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
-#include "mesh.h"
+#include "vec3.h"
 
-void	mesh_set_vert(t_mesh *m, size_t i, t_vec3 v)
+float	ft_dot_vec3(t_vec3 v1, t_vec3 v2)
 {
-	if (!m || !m->vertices || i > m->num_vertices - 1)
-	{
-		exit_message("mesh_set_vert: failed to set vertex!\n");
-	}
-	else
-		m->vertices[i] = v;
+	float dot;
+
+	dot = (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
+	return (dot);
 }

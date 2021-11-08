@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mat4_perspective.c                                 :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/13 23:26:52 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:41 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/15 14:12:14 by wkorande          #+#    #+#             */
+/*   Updated: 2021/11/08 17:45:08 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mat4.h"
 #include "libft_light.h"
-#include <math.h>
 
-t_mat4	mat4_perspective(float fov, float aspect, float zn, float zf)
+int	ft_atoi(const char *str)
 {
-	t_mat4	mat;
-	float	tanhalffov;
-	float	rad;
+	long	res;
+	int		sign;
 
-	rad = ft_deg_to_rad(fov);
-	mat = mat4_init();
-	tanhalffov = tanf(fov / 2.0);
-	mat.data[0] = 1.0 / (aspect * tanhalffov);
-	mat.data[5] = 1.0 / tanhalffov;
-	mat.data[10] = -(zf + zn) / (zf - zn);
-	mat.data[11] = -1.0;
-	mat.data[14] = -(2.0 * zf * zn) / (zf - zn);
-	return (mat);
+	sign = 1;
+	res = 0;
+	while (*str && (*str == ' ' || *str == '\n' || *str == '\t' ||
+			*str == '\v' || *str == '\f' || *str == '\r'))
+		str++;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	else if (*str == '+')
+	{
+		str++;
+	}
+	while (*str && *str >= '0' && *str <= '9')
+	{
+		res = res * 10 + (*str - '0');
+		str++;
+	}
+	return (sign * res);
 }

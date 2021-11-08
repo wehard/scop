@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mat4_perspective.c                                 :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/13 23:26:52 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:41 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/17 17:15:53 by wkorande          #+#    #+#             */
+/*   Updated: 2021/11/08 17:38:53 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mat4.h"
+#include <stdlib.h>
 #include "libft_light.h"
-#include <math.h>
 
-t_mat4	mat4_perspective(float fov, float aspect, float zn, float zf)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_mat4	mat;
-	float	tanhalffov;
-	float	rad;
+	char	*join;
+	int		len;
 
-	rad = ft_deg_to_rad(fov);
-	mat = mat4_init();
-	tanhalffov = tanf(fov / 2.0);
-	mat.data[0] = 1.0 / (aspect * tanhalffov);
-	mat.data[5] = 1.0 / tanhalffov;
-	mat.data[10] = -(zf + zn) / (zf - zn);
-	mat.data[11] = -1.0;
-	mat.data[14] = -(2.0 * zf * zn) / (zf - zn);
-	return (mat);
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	if (!(join = (char*)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	ft_bzero(join, len + 1);
+	join = ft_strcat(join, (char*)s1);
+	join = ft_strcat(join, (char*)s2);
+	return (join);
 }

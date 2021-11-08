@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mat4_perspective.c                                 :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/13 23:26:52 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:41 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/15 14:52:47 by wkorande          #+#    #+#             */
+/*   Updated: 2021/11/08 17:37:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mat4.h"
 #include "libft_light.h"
-#include <math.h>
 
-t_mat4	mat4_perspective(float fov, float aspect, float zn, float zf)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	t_mat4	mat;
-	float	tanhalffov;
-	float	rad;
+	unsigned char	*s;
+	unsigned char	*d;
+	size_t			i;
 
-	rad = ft_deg_to_rad(fov);
-	mat = mat4_init();
-	tanhalffov = tanf(fov / 2.0);
-	mat.data[0] = 1.0 / (aspect * tanhalffov);
-	mat.data[5] = 1.0 / tanhalffov;
-	mat.data[10] = -(zf + zn) / (zf - zn);
-	mat.data[11] = -1.0;
-	mat.data[14] = -(2.0 * zf * zn) / (zf - zn);
-	return (mat);
+	s = (unsigned char*)src;
+	d = (unsigned char*)dst;
+	i = 0;
+	if (n <= 0 || dst == src)
+		return (dst);
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dst);
 }

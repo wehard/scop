@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mat4_perspective.c                                 :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/13 23:26:52 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:41 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/14 16:36:39 by wkorande          #+#    #+#             */
+/*   Updated: 2021/11/08 17:35:14 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mat4.h"
 #include "libft_light.h"
-#include <math.h>
 
-t_mat4	mat4_perspective(float fov, float aspect, float zn, float zf)
+size_t	ft_strlen(const char *s)
 {
-	t_mat4	mat;
-	float	tanhalffov;
-	float	rad;
+	size_t i;
 
-	rad = ft_deg_to_rad(fov);
-	mat = mat4_init();
-	tanhalffov = tanf(fov / 2.0);
-	mat.data[0] = 1.0 / (aspect * tanhalffov);
-	mat.data[5] = 1.0 / tanhalffov;
-	mat.data[10] = -(zf + zn) / (zf - zn);
-	mat.data[11] = -1.0;
-	mat.data[14] = -(2.0 * zf * zn) / (zf - zn);
-	return (mat);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }

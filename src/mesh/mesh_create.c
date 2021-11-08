@@ -6,12 +6,12 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 18:24:04 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 16:14:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:57:42 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "scop.h"
 #include "mesh.h"
-#include "ft_printf.h"
 
 t_mesh	*mesh_create(void)
 {
@@ -20,8 +20,7 @@ t_mesh	*mesh_create(void)
 	m = (t_mesh *)malloc(sizeof(t_mesh));
 	if (!m)
 	{
-		ft_printf("mesh_create: failed to allocate memory for t_mesh!\n");
-		return (NULL);
+		exit_message("mesh_create: failed to allocate memory for t_mesh!");
 	}
 	m->num_vertices = 0;
 	m->vertices = NULL;
@@ -44,8 +43,7 @@ void	mesh_create_verts(t_mesh *m, size_t num_vertices)
 	m->vertices = (t_vec3 *)malloc(sizeof(t_vec3) * num_vertices);
 	if (!m->vertices)
 	{
-		ft_printf("mesh_create: failed to allocate memory for vertices!\n");
-		exit(EXIT_FAILURE);
+		exit_message("mesh_create: failed to allocate memory for vertices!\n");
 	}
 }
 
@@ -57,8 +55,7 @@ void	mesh_create_indices(t_mesh *m, size_t num_indices)
 	m->indices = (unsigned int *)malloc(sizeof(unsigned int) * num_indices);
 	if (!m->indices)
 	{
-		ft_printf("mesh_create: failed to allocate memory for vertices!\n");
-		exit(EXIT_FAILURE);
+		exit_message("mesh_create: failed to allocate memory for vertices!\n");
 	}
 }
 
@@ -72,8 +69,7 @@ void	mesh_create_normals(t_mesh *m, size_t num_normals)
 	m->normals = (t_vec3 *)malloc(sizeof(t_vec3) * num_normals);
 	if (!m->normals)
 	{
-		ft_printf("mesh_create: failed to allocate memory for normals!\n");
-		exit(EXIT_FAILURE);
+		exit_message("mesh_create: failed to allocate memory for normals!\n");
 	}
 }
 
@@ -87,7 +83,6 @@ void	mesh_create_uvs(t_mesh *m, size_t num_uvs)
 	m->uvs = (t_vec2 *)malloc(sizeof(t_vec2) * num_uvs);
 	if (!m->uvs)
 	{
-		ft_printf("mesh_create: failed to allocate memory for uvs!\n");
-		exit(EXIT_FAILURE);
+		exit_message("mesh_create: failed to allocate memory for uvs!\n");
 	}
 }

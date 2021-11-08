@@ -6,18 +6,19 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:16:24 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 16:11:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 18:00:46 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shader.h"
-#include "ft_printf.h"
 #include <unistd.h>
 #include <fcntl.h>
+#include "libft_light.h"
 #include "ft_get_next_line.h"
 #include <GL/glew.h>
 #include <stdio.h>
 #include <errno.h>
+#include <string.h>
 
 static char	*load_shader_src(const char *src_path)
 {
@@ -28,7 +29,9 @@ static char	*load_shader_src(const char *src_path)
 	fd = open(src_path, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("load_shader_src: %s %s\n", src_path, strerror(errno));
+		ft_putstr("load_shader_src: ");
+		ft_putstr(src_path);
+		ft_putendl(strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	src = (char *)malloc(MAX_SHADER_SRC_SIZE);
@@ -61,11 +64,13 @@ static uint32_t	compile_shader(char *src, GLenum shader_type)
 		glGetShaderInfoLog(shader_id, log_len, NULL, error);
 		if (shader_type == GL_FRAGMENT_SHADER)
 		{
-			ft_printf("%s: %s\n", "frag", error);
+			ft_putstr("frag: ");
+			ft_putendl(error);
 		}
 		else
 		{
-			ft_printf("%s: %s\n", "vert", error);
+			ft_putstr("vert: ");
+			ft_putendl(error);
 		}
 	}
 	return (shader_id);
@@ -78,8 +83,7 @@ t_shader	*shader_create(const char *vert_path, const char *frag_path)
 	shader = (t_shader *)malloc(sizeof(t_shader));
 	if (!shader)
 	{
-		ft_printf("Failed to load shader!\n");
-		exit(EXIT_FAILURE);
+		exit_message("Failed to load shader!\n");
 	}
 	shader->vert_src = load_shader_src(vert_path);
 	shader->frag_src = load_shader_src(frag_path);

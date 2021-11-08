@@ -6,17 +6,16 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:05:05 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:02:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:55:38 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include "mesh.h"
 #include "ft_get_next_line.h"
-#include "libft.h"
+#include "libft_light.h"
 #include <unistd.h>
 #include <fcntl.h>
-#include "ft_printf.h"
 #include "obj_loader.h"
 #include "vec2.h"
 

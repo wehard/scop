@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mesh_set_vert.c                                    :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
+/*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/22 18:23:08 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:56:11 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/15 14:03:06 by wkorande          #+#    #+#             */
+/*   Updated: 2019/10/15 14:04:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
-#include "mesh.h"
-
-void	mesh_set_vert(t_mesh *m, size_t i, t_vec3 v)
+int	ft_isdigit(int c)
 {
-	if (!m || !m->vertices || i > m->num_vertices - 1)
-	{
-		exit_message("mesh_set_vert: failed to set vertex!\n");
-	}
+	if (c >= 48 && c <= 57)
+		return (1);
 	else
-		m->vertices[i] = v;
+		return (0);
 }

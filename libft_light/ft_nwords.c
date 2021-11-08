@@ -1,51 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_nwords.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 13:47:47 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:46:19 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/18 12:28:18 by wkorande          #+#    #+#             */
+/*   Updated: 2021/11/08 17:37:01 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdlib.h>
 #include "libft_light.h"
 
-void	exit_message(const char *message)
+int		ft_nwords(char *str, char delim)
 {
-	ft_putendl_fd(message, 2);
-	exit(EXIT_FAILURE);
-}
+	int word;
+	int n;
+	int i;
 
-void	free_null(size_t count, ...)
-{
-	va_list	pl;
-	size_t	i;
-	void	*param_type;
-
+	if (!str || !delim)
+		return (0);
+	word = 0;
+	n = 0;
 	i = 0;
-	va_start(pl, count);
-	while (i < count)
+	while (str[i] != '\0')
 	{
-		param_type = va_arg(pl, void *);
-		free(param_type);
-		param_type = NULL;
+		if (str[i] != delim)
+		{
+			if (word == 0)
+			{
+				word = 1;
+				n++;
+			}
+		}
+		else if (str[i] == delim)
+			word = 0;
 		i++;
 	}
-	va_end(pl);
-}
-
-void	free_parts(char **parts)
-{
-	size_t	i;
-	i = 0;
-	while (parts[i])
-	{
-		free(parts[i]);
-		i++;
-	}
-	free(parts);
+	return (n);
 }

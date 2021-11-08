@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 15:49:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:58:42 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "mesh.h"
 #include "shader.h"
 #include <math.h>
-#include "libft.h"
+#include "libft_light.h"
 #include "tex.h"
 
 static void	gen_buffers(t_entity *entity)

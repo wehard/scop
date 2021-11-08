@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mesh_set_vert.c                                    :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
+/*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/22 18:23:08 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:56:11 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/16 17:29:05 by wkorande          #+#    #+#             */
+/*   Updated: 2019/10/16 17:29:30 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
-#include "mesh.h"
+#include <unistd.h>
 
-void	mesh_set_vert(t_mesh *m, size_t i, t_vec3 v)
+void	ft_putchar_fd(char c, int fd)
 {
-	if (!m || !m->vertices || i > m->num_vertices - 1)
-	{
-		exit_message("mesh_set_vert: failed to set vertex!\n");
-	}
-	else
-		m->vertices[i] = v;
+	write(fd, &c, 1);
 }

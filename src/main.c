@@ -6,20 +6,19 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 16:38:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:59:01 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
-#include "libft.h"
+#include "libft_light.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
 #include "obj_loader.h"
 #include "scop.h"
 #include "shader.h"
-#include "ft_printf.h"
 #include <math.h>
 #include "tex.h"
 

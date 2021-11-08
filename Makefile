@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2021/11/08 16:29:09 by wkorande         ###   ########.fr        #
+#    Updated: 2021/11/08 17:04:42 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,10 +53,10 @@ INCL = -I libft/includes/ -I include -I lib/include
 
 UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux)
-		LDFLAGS = -L libft -lft -lglfw -lGL -lGLEW -lm -lXext -lX11
+		LDFLAGS =  -lglfw -lGL -lGLEW -lm -lXext -lX11
 	endif
 	ifeq ($(UNAME_S),Darwin)
-		LDFLAGS = -L libft -lft -L lib -lglfw3 -L lib -lGLEW -lm -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+		LDFLAGS =  -L lib -lglfw3 -L lib -lGLEW -lm -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 	endif
 
 CC = clang

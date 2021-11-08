@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:39:53 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:44:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:14:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@
 
 # define BUFF_SIZE 1
 # define MAX_FD 4864
+
+typedef struct s_gnl
+{
+	char	buffer[BUFF_SIZE + 1];
+	char	*tmp;
+	int		bytes;
+}		t_gnl;
+
+typedef struct s_gnl_tmp
+{
+	char	*tmp;
+	int		len;
+}		t_gnl_tmp;
 
 int ft_get_next_line(const int fd, char **line);
 

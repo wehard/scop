@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2021/11/08 18:45:16 by wkorande         ###   ########.fr        #
+#    Updated: 2021/11/08 20:27:22 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,46 +43,46 @@ SRC =	entity.c\
 LODEPNG_SRC = lib/lodepng/lodepng.c
 
 LIBFT_LIGHT_SRC = libft_light/ft_add_vec3.c\
-libft_light/ft_atoi.c\
-libft_light/ft_bzero.c\
-libft_light/ft_cross_vec3.c\
-libft_light/ft_deg_to_rad.c\
-libft_light/ft_div_vec3.c\
-libft_light/ft_dot_vec3.c\
-libft_light/ft_get_next_line.c\
-libft_light/ft_isdigit.c\
-libft_light/ft_len_vec3.c\
-libft_light/ft_make_vec2.c\
-libft_light/ft_make_vec3.c\
-libft_light/ft_memalloc.c\
-libft_light/ft_memcpy.c\
-libft_light/ft_mul_vec3.c\
-libft_light/ft_normalize_vec3.c\
-libft_light/ft_nwords.c\
-libft_light/ft_parse_vec3.c\
-libft_light/ft_putchar.c\
-libft_light/ft_putchar_fd.c\
-libft_light/ft_putendl.c\
-libft_light/ft_putendl_fd.c\
-libft_light/ft_putstr.c\
-libft_light/ft_putstr_fd.c\
-libft_light/ft_strcat.c\
-libft_light/ft_strdup.c\
-libft_light/ft_strjoin.c\
-libft_light/ft_strlen.c\
-libft_light/ft_strncmp.c\
-libft_light/ft_strncpy.c\
-libft_light/ft_strsplit.c\
-libft_light/ft_strstr.c\
-libft_light/ft_strsub.c\
-libft_light/ft_strtod.c\
-libft_light/ft_strtok.c\
-libft_light/ft_sub_vec3.c
+					libft_light/ft_atoi.c\
+					libft_light/ft_bzero.c\
+					libft_light/ft_cross_vec3.c\
+					libft_light/ft_deg_to_rad.c\
+					libft_light/ft_div_vec3.c\
+					libft_light/ft_dot_vec3.c\
+					libft_light/ft_get_next_line.c\
+					libft_light/ft_isdigit.c\
+					libft_light/ft_len_vec3.c\
+					libft_light/ft_make_vec2.c\
+					libft_light/ft_make_vec3.c\
+					libft_light/ft_memalloc.c\
+					libft_light/ft_memcpy.c\
+					libft_light/ft_mul_vec3.c\
+					libft_light/ft_normalize_vec3.c\
+					libft_light/ft_nwords.c\
+					libft_light/ft_parse_vec3.c\
+					libft_light/ft_putchar.c\
+					libft_light/ft_putchar_fd.c\
+					libft_light/ft_putendl.c\
+					libft_light/ft_putendl_fd.c\
+					libft_light/ft_putstr.c\
+					libft_light/ft_putstr_fd.c\
+					libft_light/ft_strcat.c\
+					libft_light/ft_strdup.c\
+					libft_light/ft_strjoin.c\
+					libft_light/ft_strlen.c\
+					libft_light/ft_strncmp.c\
+					libft_light/ft_strncpy.c\
+					libft_light/ft_strsplit.c\
+					libft_light/ft_strstr.c\
+					libft_light/ft_strsub.c\
+					libft_light/ft_strtod.c\
+					libft_light/ft_strtok.c\
+					libft_light/ft_sub_vec3.c
 
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC)) $(LODEPNG_SRC) $(LIBFT_LIGHT_SRC)
 
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
@@ -103,17 +103,14 @@ all: $(NAME)
 $(NAME):
 	$(CC) $(CFLAGS) $(INCL) $(SRCS) $(LDFLAGS) -o $(NAME)
 
-
 debug:
 	$(CC) -g $(CFLAGS) $(INCL) $(SRCS) $(LDFLAGS) -o $(NAME)
 
 clean:
-	#@make clean -C libft
 
 fclean: clean
 	@rm -f $(NAME)
-	# @make fclean -C libft
 
 re: fclean all
 
-.PHONY: all libftdebug clean fclean re run debug
+.PHONY: all clean fclean re debug

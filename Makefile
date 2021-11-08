@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2021/11/07 16:44:54 by wkorande         ###   ########.fr        #
+#    Updated: 2021/11/08 16:20:51 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,12 +36,14 @@ SRC =	entity.c\
 		mat4/mat4_translate.c\
 		camera.c\
 		tex.c\
-		stb_image.c\
 		input.c\
 		utils.c\
-		init.c
+		init.c\
 
-SRCS = $(addprefix $(SRCDIR)/, $(SRC))
+LODEPNG_SRC = lib/lodepng/lodepng.c
+
+
+SRCS = $(addprefix $(SRCDIR)/, $(SRC)) $(LODEPNG_SRC)
 
 CFLAGS = #-Wall -Wextra -Werror
 

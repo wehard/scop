@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:18:25 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 15:23:11 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:52:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	mouse_button_callback(GLFWwindow *window, int button,
 {
 	t_env	*env;
 
+	mods = 0;
 	env = (t_env *)glfwGetWindowUserPointer(window);
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
 	{

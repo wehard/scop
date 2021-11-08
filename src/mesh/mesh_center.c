@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 16:34:25 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 18:23:47 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:52:49 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ static void	mesh_calc_bounds(t_mesh *mesh)
 			mesh->bounds.max.z = mesh->vertices[i].z;
 		i++;
 	}
-}
-
-static float	ft_abs_f(float f)
-{
-	if (f < 0.0)
-		return (f * -1.0);
-	return (f);
 }
 
 static float	ft_map_range(float v, t_vec2 from, t_vec2 to)

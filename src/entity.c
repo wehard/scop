@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 09:58:39 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 14:31:22 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:49:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	entity_update_buffers(t_entity *entity)
 t_entity	*entity_create(t_mesh *mesh)
 {
 	t_entity	*entity;
-	size_t		i;
 
 	entity = (t_entity *)malloc(sizeof(t_entity));
 	if (!entity)

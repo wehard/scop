@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 16:41:28 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/07 19:01:11 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:50:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	max_axis(t_vec3 v)
 		return (AXIS_Z);
 }
 
-void	mesh_gen_uvs(t_mesh *mesh)
+void	mesh_gen_uvs_sphere(t_mesh *mesh)
 {
 	size_t	i;
 	t_vec2	uv;
@@ -45,25 +45,25 @@ void	mesh_gen_uvs(t_mesh *mesh)
 	}
 }
 
-// void	mesh_gen_uvs(t_mesh *mesh)
-// {
-// 	size_t	i;
-// 	t_vec2	uv;
-// 	t_vec3	d;
-// 	int		axis;
+void	mesh_gen_uvs(t_mesh *mesh)
+{
+	size_t	i;
+	t_vec2	uv;
+	t_vec3	d;
+	int		axis;
 
-// 	i = 0;
-// 	while (i < mesh->num_vertices)
-// 	{
-// 		d = ft_normalize_vec3(mesh->vertices[i]);
-// 		axis = max_axis(d);
-// 		if (axis == AXIS_X)
-// 			uv = (t_vec2){(-d.z), (-d.y)};
-// 		else if (axis == AXIS_Y)
-// 			uv = (t_vec2){(d.x), (d.z)};
-// 		else
-// 			uv = (t_vec2){(d.x), (-d.y)};
-// 		mesh->uvs[i] = uv;
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (i < mesh->num_vertices)
+	{
+		d = ft_normalize_vec3(mesh->vertices[i]);
+		axis = max_axis(d);
+		if (axis == AXIS_X)
+			uv = (t_vec2){(-d.z), (-d.y)};
+		else if (axis == AXIS_Y)
+			uv = (t_vec2){(d.x), (d.z)};
+		else
+			uv = (t_vec2){(d.x), (-d.y)};
+		mesh->uvs[i] = uv;
+		i++;
+	}
+}

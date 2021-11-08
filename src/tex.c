@@ -6,24 +6,25 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 12:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/07/16 17:02:46 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:21:01 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <GL/glew.h>
 #include "scop.h"
 #include "tex.h"
-#include "stb_image.h"
+#include "lodepng.h"
 
 t_tex	*tex_load(const char *filepath)
 {
 	t_tex			*tx;
 	unsigned char	*data;
 
+	data = NULL;
 	tx = (t_tex *)malloc(sizeof(t_tex));
 	if (!tx)
 		exit_message("Failed to allocate t_tex!");
-	data = stbi_load(filepath, &tx->width, &tx->height, &tx->num_channels, 0);
+	lodepng_decode32_file(&data, &tx->width, &tx->height, filepath);
 	if (!data)
 		exit_message("Failed to load texture file!");
 	glGenTextures(1, &tx->tex_id);
@@ -33,9 +34,9 @@ t_tex	*tex_load(const char *filepath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tx->width, tx->height, 0,
-		GL_RGB, GL_UNSIGNED_BYTE, data);
+		GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
-	stbi_image_free(data);
+	free(data);
 	return (tx);
 }
 

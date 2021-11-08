@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:16:24 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 19:37:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:33:16 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static char	*load_shader_src(const char *src_path)
 	{
 		ft_putstr("load_shader_src: ");
 		ft_putstr(src_path);
+		ft_putchar(' ');
 		ft_putendl(strerror(errno));
 		exit(EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:14:54 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 20:46:11 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 23:33:21 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	init_env(t_env *env)
 			(float)WIN_W / (float)WIN_H, 0.1, 100.0);
 	env->delta_time = 0.0;
 	env->last_time = 0.0;
-	camera_init(&env->camera, ft_make_vec3(0, 10, 45),
-		ft_make_vec3(0, -0.3, -1), ft_make_vec2(-90.0, 0.0));
+	camera_init(&env->camera, ft_make_vec3(0, 0, 30),
+		ft_make_vec3(0, 0, -1), ft_make_vec2(-90.0, 0.0));
 	env->shader_current = NULL;
 	env->shader_grey = NULL;
 	env->shader_grey = NULL;

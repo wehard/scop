@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:37:45 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 19:27:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:01:07 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ static int	ft_serve_line(int fd, char **descs, char **line, int bytes)
 		len++;
 	if (descs[fd][len] == '\n')
 	{
-		if (!(*line = ft_strsub(descs[fd], 0, len)))
+		*line = ft_strsub(descs[fd], 0, len);
+		if (!*line)
 			return (-1);
-		if (!(tmp = ft_strdup(descs[fd] + len + 1)))
+		tmp = ft_strdup(descs[fd] + len + 1);
+		if (!tmp)
 			return (-1);
 		descs[fd] = ft_free_and_assign(descs[fd], tmp);
 	}
@@ -56,7 +58,7 @@ static int	ft_serve_line(int fd, char **descs, char **line, int bytes)
 	return (1);
 }
 
-int			ft_get_next_line(const int fd, char **line)
+int	ft_get_next_line(const int fd, char **line)
 {
 	static char	*descs[MAX_FD];
 	char		buffer[BUFF_SIZE + 1];
@@ -65,17 +67,21 @@ int			ft_get_next_line(const int fd, char **line)
 
 	if (fd < 0 || !line)
 		return (-1);
-	while ((bytes = read(fd, buffer, BUFF_SIZE)) > 0)
+	bytes = 1;
+	while (bytes > 0)
 	{
+		bytes = read(fd, buffer, BUFF_SIZE);
 		buffer[bytes] = '\0';
 		if (descs[fd] == NULL)
 		{
-			if (!(descs[fd] = ft_strdup(buffer)))
+			descs[fd] = ft_strdup(buffer);
+			if (!descs[fd])
 				return (-1);
 		}
 		else
 		{
-			if (!(tmp = ft_strjoin(descs[fd], buffer)))
+			tmp = ft_strjoin(descs[fd], buffer);
+			if (!tmp)
 				return (-1);
 			descs[fd] = ft_free_and_assign(descs[fd], tmp);
 		}

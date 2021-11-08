@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:14:54 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 20:34:07 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:46:11 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	load_shaders(t_env *env)
 			"resources/shaders/grey.vert",
 			"resources/shaders/grey.frag");
 	env->shader_tex = shader_create(
-			"./resources/shaders/textured.vert",
-			"./resources/shaders/textured.frag");
+			"resources/shaders/textured.vert",
+			"resources/shaders/textured.frag");
 	env->shader_current = env->shader_grey;
 }
 
@@ -77,6 +77,6 @@ void	init_env_entity(t_env *env, const char *filename)
 
 	mesh = obj_load(filename);
 	env->entity = entity_create(mesh);
-	env->entity->tex = tex_load("./resources/textures/texture.png");
+	env->entity->tex = tex_load("resources/textures/texture.png");
 	env->entity->scale = ft_make_vec3(5, 5, 5);
 }

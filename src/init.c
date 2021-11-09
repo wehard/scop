@@ -43,11 +43,11 @@ static GLFWwindow	*init_gl(void)
 void	load_shaders(t_env *env)
 {
 	env->shader_grey = shader_create(
-			"./resources/shaders/grey.vert",
-			"./resources/shaders/grey.frag");
+			"res/shaders/grey.vert",
+			"res/shaders/grey.frag");
 	env->shader_tex = shader_create(
-			"./resources/shaders/textured.vert",
-			"./resources/shaders/textured.frag");
+			"res/shaders/textured.vert",
+			"res/shaders/textured.frag");
 	env->shader_current = env->shader_grey;
 }
 
@@ -77,6 +77,6 @@ void	init_env_entity(t_env *env, const char *filename)
 
 	mesh = obj_load(filename);
 	env->entity = entity_create(mesh);
-	env->entity->tex = tex_load("resources/textures/texture.png");
+	env->entity->tex = tex_load("res/textures/texture.png");
 	env->entity->scale = ft_make_vec3(5, 5, 5);
 }

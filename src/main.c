@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 19:29:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/09 09:18:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	main(int argc, char *argv[])
 		exit_message("./scop [obj]");
 		return (EXIT_FAILURE);
 	}
+	if (!verify_ext(argv[1], ".obj"))
+		exit_message("Check .obj filename!");
 	init_env(&env);
 	init_env_entity(&env, argv[1]);
 	while (!glfwWindowShouldClose(env.window)

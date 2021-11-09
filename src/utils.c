@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 13:47:47 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/09 09:21:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/09 20:32:39 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	verify_ext(const char *filename, const char *extension)
 	return (1);
 }
 
-int ft_open(const char *file, int oflags)
+int	ft_open(const char *file, int oflags)
 {
 	int	fd;
 

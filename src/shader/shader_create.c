@@ -26,13 +26,9 @@ static char	*load_shader_src(const char *src_path)
 	char	*src;
 	char	*line;
 
-	fd = open(src_path, O_RDONLY);
+	fd = ft_open(src_path, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr("load_shader_src: ");
-		ft_putstr(src_path);
-		ft_putchar(' ');
-		ft_putendl(strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	src = (char *)malloc(MAX_SHADER_SRC_SIZE);

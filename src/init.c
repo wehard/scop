@@ -43,11 +43,11 @@ static GLFWwindow	*init_gl(void)
 void	load_shaders(t_env *env)
 {
 	env->shader_grey = shader_create(
-			"resources/shaders/grey.vert",
-			"resources/shaders/grey.frag");
+			"./resources/shaders/grey.vert",
+			"./resources/shaders/grey.frag");
 	env->shader_tex = shader_create(
-			"resources/shaders/textured.vert",
-			"resources/shaders/textured.frag");
+			"./resources/shaders/textured.vert",
+			"./resources/shaders/textured.frag");
 	env->shader_current = env->shader_grey;
 }
 

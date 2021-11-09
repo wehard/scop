@@ -128,7 +128,7 @@ t_mesh	*obj_load(const char *filename)
 	if (!m)
 		exit_message("obj_loader: Failed to create mesh!");
 	read_mesh_info(m, filename);
-	fd = open(filename, O_RDONLY);
+	fd = ft_open(filename, O_RDONLY);
 	if (fd < 0 || read(fd, NULL, 0) == -1)
 		exit_message("Error loading obj file!");
 	read_mesh(fd, m);

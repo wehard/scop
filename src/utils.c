@@ -10,9 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft_light.h"
 #include <stdarg.h>
 #include <stdlib.h>
-#include "libft_light.h"
+#include <fcntl.h>
+#include <string.h>
+#include <errno.h>
 
 void	exit_message(const char *message)
 {
@@ -59,4 +62,19 @@ int	verify_ext(const char *filename, const char *extension)
 	if (!ext)
 		return (0);
 	return (1);
+}
+
+int ft_open(const char *file, int oflags)
+{
+	int	fd;
+
+	fd = open(file, oflags);
+	if (fd < 0)
+	{
+		ft_putstr("ft_open error: ");
+		ft_putstr(file);
+		ft_putchar(' ');
+		ft_putendl(strerror(errno));
+	}
+	return (fd);
 }

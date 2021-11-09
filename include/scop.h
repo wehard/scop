@@ -93,5 +93,6 @@ void		exit_message(const char *message);
 void		free_null(size_t count, ...);
 void		free_parts(char **parts);
 int			verify_ext(const char *filename, const char *extension);
+int			ft_open(const char *file, int oflags);
 
 #endif

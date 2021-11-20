@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:14:54 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 23:33:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:04:16 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,39 @@ void	load_shaders(t_env *env)
 	env->shader_current = env->shader_grey;
 }
 
+static void	init_env_help_entity(t_env *env)
+{
+	t_mesh	*mesh;
+
+	mesh = mesh_create();
+	mesh_create_verts(mesh, 4);
+	mesh_create_indices(mesh, 6);
+	mesh_create_uvs(mesh, 4);
+	mesh->vertices[0] = ft_make_vec3(-1, -1, 0);
+	mesh->vertices[1] = ft_make_vec3(-1, 1, 0);
+	mesh->vertices[2] = ft_make_vec3(1, 1, 0);
+	mesh->vertices[3] = ft_make_vec3(1, -1, 0);
+	mesh->indices[0] = 0;
+	mesh->indices[1] = 1;
+	mesh->indices[2] = 2;
+	mesh->indices[3] = 2;
+	mesh->indices[4] = 3;
+	mesh->indices[5] = 0;
+	mesh->uvs[0] = ft_make_vec2(0, 0);
+	mesh->uvs[1] = ft_make_vec2(0, 1);
+	mesh->uvs[2] = ft_make_vec2(1, 1);
+	mesh->uvs[3] = ft_make_vec2(1, 0);
+	env->entity_help = entity_create(mesh);
+	env->entity_help->tex = tex_load("res/textures/texture.png");
+	env->entity_help->position = ft_make_vec3(0, 0, -15);
+	env->entity_help->scale = ft_make_vec3(20, 20, 20);
+	env->entity_help->rotation = ft_make_vec3(0, 180, 180);
+}
+
 void	init_env(t_env *env)
 {
 	env->wireframe = 0;
+	env->help = 0;
 	env->mouse_last_x = WIN_W / 2;
 	env->mouse_last_y = WIN_H / 2;
 	env->mouse_sensitivity = 0.1f;
@@ -68,7 +98,9 @@ void	init_env(t_env *env)
 	env->shader_grey = NULL;
 	env->window = init_gl();
 	glfwSetWindowUserPointer(env->window, env);
+	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GLFW_TRUE);
 	load_shaders(env);
+	init_env_help_entity(env);
 }
 
 void	init_env_entity(t_env *env, const char *filename)

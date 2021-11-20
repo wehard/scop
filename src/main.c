@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/09 09:18:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:30:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,26 @@ static void	set_draw_mode(t_env *env)
 
 static void	update(t_env *env)
 {
-	float	current_time;
+	float		current_time;
 
 	current_time = glfwGetTime();
 	env->delta_time = current_time - env->last_time;
 	env->last_time = current_time;
 	camera_update(env, &env->camera);
+	if (glfwGetKey(env->window, GLFW_KEY_KP_8))
+		env->entity->position.z -= 10.0 * env->delta_time;
+	if (glfwGetKey(env->window, GLFW_KEY_KP_2))
+		env->entity->position.z += 10.0 * env->delta_time;
+	if (glfwGetKey(env->window, GLFW_KEY_KP_4))
+		env->entity->position.x -= 10.0 * env->delta_time;
+	if (glfwGetKey(env->window, GLFW_KEY_KP_6))
+		env->entity->position.x += 10.0 * env->delta_time;
+	if (glfwGetKey(env->window, GLFW_KEY_KP_ADD))
+		env->entity->position.y -= 10.0 * env->delta_time;
+	if (glfwGetKey(env->window, GLFW_KEY_KP_SUBTRACT))
+		env->entity->position.y += 10.0 * env->delta_time;
+	toggle_used_shader(env);
+	toggle_help(env);
 	env->entity->rotation.y += 50.0 * env->delta_time;
 }
 
@@ -54,6 +68,8 @@ static void	render(t_env *env)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	set_draw_mode(env);
 	entity_draw(env, env->entity, env->shader_current);
+	if (env->help)
+		entity_draw(env, env->entity_help, env->shader_tex);
 	glfwSwapBuffers(env->window);
 	glfwPollEvents();
 }
@@ -66,6 +82,9 @@ void	cleanup(t_env *env)
 	free(env->entity->tex);
 	mesh_destroy(env->entity->mesh);
 	free(env->entity);
+	free(env->entity_help->tex);
+	mesh_destroy(env->entity_help->mesh);
+	free(env->entity_help);
 }
 
 int	main(int argc, char *argv[])

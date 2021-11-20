@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:18:25 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 17:45:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:30:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,40 @@ void	mouse_callback(GLFWwindow *window, double xpos, double ypos)
 			ft_make_vec3(0, 1, 0));
 	env->mouse_last_x = xpos;
 	env->mouse_last_y = ypos;
+}
+
+void	toggle_help(t_env *env)
+{
+	t_key_state	key_state;
+
+	key_state.i = glfwGetKey(env->window, GLFW_KEY_I);
+	if (key_state.i == GLFW_PRESS && env->key_states.i != GLFW_PRESS)
+	{
+		env->help = !env->help;
+	}
+	env->key_states.i = key_state.i;
+}
+
+void	toggle_used_shader(t_env *env)
+{
+	t_key_state	key_state;
+
+	key_state.one = glfwGetKey(env->window, GLFW_KEY_1);
+	if (key_state.one == GLFW_PRESS && env->key_states.one != GLFW_PRESS)
+	{
+		if (env->shader_current == env->shader_grey)
+			env->shader_current = env->shader_tex;
+		else
+			env->shader_current = env->shader_grey;
+	}
+	env->key_states.one = key_state.one;
+	key_state.two = glfwGetKey(env->window, GLFW_KEY_2);
+	if (key_state.two == GLFW_PRESS && env->key_states.two != GLFW_PRESS)
+	{
+		if (env->shader_current == env->shader_grey)
+			env->shader_current = env->shader_tex;
+		else
+			env->shader_current = env->shader_grey;
+	}
+	env->key_states.two = key_state.two;
 }

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:14:54 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/20 18:04:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:50:07 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	load_shaders(t_env *env)
 	env->shader_tex = shader_create(
 			"res/shaders/textured.vert",
 			"res/shaders/textured.frag");
+	env->shader_norm = shader_create(
+			"res/shaders/normals.vert",
+			"res/shaders/normals.frag");
 	env->shader_current = env->shader_grey;
 }
 
@@ -74,7 +77,7 @@ static void	init_env_help_entity(t_env *env)
 	mesh->uvs[2] = ft_make_vec2(1, 1);
 	mesh->uvs[3] = ft_make_vec2(1, 0);
 	env->entity_help = entity_create(mesh);
-	env->entity_help->tex = tex_load("res/textures/texture.png");
+	env->entity_help->tex = tex_load("res/textures/instructions.png");
 	env->entity_help->position = ft_make_vec3(0, 0, -15);
 	env->entity_help->scale = ft_make_vec3(20, 20, 20);
 	env->entity_help->rotation = ft_make_vec3(0, 180, 180);
@@ -109,6 +112,6 @@ void	init_env_entity(t_env *env, const char *filename)
 
 	mesh = obj_load(filename);
 	env->entity = entity_create(mesh);
-	env->entity->tex = tex_load("res/textures/texture.png");
+	env->entity->tex = tex_load("res/textures/unicorn.png");
 	env->entity->scale = ft_make_vec3(5, 5, 5);
 }

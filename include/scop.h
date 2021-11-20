@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/20 18:28:55 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:35:36 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_env
 	struct s_shader	*shader_current;
 	struct s_shader	*shader_grey;
 	struct s_shader	*shader_tex;
+	struct s_shader	*shader_norm;
 	int				wireframe;
 	int				help;
 	t_camera		camera;

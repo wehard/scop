@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:18:25 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/20 18:30:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:41:01 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	toggle_used_shader(t_env *env)
 	key_state.one = glfwGetKey(env->window, GLFW_KEY_1);
 	if (key_state.one == GLFW_PRESS && env->key_states.one != GLFW_PRESS)
 	{
-		if (env->shader_current == env->shader_grey)
+		if (env->shader_current != env->shader_tex)
 			env->shader_current = env->shader_tex;
 		else
 			env->shader_current = env->shader_grey;
@@ -91,8 +91,8 @@ void	toggle_used_shader(t_env *env)
 	key_state.two = glfwGetKey(env->window, GLFW_KEY_2);
 	if (key_state.two == GLFW_PRESS && env->key_states.two != GLFW_PRESS)
 	{
-		if (env->shader_current == env->shader_grey)
-			env->shader_current = env->shader_tex;
+		if (env->shader_current != env->shader_norm)
+			env->shader_current = env->shader_norm;
 		else
 			env->shader_current = env->shader_grey;
 	}

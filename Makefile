@@ -6,7 +6,7 @@
 #    By: wkorande <willehard@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2021/11/08 20:27:22 by wkorande         ###   ########.fr        #
+#    Updated: 2021/11/21 14:30:08 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC =	entity.c\
 		mesh/mesh_set_vert.c\
 		mesh/mesh_gen_uvs.c\
 		mesh/mesh_center.c\
+		mesh/mesh_centroid.c\
+		mesh/mesh_offset.c\
 		obj_loader.c\
 		shader/shader_create.c\
 		shader/shader_destroy.c\

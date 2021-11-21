@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:00:35 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/08 20:21:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/21 14:29:45 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ typedef struct s_triface
 	t_vec3		normal;
 	t_vec3		e[3];
 }				t_triface;
+
+typedef struct s_tri
+{
+	t_vec3		a;
+	t_vec3		b;
+	t_vec3		c;
+}				t_tri;
 
 typedef struct s_bounds
 {
@@ -59,5 +66,6 @@ void			mesh_set_vert(t_mesh *m, size_t i, t_vec3 v);
 
 void			mesh_gen_uvs(t_mesh *mesh);
 void			mesh_center(t_mesh *mesh);
-
+t_vec3			mesh_calc_centroid(t_mesh *mesh);
+void			mesh_offset(t_mesh *mesh, t_vec3 offset);
 #endif

@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/21 16:09:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/21 16:14:01 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	update(t_env *env)
 
 static void	render(t_env *env)
 {
-	glClearColor(0.3, 0.2, 0.4, 1.0);
+	glClearColor(0.1, 0.05, 0.15, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	set_draw_mode(env);

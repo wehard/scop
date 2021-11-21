@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:32:17 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/20 18:35:36 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/21 15:54:38 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_entity
 typedef struct s_key_state
 {
 	int			i;
+	int			y;
 	int			one;
 	int			two;
 	int			three;
@@ -69,6 +70,7 @@ typedef struct s_env
 	struct s_shader	*shader_grey;
 	struct s_shader	*shader_tex;
 	struct s_shader	*shader_norm;
+	struct s_shader	*shader_frac;
 	int				wireframe;
 	int				help;
 	t_camera		camera;
@@ -97,8 +99,6 @@ void		camera_init(t_camera *camera, t_vec3 pos,
 				t_vec3 forward, t_vec2 yaw_pitch);
 void		camera_update(t_env *env, t_camera *camera);
 
-void		mouse_button_callback(GLFWwindow *window, int button,
-				int action, int mods);
 void		mouse_callback(GLFWwindow *window, double xpos, double ypos);
 
 void		exit_message(const char *message);
@@ -109,5 +109,6 @@ int			ft_open(const char *file, int oflags);
 
 void		toggle_help(t_env *env);
 void		toggle_used_shader(t_env *env);
+void		toggle_wireframe(t_env *env);
 
 #endif

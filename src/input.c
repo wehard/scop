@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:18:25 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/20 18:41:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/21 15:56:11 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,6 @@
 #include <GLFW/glfw3.h>
 #include <math.h>
 #include "libft_light.h"
-
-void	mouse_button_callback(GLFWwindow *window, int button,
-	int action, int mods)
-{
-	t_env	*env;
-
-	mods = 0;
-	env = (t_env *)glfwGetWindowUserPointer(window);
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-	{
-		if (env->shader_current == env->shader_grey)
-			env->shader_current = env->shader_tex;
-		else
-			env->shader_current = env->shader_grey;
-	}
-	else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
-	{
-		env->wireframe = !env->wireframe;
-	}
-}
 
 void	mouse_callback(GLFWwindow *window, double xpos, double ypos)
 {
@@ -75,6 +55,33 @@ void	toggle_help(t_env *env)
 	env->key_states.i = key_state.i;
 }
 
+void	toggle_wireframe(t_env *env)
+{
+	t_key_state	key_state;
+
+	key_state.y = glfwGetKey(env->window, GLFW_KEY_Y);
+	if (key_state.y == GLFW_PRESS && env->key_states.y != GLFW_PRESS)
+	{
+		env->wireframe = !env->wireframe;
+	}
+	env->key_states.y = key_state.y;
+}
+
+static void	toggle_used_shader_ex(t_env *env)
+{
+	t_key_state	key_state;
+
+	key_state.three = glfwGetKey(env->window, GLFW_KEY_3);
+	if (key_state.three == GLFW_PRESS && env->key_states.three != GLFW_PRESS)
+	{
+		if (env->shader_current != env->shader_frac)
+			env->shader_current = env->shader_frac;
+		else
+			env->shader_current = env->shader_grey;
+	}
+	env->key_states.three = key_state.three;
+}
+
 void	toggle_used_shader(t_env *env)
 {
 	t_key_state	key_state;
@@ -97,4 +104,5 @@ void	toggle_used_shader(t_env *env)
 			env->shader_current = env->shader_grey;
 	}
 	env->key_states.two = key_state.two;
+	toggle_used_shader_ex(env);
 }

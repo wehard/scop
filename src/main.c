@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/20 18:31:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/21 15:53:55 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,12 @@ static void	update(t_env *env)
 		env->entity->position.y -= 10.0 * env->delta_time;
 	if (glfwGetKey(env->window, GLFW_KEY_KP_SUBTRACT))
 		env->entity->position.y += 10.0 * env->delta_time;
+	if (glfwGetKey(env->window, GLFW_KEY_Q))
+		camera_init(&env->camera, ft_make_vec3(0, 0, 30),
+			ft_make_vec3(0, 0, -1), ft_make_vec2(-90.0, 0.0));
 	toggle_used_shader(env);
 	toggle_help(env);
+	toggle_wireframe(env);
 	env->entity->rotation.y += 50.0 * env->delta_time;
 }
 
@@ -69,7 +73,7 @@ static void	render(t_env *env)
 	set_draw_mode(env);
 	entity_draw(env, env->entity, env->shader_current);
 	if (env->help)
-		entity_draw(env, env->entity_help, env->shader_tex);
+		entity_draw(env, env->entity_help, env->shader_current);
 	glfwSwapBuffers(env->window);
 	glfwPollEvents();
 }

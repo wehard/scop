@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:14:54 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/20 18:50:07 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/21 15:54:48 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static GLFWwindow	*init_gl(void)
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
 		exit_message("glewInit failed!");
-	glfwSetMouseButtonCallback(window, mouse_button_callback);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glEnable(GL_DEPTH_TEST);
 	return (window);
@@ -51,6 +50,9 @@ void	load_shaders(t_env *env)
 	env->shader_norm = shader_create(
 			"res/shaders/normals.vert",
 			"res/shaders/normals.frag");
+	env->shader_frac = shader_create(
+			"res/shaders/mandelbrot.vert",
+			"res/shaders/mandelbrot.frag");
 	env->shader_current = env->shader_grey;
 }
 
@@ -72,10 +74,10 @@ static void	init_env_help_entity(t_env *env)
 	mesh->indices[3] = 2;
 	mesh->indices[4] = 3;
 	mesh->indices[5] = 0;
-	mesh->uvs[0] = ft_make_vec2(0, 0);
-	mesh->uvs[1] = ft_make_vec2(0, 1);
-	mesh->uvs[2] = ft_make_vec2(1, 1);
-	mesh->uvs[3] = ft_make_vec2(1, 0);
+	mesh->uvs[0] = ft_make_vec2(-1.0, -1.0);
+	mesh->uvs[1] = ft_make_vec2(-1.0, 1.0);
+	mesh->uvs[2] = ft_make_vec2(1.0, 1.0);
+	mesh->uvs[3] = ft_make_vec2(1.0, -1.0);
 	env->entity_help = entity_create(mesh);
 	env->entity_help->tex = tex_load("res/textures/instructions.png");
 	env->entity_help->position = ft_make_vec3(0, 0, -15);
@@ -99,6 +101,7 @@ void	init_env(t_env *env)
 	env->shader_current = NULL;
 	env->shader_grey = NULL;
 	env->shader_grey = NULL;
+	env->shader_frac = NULL;
 	env->window = init_gl();
 	glfwSetWindowUserPointer(env->window, env);
 	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GLFW_TRUE);

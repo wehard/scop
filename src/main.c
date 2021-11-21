@@ -6,7 +6,7 @@
 /*   By: wkorande <willehard@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:10 by wkorande          #+#    #+#             */
-/*   Updated: 2021/11/21 15:53:55 by wkorande         ###   ########.fr       */
+/*   Updated: 2021/11/21 16:09:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	cleanup(t_env *env)
 	env->shader_current = 0;
 	shader_destroy(env->shader_grey);
 	shader_destroy(env->shader_tex);
+	shader_destroy(env->shader_norm);
+	shader_destroy(env->shader_frac);
 	free(env->entity->tex);
 	mesh_destroy(env->entity->mesh);
 	free(env->entity);

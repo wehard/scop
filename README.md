@@ -1,24 +1,26 @@
-# scop
+## scop
 
-![screenshot](https://github.com/wehard/scop/blob/master/res/textures/screenshot.png)
+![screenshot](https://github.com/wehard/scop/blob/master/res/textures/screenshot.png)  
+![screenshot](https://github.com/wehard/scop/blob/master/res/textures/screenshot-1.png)  
+![screenshot](https://github.com/wehard/scop/blob/master/res/textures/screenshot-2.png)  
 
-- Show 3D object
-- .obj file
-- parse to obtain rendering
+## Mandatory
 
-- window display in perspective
-- rotate around main axis
-- various colors to distinguish sides
-- object can be moved on all axis, both directions
-
-- apply texture when pressing key, same key return to colors
-
-- present 42 logo turning around on central axis, shades of gray and textures
-
-- during defense more 3d objects will be tested
+- [x] show 3d object
+	- read and parse .obj file
+	- generate gl buffers
+- [x] display in perspective projection
+- [x] rotate around main axis
+- [x] various colors to distinguish sides
+- [x] object can be moved in both directions on all axis
+- [x] apply texture when pressing key, same key return to colors
+- [x] present 42 logo obj turning around on central axis, shades of gray and textures
 
 ## Bonuses
 
-- correct rendering of first teapot version
-- no texture stretching
+- [x] correct rendering of first teapot version
+- [ ] no texture stretching
 - more bonuses
+	- fractal shader
+	- normal shader
+	- camera movement
